@@ -470,6 +470,10 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuId") FROM stdin;
 --
 
 COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
+1	Asian	https://www.101corpuschristi.com/uploads/media/default/0001/23/fef92b31aa597167a112c932f2777db7941a79d3.jpeg
+2	Fast Food	https://www.verdictfoodservice.com/wp-content/uploads/sites/31/2018/07/McDonaldsLunch_Dinner.jpg
+3	Italian	https://www.lux-review.com/wp-content/uploads/2020/03/Pasta-1.jpg
+4	Seafood	https://wallpapercave.com/wp/wp1912398.jpg
 \.
 
 
@@ -538,7 +542,7 @@ SELECT pg_catalog.setval('public."cart_cartId_seq"', 1, false);
 -- Name: categories_categoryId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."categories_categoryId_seq"', 1, false);
+SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
 
 
 --
