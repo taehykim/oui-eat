@@ -510,6 +510,8 @@ Thai Kitchen	1	33.681696	-117.805381	4250 Barranca Pkwy U, Irvine, CA 92604	1	ht
 Cucina Enoteca	2	33.652052	-117.746196	532 Spectrum Center Dr, Irvine, CA 92618	3	https://s3-media0.fl.yelpcdn.com/bphoto/aIuIwCKEI89hWUHDFrCMZw/o.jpg	3.0	4.4
 Gulfstream	3	33.6060070000	-117.8752780000	850 Avocado Ave, Newport Beach 92660	4	https://gulfstreamrestaurant.com/images/gallery/bartender.jpg	2	4.2
 In-N-Out Burger	4	33.65019	-117.84073	4115 Campus Drive, 92612	2	https://www.in-n-out.com/Frontend-Assembly/Telerik.Sitefinity.Frontend/content/images/homepage/double-double.png?package=INNOUT	1.5	4.2
+EMC Seafood	5	33.669445	-117.823059	Heritage Plaza, 14346 Culver Dr, Irvine, CA 92604	4	https://www.emcseafood.com/wp-content/uploads/2014/05/emc-seafood-pasta.jpg	2	4.4
+Wendys 	6	33.652052	-117.823056	14386 Culver Dr, Irvine, CA 92604	2	https://dynl.mktgcdn.com/p/IqIuwfyfi12qOxK54MtSfQYHxfpxRFtNL8AMbSeNACk/1900x1068.jpg	1.5	4.0
 \.
 
 
@@ -574,7 +576,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 4, true);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 6, true);
 
 
 --
