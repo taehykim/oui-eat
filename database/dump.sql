@@ -319,13 +319,13 @@ ALTER SEQUENCE public."orders_orderId_seq" OWNED BY public.orders."orderId";
 CREATE TABLE public.restaurants (
     name text NOT NULL,
     "restaurantId" integer NOT NULL,
-    lat integer NOT NULL,
-    lon integer NOT NULL,
+    lat numeric NOT NULL,
+    lon numeric NOT NULL,
     address text NOT NULL,
     "categoryId" integer NOT NULL,
     image text NOT NULL,
-    "deliveryFee" integer NOT NULL,
-    rating integer NOT NULL
+    "deliveryFee" numeric NOT NULL,
+    rating numeric NOT NULL
 );
 
 
@@ -506,6 +506,10 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCard", "orderedAt") FR
 --
 
 COPY public.restaurants (name, "restaurantId", lat, lon, address, "categoryId", image, "deliveryFee", rating) FROM stdin;
+Thai Kitchen	1	33.681696	-117.805381	4250 Barranca Pkwy U, Irvine, CA 92604	1	https://s3-media0.fl.yelpcdn.com/bphoto/0WeCs_i9u8gda6wu0gRvJA/o.jpg	1.5	4.3
+Cucina Enoteca	2	33.652052	-117.746196	532 Spectrum Center Dr, Irvine, CA 92618	3	https://s3-media0.fl.yelpcdn.com/bphoto/aIuIwCKEI89hWUHDFrCMZw/o.jpg	3.0	4.4
+Gulfstream	3	33.6060070000	-117.8752780000	850 Avocado Ave, Newport Beach 92660	4	https://gulfstreamrestaurant.com/images/gallery/bartender.jpg	2	4.2
+In-N-Out Burger	4	33.65019	-117.84073	4115 Campus Drive, 92612	2	https://www.in-n-out.com/Frontend-Assembly/Telerik.Sitefinity.Frontend/content/images/homepage/double-double.png?package=INNOUT	1.5	4.2
 \.
 
 
@@ -570,7 +574,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 1, false);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 4, true);
 
 
 --
