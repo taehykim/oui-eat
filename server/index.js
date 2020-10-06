@@ -59,6 +59,18 @@ app.get('/api/category/:categoryId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/rating', (req, res, next) => {
+  const selectRestByRating = `
+    select *
+      from "restaurants"
+  order by "rating" desc
+     limit 5;
+  `;
+  db.query(selectRestByRating)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
