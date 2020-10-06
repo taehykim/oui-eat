@@ -39,6 +39,26 @@ app.get('/api/restaurant/:restaurantId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/category/:categoryId', (req, res, next) => {
+  const id = parseInt(req.params.categoryId, 10);
+  if (!id || id < 1) {
+    return next(new ClientError('The categoryId must be a positive integer', 400));
+  }
+  const selectRestaurants = `
+    select *
+      from "restaurants"
+     where "categoryId" = $1;
+  `;
+  db.query(selectRestaurants, [id])
+    .then(result => {
+      if (result.rows.length === 0) {
+        return next(new ClientError('The categoryId cannot be found', 404));
+      }
+      return res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
