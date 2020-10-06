@@ -83,6 +83,17 @@ app.get('/api/rating', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/cart', (req, res, next) => {
+  res.json([]);
+});
+
+app.post('/api/cart', express.json(), (req, res, next) => {
+  const menuId = parseInt(req.body.menuId, 10);
+  if (!menuId || menuId < 0) {
+    return next(new ClientError('The menuId must be a positive integer', 400));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
