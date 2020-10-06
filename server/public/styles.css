@@ -1,11 +1,15 @@
 header {
   background-color: rgb(244, 217, 247);
   height: 54px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 .logo {
   color: rgb(187, 84, 199);
 }
+
 
 .fa-times,
 .cart-icon {
@@ -20,4 +24,13 @@ header {
 .cart-icon:hover,
 img:hover {
   cursor: pointer;
+}
+
+.navbar {
+  background-color: rgb(244, 217, 247);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 54px;
+  font-size: 2rem;
 }

@@ -4,6 +4,7 @@ import RestaurantList from './restaurant-list';
 import Home from './home';
 import Categories from './categories';
 import MenuList from './menu-list';
+import Navbar from './navbar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,6 +55,7 @@ export default class App extends React.Component {
       <>
         <Header cart={this.state.cart} view={this.state.view} />
         <div className="row p-3">{viewing}</div>
+        <Navbar setView={this.setView} />
       </>
     );
   }
