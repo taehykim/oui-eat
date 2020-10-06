@@ -11,3 +11,13 @@ header {
 .cart-icon {
   font-size: 1.2rem;
 }
+
+.fa-star {
+  color: gold;
+}
+
+.back:hover,
+.cart-icon:hover,
+img:hover {
+  cursor: pointer;
+}
