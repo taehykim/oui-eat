@@ -234,7 +234,7 @@ CREATE TABLE public."menuItems" (
     "restaurantId" integer NOT NULL,
     name text NOT NULL,
     "menuItemId" integer NOT NULL,
-    price integer NOT NULL,
+    price numeric NOT NULL,
     description text NOT NULL
 );
 
@@ -490,6 +490,77 @@ COPY public."favoriteRestaurants" ("userId", "restaurantId") FROM stdin;
 --
 
 COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description) FROM stdin;
+4	DOUBLE-DOUBLE	1	3.45	
+4	CHEESEBURGER	2	2.40	
+4	HAMBURGER	3	2.10	
+4	FRENCH FRIES	4	1.60	
+4	DOUBLE-DOUBLE COMBO	5	6.70	
+4	CHEESEBURGER COMBO	6	5.65	
+4	HAMBURGER COMBO	7	5.35	
+4	SMALL SOFT DRINK	8	1.50	
+4	MEDIUM SOFT DRINK	9	1.65	
+4	LARGE SOFT DRINK	10	1.85	
+4	XL SOFT DRINK	11	2.05	
+4	SHAKE	12	2.15	
+4	COFFEE	13	1.35	
+4	MILK	14	0.99	
+3	Heavenly Biscuits	15	3	worth the wait
+3	Home Smoked Salmon	16	18	served with our Chef’s dressing and toasts
+3	Chilled Jumbo Shrimp	17	26	with cocktail and rémoulade sauces
+3	Newport Beach Clam Chowder	18	8	served with bacon crumbles and croutons
+3	Caesar Salad	19	11	grated Reggiano, rustic croutons, our signature Caesar dressing
+3	Emerald Kale & Rotisserie Chicken Salad	20	18	with cashews and sesame miso vinaigrette
+3	Chopped Vegetable Salad	21	20	avocado, beets, grapes, chopped egg, macadamia nuts, fresh herbs
+3	Pan-seared Ahi Tuna	22	23	with almond sauce, and salad of mango, avocado, cucumber, sesame miso dressing
+3	Cheeseburger	23	17	freshly ground chuck steak, served all the way on a toasted bun
+3	Ding’s Crispy Chicken Sandwich	24	18	crispy buttermilk fried chicken, baby Swiss, spicy slaw
+3	Rotisserie Chicken	25	24	herb roasted with pan juices
+3	Mustard Barbecue Pork Ribs	26	28	fall-off-the-bone tender, with our house-made barbecue sauce
+3	Rutherford Rib-eye	27	50	hand-selected and lightly seasoned, with house-made Worcestershire
+3	‘The Duke’ Filet Mignon	28	39	usda prime center-cut tenderloin
+3	Wild Rice with Champagne Vinaigrette and Almonds	29	5	
+3	Coleslaw	30	5	
+3	Broccoli with Reggiano	31	5	
+3	Heirloom Cauliflower	32	5	
+3	Pomme Purée	33	5	
+5	Uni Pasta	34	27	Uni Cream Sauce, Dried Seaweed, Fish Roe, Chives
+5	EMC Clam Chowder	35	9	Clams, Bacon, Potatoes, Celery, Onions, Light Creamy Broth
+5	Grilled Oysters	36	10	Choice of Garlic Butter, Smoke Salt, Rockefeller, or Cajun Garlic
+5	Fish Tacos	37	5.5	Fried or Pan Seared
+5	Lobster Ravioli	38	21.5	Shrimp, Clam , Chardonnay Sauce
+5	Blue Crab Lettuce Cups	39	15.5	Blue Crab, Tomatoes, Bacon, Avocado, Louie Sauce, Butter Lettuce
+5	Truffle Sliders	40	16.5	Angus Beef, Mushrooms, Munster, Truffle Shaving Saunce, Shitake Aioli, Brioche Bun
+6	Baconator	41	8.99	1/2 Double Beef , Bacon, Cheese
+6	Big Bacon Classic	42	6.99	1/3 Beef , Bacon, Cheese
+6	Grilled Chicken Sandwich	43	5.49	Grilled Chicken, Lettuce, Tomatoes, Onion
+6	Southwest Avocado Chicken Salad	44	14.5	Lettuce, Avocado, Chicken, Tomatoes, Southwest Sauce
+6	4 for $5	45	5	Chicken Sandwich, 10pc nuggets, french fries, and a drink
+1	Pad Thai	46	9.95	Stir-fried rice noodles with our special seasoning, egg, green onions, bean sprouts, and sprinkled with ground peanuts. Gluten-free
+1	Pad See Ewe	47	9.95	Soft wide rice noodles stir-fried with sweet black soy sauce, egg, broccoli, mushrooms, carrots, and baby corn. Sweet and savory.
+1	Pad Kee Mow	48	9.95	Soft wide rice noodles stir-fried with garlic, Thai basil, sprouts, carrots, and onions. Served over lettuce. Savory, tangy, delicious!
+1	Pineapple Fried Rice	49	10.95	Curry-seasoned fried rice with pineapple, onions, carrots, cashew nuts and raisins. Gluten-free
+1	Thai Spice Fried Rice 	50	9.95	Our signature fried rice with a tangy and savory seasoning, Thai basil, bean sprouts, carrots, onions, and garlic
+1	Chicken Yellow Curry	51	10.95	A classic favorite, tender chicken and potato cooked in yellow curry and Thai coconut milk. Served with rice. Gluten-free
+1	Green Curry 	52	11.95	Tender beef, white meat chicken, or tofu with bell pepper, bamboo shoots, zucchini, peas and carrots in green curry and Thai coconut milk. Served with rice on the side. Gluten-free
+1	Mango with Sweet Sticky Rice	53	4.95	Seasonal
+1	Thai Iced Tea	54	3.50	Traditional Thai iced tea cold-brewed on site. Non-dairy creamer added to create a sweet delicious drink
+1	Thai Iced Coffee	55	3.50	Iced dark cold-brewed coffee Thai-style with non-dairy creamer added
+1	Thai Chicken Salad	56	12.95	Seasoned chicken breast with lettuce, cucumbers, broccoli, tomatoes, onions, carrots, and bell pepper topped with crunchy noodles, choice of dressing: Zesty Lemon, peanut sauce or honey ranch
+1	Thai Beef Salad	57	11.95	Sliced tender beef with cucumbers, tomatoes, onions, carrots, celery, and tossed with our Thai citrus dressing. Beef is NOT gluten-free
+1	Tom Ka Kai	58	6.25	Sliced chicken breast with mushrooms, celery, white onion, herbs and seasoning in a traditional Thai coconut milk broth
+2	Margherita Pizza	59	16.50	Tomato sauce + house made mozzarella + basil
+2	Pepperoni + Sausage Pizza	60	18.00	Ricotta + fresh mozzarella + tomato + garlic + basil
+2	Fig + stracchino	61	17.00	Garlic + hot honey + arugula
+2	Cheese Pizza	62	14.00	Cheese Pizza
+2	Vegan Pizza	63	14.50	Chefs whim
+2	Clam + squid ink linguine	64	24.00	Charred tomato + fennel soffritto + creme fraiche
+2	Bucatini amatriciana	65	19.50	Guanciale + tomato + onion + chili + pecorino
+2	Rigatoni Bolognese	66	20.00	Veal + pork + lemon ricotta + grana padano
+2	Cucina burger	67	19.00	Taleggio + port wine onion + porcini aioli + brioche bun + parmesan fries
+2	Olive oil cake	68	10.00	Seasonal fruit + pistachio whip
+2	Chocolate panna cotta	69	9.00	Mascarpone crema + cacao nib
+2	Cannellini bean hummus	70	12.00	Sicilian pesto + pistachio + market vegetable + baguette
+2	Charred Octopus	71	16.50	Gigante bean + fennel + lemon yogurt + brown butter vinaigrette
 \.
 
 
@@ -555,7 +626,7 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 1, false);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 71, true);
 
 
 --
