@@ -22,7 +22,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="d-flex flex-column justify-content-center ">
+      <div className="d-flex flex-column justify-content-center mt-5">
         <p className="h4">Restaurants Near Me</p>
         {this.state.topFive.map(restaurant => (
           <RestaurantItem
