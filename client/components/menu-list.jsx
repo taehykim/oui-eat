@@ -24,7 +24,7 @@ class MenuList extends React.Component {
   render() {
     return (
       <>
-        <div className="border-bottom mb-2">
+        <div className="border-bottom mb-2 mt-5">
           <img
             id={this.props.restaurant.restaurantId}
             src={this.props.restaurant.image}
