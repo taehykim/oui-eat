@@ -1,6 +1,9 @@
 header {
   background-color: rgb(244, 217, 247);
   height: 54px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 .logo {
