@@ -1,0 +1,38 @@
+import React from 'react';
+import RestaurantItem from './restaurant-item';
+
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { topFive: [] };
+    this.getTopFive = this.getTopFive.bind(this);
+  }
+
+  getTopFive() {
+    fetch('/api/rating')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ topFive: data });
+      });
+  }
+
+  componentDidMount() {
+    this.getTopFive();
+  }
+
+  render() {
+    return (
+      <div className="d-flex flex-column justify-content-center ">
+        <p className="h4">Restaurants Near Me</p>
+        {this.state.topFive.map(restaurant => (
+          <RestaurantItem
+            key={restaurant.restaurantId}
+            restaurant={restaurant}
+          />
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Home;
