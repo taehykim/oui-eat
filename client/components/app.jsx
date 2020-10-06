@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import RestaurantList from './restaurant-list';
 import Categories from './categories';
+import Navbar from './navbar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export default class App extends React.Component {
       <>
         <Header cart={this.state.cart} view={this.state.view} />
         { viewing }
+        <Navbar setView={this.setView} />
       </>
     );
   }
