@@ -19,6 +19,26 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/restaurant/:restaurantId', (req, res, next) => {
+  const id = parseInt(req.params.restaurantId, 10);
+  if (!id || id < 1) {
+    return next(new ClientError('The restaurantId must be a positive integer', 400));
+  }
+  const selectRestaurant = `
+    select *
+      from "menuItems"
+     where "restaurantId" = $1;
+  `;
+  db.query(selectRestaurant, [id])
+    .then(result => {
+      if (result.rows.length === 0) {
+        return next(new ClientError('The restaurantId cannot be found', 404));
+      }
+      return res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/category/:categoryId', (req, res, next) => {
   const id = parseInt(req.params.categoryId, 10);
   if (!id || id < 1) {
