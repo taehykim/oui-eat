@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import RestaurantList from './restaurant-list';
+import Home from './home';
 import Categories from './categories';
 import Navbar from './navbar';
 
@@ -36,14 +37,21 @@ export default class App extends React.Component {
   render() {
     let viewing = null;
     if (this.state.view.name === 'restaurants') {
-      viewing = <RestaurantList setView={this.setView} category={this.state.view.params} />;
+      viewing = (
+        <RestaurantList
+          setView={this.setView}
+          category={this.state.view.params}
+        />
+      );
     } else if (this.state.view.name === 'categories') {
       viewing = <Categories allCategories={this.state.categories} />;
+    } else if (this.state.view.name === 'home') {
+      viewing = <Home />;
     }
     return (
       <>
         <Header cart={this.state.cart} view={this.state.view} />
-        { viewing }
+        <div className="row p-3">{viewing}</div>
         <Navbar setView={this.setView} />
       </>
     );
