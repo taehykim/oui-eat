@@ -46,7 +46,7 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'categories') {
       viewing = <Categories allCategories={this.state.categories} />;
     } else if (this.state.view.name === 'home') {
-      viewing = <Home />;
+      viewing = <Home setView={this.setView} />;
     }
     return (
       <>

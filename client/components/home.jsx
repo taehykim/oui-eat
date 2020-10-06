@@ -26,6 +26,7 @@ class Home extends React.Component {
         <p className="h4">Restaurants Near Me</p>
         {this.state.topFive.map(restaurant => (
           <RestaurantItem
+            setView={this.props.setView}
             key={restaurant.restaurantId}
             restaurant={restaurant}
           />
