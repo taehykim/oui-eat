@@ -3,18 +3,16 @@ import Header from './header';
 import RestaurantList from './restaurant-list';
 import Categories from './categories';
 
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.setView = this.setView.bind(this);
     this.state = {
       view: { name: 'categories', params: {}, currentCategory: null },
-      cart: [],
+      cart: []
 
     };
   }
-
 
   setView(name, params) {
     this.setState({ view: { name: name, params: params } });

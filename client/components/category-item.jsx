@@ -7,12 +7,12 @@ function CategoryItem(props) {
   //   props.setView('restaurants', {categoryId: props.category.categoryId, name: props.category.name});
 
   // }
-  console.log(props)
+  console.log(props);
   return (
     <>
-    <div className="card-container">
+      <div className="card-container">
         <div className="card" >{props.name} </div>
-    </div>
+      </div>
 
     </>
   );
