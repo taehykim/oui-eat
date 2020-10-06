@@ -16,6 +16,7 @@ header {
   color: gold;
 }
 
+.back:hover,
 .cart-icon:hover,
 img:hover {
   cursor: pointer;
