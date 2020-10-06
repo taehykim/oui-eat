@@ -21,9 +21,9 @@ class RestaurantList extends React.Component {
 
   render() {
     return (
-      <div className="row flex-wrap">
-        <p>{this.state.restaurants.length} Results for &#34;{this.props.category.name}&#34;</p>
-        { this.state.restaurants.map(restaurant => <RestaurantItem key={restaurant.restaurantId} restaurant={restaurant} />) }
+      <div className="row mt-4">
+        <p className="col-12">{this.state.restaurants.length} Results for &#34;{this.props.category.name}&#34;</p>
+        { this.state.restaurants.map(restaurant => <RestaurantItem setView={this.props.setView} key={restaurant.restaurantId} restaurant={restaurant} />) }
       </div>
     );
   }

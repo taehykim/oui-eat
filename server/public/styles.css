@@ -15,3 +15,8 @@ header {
 .fa-star {
   color: gold;
 }
+
+.cart-icon:hover,
+img:hover {
+  cursor: pointer;
+}
