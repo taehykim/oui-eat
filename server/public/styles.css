@@ -1,0 +1,13 @@
+header {
+  background-color: rgb(244, 217, 247);
+  height: 54px;
+}
+
+.logo {
+  color: rgb(187, 84, 199);
+}
+
+.fa-times,
+.cart-icon {
+  font-size: 1.2rem;
+}
