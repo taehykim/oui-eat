@@ -3,6 +3,7 @@ import Header from './header';
 import RestaurantList from './restaurant-list';
 import Home from './home';
 import Categories from './categories';
+import MenuList from './menu-list';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -45,7 +46,9 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'categories') {
       viewing = <Categories allCategories={this.state.categories} />;
     } else if (this.state.view.name === 'home') {
-      viewing = <Home />;
+      viewing = <Home setView={this.setView} />;
+    } else if (this.state.view.name === 'menu') {
+      viewing = <MenuList restaurant={this.state.view.params} />;
     }
     return (
       <>

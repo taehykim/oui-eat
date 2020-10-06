@@ -28,6 +28,7 @@ class Home extends React.Component {
           <RestaurantItem
             key={restaurant.restaurantId}
             restaurant={restaurant}
+            setView={this.props.setView}
           />
         ))}
       </div>
