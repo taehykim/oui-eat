@@ -164,6 +164,18 @@ app.post('/api/cart', express.json(), (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/orders', express.json(), (req, res, next) => {
+  if (!req.session.cartId) {
+    throw new ClientError('There must be a cartId included', 400);
+  } else if (!req.body.creditCard) {
+    throw new ClientError('There must be a creditCard included', 400);
+  } else if (!req.body.shippingAddress) {
+    throw new ClientError('There must be a shippingAddress included', 400);
+  } else if (!req.body.name) {
+    throw new ClientError('There must be a name included', 400);
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
