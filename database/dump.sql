@@ -141,7 +141,8 @@ CREATE TABLE public.cart (
 CREATE TABLE public."cartItems" (
     "cartItemId" integer NOT NULL,
     "cartId" integer NOT NULL,
-    "menuId" integer NOT NULL
+    "menuItemId" integer NOT NULL,
+    price numeric
 );
 
 
@@ -454,6 +455,16 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 --
 
 COPY public.cart ("cartId") FROM stdin;
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 \.
 
 
@@ -461,7 +472,23 @@ COPY public.cart ("cartId") FROM stdin;
 -- Data for Name: cartItems; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public."cartItems" ("cartItemId", "cartId", "menuId") FROM stdin;
+COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin;
+1	4	9	1.65
+2	5	10	1.85
+3	6	10	1.85
+4	7	16	18
+5	8	4	1.60
+6	9	4	1.60
+7	9	9	1.65
+8	9	10	1.85
+9	9	2	2.40
+10	9	55	3.50
+11	9	21	20
+12	9	50	9.95
+13	9	50	9.95
+14	10	59	16.50
+15	10	59	16.50
+16	10	60	18.00
 \.
 
 
@@ -591,6 +618,7 @@ Wendys 	6	33.652052	-117.823056	14386 Culver Dr, Irvine, CA 92604	2	https://dynl
 --
 
 COPY public.users ("userId") FROM stdin;
+1
 \.
 
 
@@ -605,14 +633,14 @@ SELECT pg_catalog.setval('public."address_addressId_seq"', 1, false);
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, false);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 16, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 1, false);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 10, true);
 
 
 --
@@ -654,7 +682,7 @@ SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 6, true);
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 1, false);
+SELECT pg_catalog.setval('public."users_userId_seq"', 1, true);
 
 
 --
@@ -742,7 +770,7 @@ ALTER TABLE ONLY public."cartItems"
 --
 
 ALTER TABLE ONLY public."cartItems"
-    ADD CONSTRAINT "cartItems_fk1" FOREIGN KEY ("menuId") REFERENCES public."menuItems"("menuItemId");
+    ADD CONSTRAINT "cartItems_fk1" FOREIGN KEY ("menuItemId") REFERENCES public."menuItems"("menuItemId");
 
 
 --
