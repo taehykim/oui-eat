@@ -17,6 +17,7 @@ export default class App extends React.Component {
     };
 
     this.getAllCategories = this.getAllCategories.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   getAllCategories() {
@@ -35,6 +36,21 @@ export default class App extends React.Component {
     this.setState({ view: { name: name, params: params } });
   }
 
+  addToCart(menuItem) {
+    const init = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    };
+
+    fetch('/api/cart', init)
+      .then(res => res.json())
+      .then(data => {
+        const newCart = [...this.state.cart];
+        newCart.push(data);
+        this.setState({ cart: newCart });
+      });
+  }
+
   render() {
     let viewing = null;
     if (this.state.view.name === 'restaurants') {
@@ -49,7 +65,12 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'home') {
       viewing = <Home setView={this.setView} />;
     } else if (this.state.view.name === 'menu') {
-      viewing = <MenuList restaurant={this.state.view.params} />;
+      viewing = (
+        <MenuList
+          restaurant={this.state.view.params}
+          addToCart={this.addToCart}
+        />
+      );
     }
     return (
       <>
