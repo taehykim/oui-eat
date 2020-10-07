@@ -106,7 +106,9 @@ app.get('/api/cart', (req, res, next) => {
 app.post('/api/cart', express.json(), (req, res, next) => {
   const menuItemId = parseInt(req.body.menuItemId, 10);
   if (!menuItemId || menuItemId < 0) {
-    return next(new ClientError('The menuItemId must be a positive integer', 400));
+    return next(
+      new ClientError('The menuItemId must be a positive integer', 400)
+    );
   }
   const selectMenuPrice = `
     select "price"
@@ -125,7 +127,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           from "cart"
           where "cartId" = $1;
       `;
-        return db.query(selectCartId, [req.session.cartId])
+        return db
+          .query(selectCartId, [req.session.cartId])
           .then(result => Object.assign(price, result.rows[0]));
       } else {
         const insertCart = `
@@ -133,7 +136,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
               values (default)
           returning "cartId";
       `;
-        return db.query(insertCart)
+        return db
+          .query(insertCart)
           .then(result => Object.assign(price, result.rows[0]));
       }
     })
@@ -144,7 +148,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
                         values ($1, $2, $3)
                      returning "cartItemId";
       `;
-      return db.query(insertItem, [cart.cartId, menuItemId, cart.price])
+      return db
+        .query(insertItem, [cart.cartId, menuItemId, cart.price])
         .then(result => result.rows[0].cartItemId);
     })
     .then(cartItemId => {
@@ -158,7 +163,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           join "menuItems" as "m" using ("menuItemId")
          where "c"."cartItemId" = $1;
       `;
-      return db.query(select, [cartItemId])
+      return db
+        .query(select, [cartItemId])
         .then(result => res.status(201).json(result.rows[0]));
     })
     .catch(err => next(err));

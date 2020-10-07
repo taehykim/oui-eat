@@ -4,6 +4,7 @@ import RestaurantList from './restaurant-list';
 import Home from './home';
 import Categories from './categories';
 import MenuList from './menu-list';
+import Orders from './orders';
 import Navbar from './navbar';
 
 export default class App extends React.Component {
@@ -80,11 +81,25 @@ export default class App extends React.Component {
           addToCart={this.addToCart}
         />
       );
+    } else if (this.state.view.name === 'orders') {
+      viewing = (
+        <Orders
+          status={
+            Object.keys(this.state.view.params).length !== 0
+              ? this.state.view.params.status
+              : null
+          }
+        />
+      );
     }
 
     return (
       <>
-        <Header cart={this.state.cart} view={this.state.view} />
+        <Header
+          cart={this.state.cart}
+          view={this.state.view}
+          setView={this.setView}
+        />
         <div className="row p-3">{viewing}</div>
         <Navbar setView={this.setView} />
       </>
