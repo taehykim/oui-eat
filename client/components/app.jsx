@@ -9,14 +9,17 @@ import Navbar from './navbar';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.setView = this.setView.bind(this);
     this.state = {
-      view: { name: 'home', params: {}, currentCategory: null },
-      cart: [],
-      categories: []
+      view: {
+        name: 'categories',
+        params: {},
+        currentCategory: null
+      },
+      cart: []
     };
-
+    this.setView = this.setView.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   getAllCategories() {
@@ -31,8 +34,25 @@ export default class App extends React.Component {
     this.getAllCategories();
   }
 
-  setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
+  setView(inputName, inputParams) {
+    this.setState({ view: { name: inputName, params: inputParams } });
+  }
+
+  addToCart(menuItem) {
+    const init = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(menuItem)
+    };
+
+    fetch('/api/cart', init)
+      .then(res => res.json())
+      .then(data => {
+        const newCart = [...this.state.cart];
+        newCart.push(data);
+        this.setState({ cart: newCart });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -49,8 +69,14 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'home') {
       viewing = <Home setView={this.setView} />;
     } else if (this.state.view.name === 'menu') {
-      viewing = <MenuList restaurant={this.state.view.params} />;
+      viewing = (
+        <MenuList
+          restaurant={this.state.view.params}
+          addToCart={this.addToCart}
+        />
+      );
     }
+
     return (
       <>
         <Header cart={this.state.cart} view={this.state.view} />

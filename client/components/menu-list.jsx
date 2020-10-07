@@ -24,7 +24,7 @@ class MenuList extends React.Component {
   render() {
     return (
       <>
-        <div className="border-bottom mb-2">
+        <div className="border-bottom mb-2 mt-5">
           <img
             id={this.props.restaurant.restaurantId}
             src={this.props.restaurant.image}
@@ -50,7 +50,11 @@ class MenuList extends React.Component {
         <div className="w-100">
           <p className="h5">Menu</p>
           {this.state.menu.map(menuItem => (
-            <MenuItem key={menuItem.menuItemId} menuItem={menuItem} />
+            <MenuItem
+              key={menuItem.menuItemId}
+              menuItem={menuItem}
+              addToCart={this.props.addToCart}
+            />
           ))}
         </div>
       </>

@@ -1,6 +1,15 @@
 import React from 'react';
 
 class MenuItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+  }
+
+  handleAddToCart(event) {
+    this.props.addToCart(this.props.menuItem);
+  }
+
   render() {
     return (
       <div className="card mb-3">
@@ -10,7 +19,11 @@ class MenuItem extends React.Component {
               {this.props.menuItem.name}
             </div>
             <div>
-              <button type="button" className="btn btn-secondary mt-1">
+              <button
+                type="button"
+                className="btn btn-secondary mt-1"
+                onClick={this.handleAddToCart}
+              >
                 Add to Cart
               </button>
             </div>
