@@ -33,7 +33,7 @@ class RestaurantList extends React.Component {
         >
           &lt; Categories
         </div>
-        <p className="col-12">
+        <p className="col-12 m-0">
           {this.state.restaurants.length} Results for {this.props.category.name}
         </p>
         {this.state.restaurants.map(restaurant => (
