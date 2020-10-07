@@ -27,9 +27,22 @@ class RestaurantList extends React.Component {
   render() {
     return (
       <div className="row mt-2">
-        <div className="col-12 text-muted font-weight-light mb-2 back" onClick={this.handleBackClick}>&lt; Categories</div>
-        <p className="col-12">{this.state.restaurants.length} Results for &#34;{this.props.category.name}&#34;</p>
-        { this.state.restaurants.map(restaurant => <RestaurantItem setView={this.props.setView} key={restaurant.restaurantId} restaurant={restaurant} />) }
+        <div
+          className="col-12 text-muted font-weight-light mb-2 back mt-5"
+          onClick={this.handleBackClick}
+        >
+          &lt; Categories
+        </div>
+        <p className="col-12 m-0">
+          {this.state.restaurants.length} Results for {this.props.category.name}
+        </p>
+        {this.state.restaurants.map(restaurant => (
+          <RestaurantItem
+            setView={this.props.setView}
+            key={restaurant.restaurantId}
+            restaurant={restaurant}
+          />
+        ))}
       </div>
     );
   }

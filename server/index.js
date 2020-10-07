@@ -164,6 +164,64 @@ app.post('/api/cart', express.json(), (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/login', (req, res) => {
+  req.session.userId = 1;
+  res.json({ userId: req.session.userId });
+});
+
+app.post('/api/orders', express.json(), (req, res, next) => {
+  if (!req.session.cartId) {
+    throw new ClientError('There must be a cartId in session', 400);
+  } else if (!req.session.userId) {
+    throw new ClientError('There must be a userId in session', 400);
+  } else if (!Number(req.body.creditCardNumber)) {
+    throw new ClientError('There must be a creditCardNumber included', 400);
+  } else if (!req.body.address) {
+    throw new ClientError('There must be an address included', 400);
+  } else if (!req.body.billingAddress) {
+    throw new ClientError('There must be a billingAddress included', 400);
+  } else if (!req.body.name) {
+    throw new ClientError('There must be a name included', 400);
+  } else if (!Number(req.body.cvv)) {
+    throw new ClientError('There must be a cvv included', 400);
+  }
+  const insertAddress = `
+    insert into "address" ("address", "userId")
+          values ($1, $2);
+  `;
+  db.query(insertAddress, [req.body.address, req.session.userId])
+    .catch(err => next(err));
+  const insertCredit = `
+    insert into "creditCard" ("name", "creditCardNumber", "cvv", "billingAddress")
+         values ($1, $2, $3, $4)
+      returning "creditCardId";
+  `;
+  const params = [req.body.name, req.body.creditCardNumber, req.body.cvv, req.body.billingAddress];
+  db.query(insertCredit, params)
+    .then(result => result.rows[0].creditCardId)
+    .then(creditCardId => {
+      const insertOrder = `
+        insert into "orders" ("creditCardId", "cartId", "userId")
+         values ($1, $2, $3)
+      returning "creditCardId",
+                "userId",
+                "orderId",
+                "orderedAt";
+      `;
+      db.query(insertOrder, [creditCardId, req.session.cartId, req.session.userId])
+        .then(result => {
+          result.rows[0].name = req.body.name;
+          result.rows[0].creditCardNumber = req.body.creditCardNumber;
+          result.rows[0].cvv = req.body.cvv;
+          result.rows[0].billingAddress = req.body.billingAddress;
+          result.rows[0].address = req.body.address;
+          delete req.session.cartId;
+          return res.status(201).json(result.rows[0]);
+        });
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
