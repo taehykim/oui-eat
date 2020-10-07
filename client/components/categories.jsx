@@ -23,18 +23,16 @@ class Categories extends React.Component {
   render() {
     const categoriesArray = this.state.categories;
     return (
-      <div className="container">
-        <div className="row ">
-          {categoriesArray.map(category => (
-            <CategoryItem
-              key={category.categoryId}
-              name={category.name}
-              image={category.imageUrl}
-              categoryInfo={category}
-              setView={this.props.setView}
-            />
-          ))}
-        </div>
+      <div className="row justify-content-center mt-5">
+        {categoriesArray.map(category => (
+          <CategoryItem
+            key={category.categoryId}
+            name={category.name}
+            image={category.imageUrl}
+            categoryInfo={category}
+            setView={this.props.setView}
+          />
+        ))}
       </div>
     );
   }
