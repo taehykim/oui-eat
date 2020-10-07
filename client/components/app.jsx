@@ -6,25 +6,37 @@ import Categories from './categories';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.setView = this.setView.bind(this);
     this.state = {
-      view: { name: 'categories', params: {}, currentCategory: null },
+      view: {
+        name: 'categories',
+        params: {},
+        currentCategory: null
+      },
       cart: []
-
     };
+    this.setView = this.setView.bind(this);
+
   }
 
-  setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
+  setView(inputName, inputParams) {
+    this.setState({ view: { name: inputName, params: inputParams } });
   }
 
   render() {
     let viewing = null;
     if (this.state.view.name === 'restaurants') {
-      viewing = <RestaurantList setView={this.setView} category={this.state.view.params} />;
+      viewing =
+        <RestaurantList
+          setView={this.setView}
+          category={this.state.view.params}
+        />;
     } else if (this.state.view.name === 'categories') {
-      viewing = <Categories setView={this.setView} />;
+      viewing =
+      <Categories
+        setView={this.setView}
+      />;
     }
+
     return (
       <>
         <Header cart={this.state.cart} view={this.state.view} />

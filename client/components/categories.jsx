@@ -4,8 +4,8 @@ import CategoryItem from './category-item';
 class Categories extends React.Component {
   constructor(props) {
     super(props);
-    this.getAllCategories = this.getAllCategories.bind(this);
     this.state = { categories: [] };
+    this.getAllCategories = this.getAllCategories.bind(this);
   }
 
   getAllCategories() {
@@ -21,15 +21,20 @@ class Categories extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    const categoriesArray = this.state.categories;
     return (
-      <>
-        {this.state.categories.map(category => <CategoryItem key={category.categoryId} name={category.name}/>)}
-      </>
+      <div className="container">
+        <div className="row ">
+          {categoriesArray.map(category =>
+            <CategoryItem
+              key={category.categoryId}
+              name={category.name}
+              image={category.imageUrl}
+            />
+          )}
+        </div>
+      </div>
     );
   }
 }
-
 export default Categories;
-
-// view: { name: 'restaurants', params: { categoryId: 2, name: 'Fast Food' } }
