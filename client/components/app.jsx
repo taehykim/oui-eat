@@ -9,13 +9,15 @@ import Navbar from './navbar';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.setView = this.setView.bind(this);
     this.state = {
-      view: { name: 'home', params: {}, currentCategory: null },
-      cart: [],
-      categories: []
+      view: {
+        name: 'categories',
+        params: {},
+        currentCategory: null
+      },
+      cart: []
     };
-
+    this.setView = this.setView.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
@@ -32,8 +34,8 @@ export default class App extends React.Component {
     this.getAllCategories();
   }
 
-  setView(name, params) {
-    this.setState({ view: { name: name, params: params } });
+  setView(inputName, inputParams) {
+    this.setState({ view: { name: inputName, params: inputParams } });
   }
 
   addToCart(menuItem) {
@@ -74,6 +76,7 @@ export default class App extends React.Component {
         />
       );
     }
+
     return (
       <>
         <Header cart={this.state.cart} view={this.state.view} />
