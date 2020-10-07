@@ -14,7 +14,7 @@ class CategoryItem extends React.Component {
     return (
       <div>
         <div
-          className=" category-item mt-5"
+          className="category-item"
           style={{
             backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 250, 0.1)), url(${this.props.image})`
           }}
