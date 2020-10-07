@@ -305,8 +305,8 @@ CREATE TABLE public.orders (
     "orderId" integer NOT NULL,
     "cartId" integer NOT NULL,
     "userId" integer NOT NULL,
-    "creditCard" text NOT NULL,
-    "orderedAt" timestamp with time zone NOT NULL
+    "creditCardId" text NOT NULL,
+    "orderedAt" timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -491,6 +491,22 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 --
 
 COPY public.address ("addressId", "userId", address) FROM stdin;
+1	1	grove street
+2	1	grove street
+3	1	grove street
+4	1	grove street
+5	1	grove street
+6	1	grove street
+7	1	grove street
+8	1	grove street
+9	1	grove street
+10	1	grove street
+11	1	grove street
+12	1	grove street
+13	1	grove street
+14	1	grove street
+15	1	grove street
+16	1	grove street
 \.
 
 
@@ -509,6 +525,7 @@ COPY public.cart ("cartId") FROM stdin;
 8
 9
 10
+11
 \.
 
 
@@ -533,6 +550,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 14	10	59	16.50
 15	10	59	16.50
 16	10	60	18.00
+17	11	2	2.40
 \.
 
 
@@ -553,6 +571,25 @@ COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
 --
 
 COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumber", name) FROM stdin;
+1	999	PO box 89888	5678	con
+2	998	PO box 89888	5678	con
+3	997	PO box 89888	5678	con
+4	996	PO box 89888	5678	con
+5	996	PO box 89888	5678	con
+6	996	PO box 89888	5678	con
+7	996	PO box 89888	5678	con
+8	996	PO box 89888	5678	con
+9	996	PO box 89888	5678	con
+10	996	PO box 89888	5678	con
+11	996	PO box 89888	5678	con
+12	996	PO box 89888	5678	con
+13	996	PO box 89888	5678	con
+14	995	PO box 89888	5678	con
+15	992	PO box 89888	5678	con
+16	990	PO box 89888	5678	con
+17	990	PO box 89888	5678	con
+18	209	PO box 89888	5678	con
+19	208	PO box 89888	5678	con
 \.
 
 
@@ -647,7 +684,14 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.orders ("orderId", "cartId", "userId", "creditCard", "orderedAt") FROM stdin;
+COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") FROM stdin;
+6	11	1	13	2020-10-07 21:48:53.948748+00
+7	11	1	14	2020-10-07 21:53:01.779037+00
+8	11	1	15	2020-10-07 21:55:29.555576+00
+9	11	1	16	2020-10-07 21:58:57.133735+00
+10	11	1	17	2020-10-07 21:59:25.208094+00
+11	11	1	18	2020-10-07 22:04:31.327508+00
+12	11	1	19	2020-10-07 22:05:21.004184+00
 \.
 
 
@@ -678,21 +722,21 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 1, false);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 16, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 16, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 17, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 10, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 11, true);
 
 
 --
@@ -706,7 +750,7 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 1, false);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 19, true);
 
 
 --
@@ -727,7 +771,7 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 12, true);
 
 
 --
