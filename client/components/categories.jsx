@@ -25,13 +25,15 @@ class Categories extends React.Component {
     return (
       <div className="container">
         <div className="row ">
-          {categoriesArray.map(category =>
+          {categoriesArray.map(category => (
             <CategoryItem
               key={category.categoryId}
               name={category.name}
               image={category.imageUrl}
+              categoryInfo={category}
+              setView={this.props.setView}
             />
-          )}
+          ))}
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'categories',
+        name: 'home',
         params: {},
         currentCategory: null
       },
@@ -65,7 +65,12 @@ export default class App extends React.Component {
         />
       );
     } else if (this.state.view.name === 'categories') {
-      viewing = <Categories allCategories={this.state.categories} />;
+      viewing = (
+        <Categories
+          allCategories={this.state.categories}
+          setView={this.setView}
+        />
+      );
     } else if (this.state.view.name === 'home') {
       viewing = <Home setView={this.setView} />;
     } else if (this.state.view.name === 'menu') {
