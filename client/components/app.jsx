@@ -39,7 +39,8 @@ export default class App extends React.Component {
   addToCart(menuItem) {
     const init = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(menuItem)
     };
 
     fetch('/api/cart', init)
@@ -48,7 +49,8 @@ export default class App extends React.Component {
         const newCart = [...this.state.cart];
         newCart.push(data);
         this.setState({ cart: newCart });
-      });
+      })
+      .catch(err => console.error(err));
   }
 
   render() {

@@ -159,7 +159,7 @@ app.post('/api/cart', express.json(), (req, res, next) => {
          where "c"."cartItemId" = $1;
       `;
       return db.query(select, [cartItemId])
-        .then(result => res.status(201).json(result.rows));
+        .then(result => res.status(201).json(result.rows[0]));
     })
     .catch(err => next(err));
 });
