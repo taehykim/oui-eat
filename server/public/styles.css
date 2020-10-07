@@ -26,6 +26,16 @@ img:hover {
   cursor: pointer;
 }
 
+.category-item{
+  height: 120px;
+  width: 160px;
+  border-radius: 9%;
+  background-size: cover;
+  background-position: center;
+  /* background: linear-gradient(rgba(98, 98, 98, 0.69), rgba(98, 98, 98, 1.2)); */
+  margin: .25rem;
+}
+
 .navbar {
   background-color: rgb(244, 217, 247);
   position: fixed;
