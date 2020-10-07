@@ -29,6 +29,7 @@ ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pk;
 ALTER TABLE IF EXISTS ONLY public.restaurants DROP CONSTRAINT IF EXISTS restaurants_pk;
 ALTER TABLE IF EXISTS ONLY public.orders DROP CONSTRAINT IF EXISTS orders_pk;
 ALTER TABLE IF EXISTS ONLY public."menuItems" DROP CONSTRAINT IF EXISTS "menuItems_pk";
+ALTER TABLE IF EXISTS ONLY public."creditCard" DROP CONSTRAINT IF EXISTS "creditCard_pkey";
 ALTER TABLE IF EXISTS ONLY public.categories DROP CONSTRAINT IF EXISTS categories_pk;
 ALTER TABLE IF EXISTS ONLY public.cart DROP CONSTRAINT IF EXISTS cart_pk;
 ALTER TABLE IF EXISTS ONLY public."cartItems" DROP CONSTRAINT IF EXISTS "cartItems_pk";
@@ -38,6 +39,7 @@ ALTER TABLE IF EXISTS public.restaurants ALTER COLUMN "restaurantId" DROP DEFAUL
 ALTER TABLE IF EXISTS public.orders ALTER COLUMN "cartId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.orders ALTER COLUMN "orderId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public."menuItems" ALTER COLUMN "menuItemId" DROP DEFAULT;
+ALTER TABLE IF EXISTS public."creditCard" ALTER COLUMN "creditCardId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.categories ALTER COLUMN "categoryId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.cart ALTER COLUMN "cartId" DROP DEFAULT;
@@ -52,6 +54,8 @@ DROP TABLE IF EXISTS public.orders;
 DROP SEQUENCE IF EXISTS public."menuItems_menuItemId_seq";
 DROP TABLE IF EXISTS public."menuItems";
 DROP TABLE IF EXISTS public."favoriteRestaurants";
+DROP SEQUENCE IF EXISTS public."creditCard_creditCardId_seq";
+DROP TABLE IF EXISTS public."creditCard";
 DROP SEQUENCE IF EXISTS public."categories_categoryId_seq";
 DROP TABLE IF EXISTS public.categories;
 DROP SEQUENCE IF EXISTS public."cart_cartId_seq";
@@ -215,6 +219,39 @@ CREATE SEQUENCE public."categories_categoryId_seq"
 --
 
 ALTER SEQUENCE public."categories_categoryId_seq" OWNED BY public.categories."categoryId";
+
+
+--
+-- Name: creditCard; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."creditCard" (
+    "creditCardId" integer NOT NULL,
+    cvv integer NOT NULL,
+    "billingAddress" text NOT NULL,
+    "creditCardNumber" text NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."creditCard_creditCardId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."creditCard_creditCardId_seq" OWNED BY public."creditCard"."creditCardId";
 
 
 --
@@ -408,6 +445,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN "categoryId" SET DEFAULT nextval
 
 
 --
+-- Name: creditCard creditCardId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."creditCard" ALTER COLUMN "creditCardId" SET DEFAULT nextval('public."creditCard_creditCardId_seq"'::regclass);
+
+
+--
 -- Name: menuItems menuItemId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -501,6 +545,14 @@ COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
 2	Fast Food	https://www.verdictfoodservice.com/wp-content/uploads/sites/31/2018/07/McDonaldsLunch_Dinner.jpg
 3	Italian	https://www.lux-review.com/wp-content/uploads/2020/03/Pasta-1.jpg
 4	Seafood	https://wallpapercave.com/wp/wp1912398.jpg
+\.
+
+
+--
+-- Data for Name: creditCard; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumber", name) FROM stdin;
 \.
 
 
@@ -651,6 +703,13 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
 
 
 --
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 1, false);
+
+
+--
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -715,6 +774,14 @@ ALTER TABLE ONLY public.cart
 
 ALTER TABLE ONLY public.categories
     ADD CONSTRAINT categories_pk PRIMARY KEY ("categoryId");
+
+
+--
+-- Name: creditCard creditCard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."creditCard"
+    ADD CONSTRAINT "creditCard_pkey" PRIMARY KEY ("creditCardId");
 
 
 --

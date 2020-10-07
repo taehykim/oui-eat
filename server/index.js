@@ -164,9 +164,16 @@ app.post('/api/cart', express.json(), (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/login', (req, res) => {
+  req.session.userId = 1;
+  res.json({ userId: req.session.userId });
+});
+
 app.post('/api/orders', express.json(), (req, res, next) => {
   if (!req.session.cartId) {
-    throw new ClientError('There must be a cartId included', 400);
+    throw new ClientError('There must be a cartId in session', 400);
+  } else if (!req.session.userId) {
+    throw new ClientError('There must be a userId in session', 400);
   } else if (!req.body.creditCard) {
     throw new ClientError('There must be a creditCard included', 400);
   } else if (!req.body.shippingAddress) {
