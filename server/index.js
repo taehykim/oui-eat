@@ -83,6 +83,87 @@ app.get('/api/rating', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/cart', (req, res, next) => {
+  if (!req.session.cartId) {
+    res.json([]);
+  } else {
+    const getCart = `
+      select "c"."cartItemId",
+             "c"."price",
+             "m"."menuItemId",
+             "m"."name",
+             "m"."description"
+        from "cartItems" as "c"
+        join "menuItems" as "m" using ("menuItemId")
+       where "c"."cartId" = $1;
+    `;
+    db.query(getCart, [req.session.cartId])
+      .then(result => res.json(result.rows))
+      .catch(err => next(err));
+  }
+});
+
+app.post('/api/cart', express.json(), (req, res, next) => {
+  const menuItemId = parseInt(req.body.menuItemId, 10);
+  if (!menuItemId || menuItemId < 0) {
+    return next(new ClientError('The menuItemId must be a positive integer', 400));
+  }
+  const selectMenuPrice = `
+    select "price"
+      from "menuItems"
+     where "menuItemId" = $1;
+  `;
+  db.query(selectMenuPrice, [menuItemId])
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError('The menuItemId does not exist', 404);
+      }
+      const price = result.rows[0];
+      if (req.session.cartId) {
+        const selectCartId = `
+        select "cartId"
+          from "cart"
+          where "cartId" = $1;
+      `;
+        return db.query(selectCartId, [req.session.cartId])
+          .then(result => Object.assign(price, result.rows[0]));
+      } else {
+        const insertCart = `
+        insert into "cart" ("cartId")
+              values (default)
+          returning "cartId";
+      `;
+        return db.query(insertCart)
+          .then(result => Object.assign(price, result.rows[0]));
+      }
+    })
+    .then(cart => {
+      req.session.cartId = cart.cartId;
+      const insertItem = `
+        insert into "cartItems" ("cartId", "menuItemId", "price")
+                        values ($1, $2, $3)
+                     returning "cartItemId";
+      `;
+      return db.query(insertItem, [cart.cartId, menuItemId, cart.price])
+        .then(result => result.rows[0].cartItemId);
+    })
+    .then(cartItemId => {
+      const select = `
+        select "c"."cartItemId",
+               "c"."price",
+               "m"."menuItemId",
+               "m"."name",
+               "m"."description"
+          from "cartItems" as "c"
+          join "menuItems" as "m" using ("menuItemId")
+         where "c"."cartItemId" = $1;
+      `;
+      return db.query(select, [cartItemId])
+        .then(result => res.status(201).json(result.rows));
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
