@@ -6,6 +6,7 @@ import Categories from './categories';
 import MenuList from './menu-list';
 import Orders from './orders';
 import Navbar from './navbar';
+import LandingPage from './landing-page';
 import CartSummary from './cart-summary';
 import Account from './account';
 
@@ -18,7 +19,8 @@ export default class App extends React.Component {
         params: {},
         currentCategory: null
       },
-      cart: []
+      cart: [],
+      isLoading: true
     };
     this.setView = this.setView.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
@@ -47,6 +49,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getAllCategories();
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 3500);
     this.getCartItems();
   }
 
@@ -84,7 +89,13 @@ export default class App extends React.Component {
 
   render() {
     let viewing = null;
-    if (this.state.view.name === 'restaurants') {
+    if (this.state.isLoading) {
+      return (
+        <>
+          <LandingPage />
+        </>
+      );
+    } else if (this.state.view.name === 'restaurants') {
       viewing = (
         <RestaurantList
           setView={this.setView}
@@ -125,7 +136,9 @@ export default class App extends React.Component {
         />
       );
     } else if (this.state.view.name === 'cartSummary') {
-      viewing = <CartSummary setView={this.setView} cartItems={this.state.cart}/>;
+      viewing = (
+        <CartSummary setView={this.setView} cartItems={this.state.cart} />
+      );
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
     }
