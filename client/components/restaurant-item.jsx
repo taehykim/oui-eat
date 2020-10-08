@@ -4,10 +4,16 @@ class RestaurantItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleRestaurantClick = this.handleRestaurantClick.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
+    this.state = { isFavorited: false };
   }
 
   handleRestaurantClick() {
     this.props.setView('menu', this.props.restaurant);
+  }
+
+  handleHeartClick() {
+    this.setState({ isFavorited: !this.state.isFavorited });
   }
 
   render() {
@@ -22,7 +28,10 @@ class RestaurantItem extends React.Component {
         />
 
         <div className="card-body">
-          <h4 className="card-title">{this.props.restaurant.name}</h4>
+          <div className="d-flex justify-content-between">
+            <h4 className="card-title">{this.props.restaurant.name}</h4>
+            {this.state.isFavorited ? <i className="fas fa-heart text-danger" onClick={this.handleHeartClick}></i> : <i className="far fa-heart text-danger" onClick={this.handleHeartClick}></i>}
+          </div>
           <div className="card-text d-flex">
             <div className="h6 bg-light py-1 px-2 mr-2">
               {this.props.restaurant.rating} <i className="fas fa-star"></i>
