@@ -78,7 +78,13 @@ export default class App extends React.Component {
 
   render() {
     let viewing = null;
-    if (this.state.view.name === 'restaurants') {
+    if (this.state.isLoading) {
+      return (
+        <>
+          <LandingPage />
+        </>
+      );
+    } else if (this.state.view.name === 'restaurants') {
       viewing = (
         <RestaurantList
           setView={this.setView}
@@ -118,20 +124,17 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
     }
-    if (this.state.isLoading) {
-      return (
-        <>
-          <LandingPage/>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Header cart={this.state.cart} view={this.state.view} />
-          <div className="row p-3">{viewing}</div>
-          <Navbar setView={this.setView} />
-        </>
-      );
-    }
+
+    return (
+      <>
+        <Header
+          cart={this.state.cart}
+          view={this.state.view}
+          setView={this.setView}
+        />
+        <div className="row p-3">{viewing}</div>
+        <Navbar setView={this.setView} />
+      </>
+    );
   }
 }
