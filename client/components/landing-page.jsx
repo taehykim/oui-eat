@@ -1,16 +1,14 @@
 import React from 'react';
 
-function LandingPage(props){
+function LandingPage(props) {
   return (
     <>
-    <div class="loader hidden">
-          <img src="images/loading.gif" alt="loading.." class="loader-gif"/>
-    </div>
+      <div className="vh-100 d-flex">
+        <div className="loading-spinner m-auto">
+          <img src="images/loading.gif" alt="loading.." className="loader"/>
+        </div>
+      </div>
     </>
-  )
+  );
 }
 export default LandingPage;
-
-{/* document.addEventListener('load', function () {
-var loader = document.querySelector('.loader');
-  loader.className += ' hidden'; */}

@@ -44,27 +44,8 @@ img:hover {
   font-size: 2rem;
 }
 
-.loader.hidden {
-  animation: fadeOut 3s;
-  animation-fill-mode: forwards;
-}
+.loader{
+  width: 450px;
+  height: auto;
 
-.loader > img {
-  width: auto;
-}
-@keyframes fadeOut {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-.modal-overlay.hidden {
-  display: none;
-}
-@keyframes fadeOut {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
 }

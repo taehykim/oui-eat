@@ -16,7 +16,8 @@ export default class App extends React.Component {
         params: {},
         currentCategory: null
       },
-      cart: []
+      cart: [],
+      isLoading: true
     };
     this.setView = this.setView.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
@@ -33,6 +34,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getAllCategories();
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 3000);
   }
 
   setView(inputName, inputParams) {
@@ -77,13 +81,21 @@ export default class App extends React.Component {
         />
       );
     }
+    if (this.state.isLoading) {
+      return (
+        <>
+          <LandingPage/>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Header cart={this.state.cart} view={this.state.view} />
+          <div className="row p-3">{viewing}</div>
+          <Navbar setView={this.setView} />
+        </>
+      );
+    }
 
-    return (
-      <>
-        <Header cart={this.state.cart} view={this.state.view} />
-        <div className="row p-3">{viewing}</div>
-        <Navbar setView={this.setView} />
-      </>
-    );
   }
 }
