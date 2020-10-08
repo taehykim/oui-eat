@@ -9,13 +9,12 @@ import Navbar from './navbar';
 import CartSummary from './cart-summary';
 import Account from './account';
 
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'cartSummary',
+        name: 'home',
         params: {},
         currentCategory: null
       },

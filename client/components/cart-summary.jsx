@@ -83,7 +83,7 @@ class CartSummary extends React.Component {
           ))}
         </div>
 
-        <p className="ml-3 mt-3">subTotal ${this.getSubTotal()}</p>
+        <p className="ml-3 mt-3">Subtotal ${this.getSubTotal()}</p>
         <p className="ml-3 mt-3">Delivery Fee ${this.getDeliveryFee()}</p>
         <h5 className="ml-5 mt-3">Total ${this.getTotal()}</h5>
 

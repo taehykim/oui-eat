@@ -1,11 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.onDeliveredClick = this.onDeliveredClick.bind(this);
     this.onPendingClick = this.onPendingClick.bind(this);
+    this.handleCartClick = this.handleCartClick.bind(this);
+    this.handleLogoClick = this.handleLogoClick.bind(this);
   }
 
   onDeliveredClick() {
@@ -14,6 +15,14 @@ class Header extends React.Component {
 
   onPendingClick() {
     this.props.setView('orders', { status: 'pending' });
+  }
+
+  handleCartClick() {
+    this.props.setView('cartSummary', {});
+  }
+
+  handleLogoClick() {
+    this.props.setView('home', {});
   }
 
   render() {
@@ -34,13 +43,13 @@ class Header extends React.Component {
           {this.props.view.name === 'cart' ? (
             <i className="ml-2 fas fa-times"></i>
           ) : (
-            <h2 className="mb-0">
+            <h2 className="mb-0" onClick={this.handleLogoClick}>
               Oui<span className="logo">Eat</span>
             </h2>
           )}
           <div className="cart-icon mr-1">
             {this.props.cart.length} items{' '}
-            <i className="fas fa-shopping-cart"></i>
+            <i className="fas fa-shopping-cart" onClick={this.handleCartClick}></i>
           </div>
         </header>
       );
