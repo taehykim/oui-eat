@@ -507,6 +507,7 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 14	1	grove street
 15	1	grove street
 16	1	grove street
+17	1	grove street
 \.
 
 
@@ -526,6 +527,7 @@ COPY public.cart ("cartId") FROM stdin;
 9
 10
 11
+12
 \.
 
 
@@ -551,6 +553,7 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 15	10	59	16.50
 16	10	60	18.00
 17	11	2	2.40
+18	12	1	3.45
 \.
 
 
@@ -590,6 +593,7 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 17	990	PO box 89888	5678	con
 18	209	PO box 89888	5678	con
 19	208	PO box 89888	5678	con
+20	208	PO box 89888	5678	tia
 \.
 
 
@@ -692,6 +696,7 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") 
 10	11	1	17	2020-10-07 21:59:25.208094+00
 11	11	1	18	2020-10-07 22:04:31.327508+00
 12	11	1	19	2020-10-07 22:05:21.004184+00
+13	12	1	20	2020-10-07 23:57:30.089243+00
 \.
 
 
@@ -722,21 +727,21 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 16, true);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 17, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 17, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 18, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 11, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 12, true);
 
 
 --
@@ -750,7 +755,7 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 19, true);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 20, true);
 
 
 --
@@ -771,7 +776,7 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 12, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 13, true);
 
 
 --
