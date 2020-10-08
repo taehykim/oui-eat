@@ -47,7 +47,13 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  getLogin() {
+    fetch('/api/login')
+      .catch(err => console.error(err));
+  }
+
   componentDidMount() {
+    this.getLogin();
     this.getAllCategories();
     setTimeout(() => {
       this.setState({ isLoading: false });

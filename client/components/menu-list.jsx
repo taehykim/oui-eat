@@ -20,7 +20,7 @@ class MenuList extends React.Component {
 
   handleHeartClick() {
     if (!this.state.isFavorited) {
-      this.props.addToFavorites(this.props.restaurant.restaurantId);
+      this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
       this.setState({ isFavorited: true });
     }
   }
