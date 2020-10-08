@@ -107,17 +107,6 @@ class CartSummary extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-
-          <label htmlFor="address">Address</label>
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              value={this.state.address}
-              onChange={this.handleChange}
-            />
-          </div>
           <label htmlFor="billingAddress">Billing Address</label>
           <div className="input-group mb-3">
             <input
@@ -145,6 +134,19 @@ class CartSummary extends React.Component {
               className="form-control"
               id="name"
               value={this.state.cvv}
+              onChange={this.handleChange}
+            />
+          </div>
+          <hr />
+
+          <div className="h5">Delivery Information</div>
+          <label htmlFor="address">Delivery Address</label>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              id="address"
+              value={this.state.address}
               onChange={this.handleChange}
             />
           </div>
