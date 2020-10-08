@@ -6,6 +6,7 @@ import Categories from './categories';
 import MenuList from './menu-list';
 import Orders from './orders';
 import Navbar from './navbar';
+import Account from './account';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -91,6 +92,8 @@ export default class App extends React.Component {
           }
         />
       );
+    } else if (this.state.view.name === 'account') {
+      viewing = <Account setView={this.setView} />;
     }
 
     return (
