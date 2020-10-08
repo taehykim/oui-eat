@@ -5,6 +5,7 @@ import Home from './home';
 import Categories from './categories';
 import MenuList from './menu-list';
 import Navbar from './navbar';
+import LandingPage from './landing-page';
 
 export default class App extends React.Component {
   constructor(props) {
