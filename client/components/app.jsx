@@ -12,7 +12,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'account',
+        name: 'home',
         params: {},
         currentCategory: null
       },
