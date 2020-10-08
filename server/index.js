@@ -106,7 +106,9 @@ app.get('/api/cart', (req, res, next) => {
 app.post('/api/cart', express.json(), (req, res, next) => {
   const menuItemId = parseInt(req.body.menuItemId, 10);
   if (!menuItemId || menuItemId < 0) {
-    return next(new ClientError('The menuItemId must be a positive integer', 400));
+    return next(
+      new ClientError('The menuItemId must be a positive integer', 400)
+    );
   }
   const selectMenuPrice = `
     select "price"
@@ -125,7 +127,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           from "cart"
           where "cartId" = $1;
       `;
-        return db.query(selectCartId, [req.session.cartId])
+        return db
+          .query(selectCartId, [req.session.cartId])
           .then(result => Object.assign(price, result.rows[0]));
       } else {
         const insertCart = `
@@ -133,7 +136,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
               values (default)
           returning "cartId";
       `;
-        return db.query(insertCart)
+        return db
+          .query(insertCart)
           .then(result => Object.assign(price, result.rows[0]));
       }
     })
@@ -144,7 +148,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
                         values ($1, $2, $3)
                      returning "cartItemId";
       `;
-      return db.query(insertItem, [cart.cartId, menuItemId, cart.price])
+      return db
+        .query(insertItem, [cart.cartId, menuItemId, cart.price])
         .then(result => result.rows[0].cartItemId);
     })
     .then(cartItemId => {
@@ -158,8 +163,99 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           join "menuItems" as "m" using ("menuItemId")
          where "c"."cartItemId" = $1;
       `;
-      return db.query(select, [cartItemId])
+      return db
+        .query(select, [cartItemId])
         .then(result => res.status(201).json(result.rows[0]));
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/login', (req, res) => {
+  req.session.userId = 1;
+  res.json({ userId: req.session.userId });
+});
+
+app.get('/api/orders', (req, res, next) => {
+  const selectAllOrders = `select 
+      "r"."restaurantId",
+      "r"."name" as "restaurantName",
+      "r"."image" as "restaurantImage",
+      "mi"."menuItemId",
+      "mi"."name" as "menuItemName",
+      "mi"."price" as "menuItemPrice",
+      "mi"."description",
+      "ci"."cartId",
+      "o"."orderId",
+      "o"."userId",
+      "o"."orderedAt"
+    from "orders" as "o"
+    join "cartItems" as "ci" using ("cartId")
+    join "menuItems" as "mi" using ("menuItemId")
+    join "restaurants" as "r" using ("restaurantId")
+    `;
+  db.query(selectAllOrders)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/orders', express.json(), (req, res, next) => {
+  if (!req.session.cartId) {
+    throw new ClientError('There must be a cartId in session', 400);
+  } else if (!req.session.userId) {
+    throw new ClientError('There must be a userId in session', 400);
+  } else if (!Number(req.body.creditCardNumber)) {
+    throw new ClientError('There must be a creditCardNumber included', 400);
+  } else if (!req.body.address) {
+    throw new ClientError('There must be an address included', 400);
+  } else if (!req.body.billingAddress) {
+    throw new ClientError('There must be a billingAddress included', 400);
+  } else if (!req.body.name) {
+    throw new ClientError('There must be a name included', 400);
+  } else if (!Number(req.body.cvv)) {
+    throw new ClientError('There must be a cvv included', 400);
+  }
+  const insertAddress = `
+    insert into "address" ("address", "userId")
+          values ($1, $2);
+  `;
+  db.query(insertAddress, [req.body.address, req.session.userId]).catch(err =>
+    next(err)
+  );
+  const insertCredit = `
+    insert into "creditCard" ("name", "creditCardNumber", "cvv", "billingAddress")
+         values ($1, $2, $3, $4)
+      returning "creditCardId";
+  `;
+  const params = [
+    req.body.name,
+    req.body.creditCardNumber,
+    req.body.cvv,
+    req.body.billingAddress
+  ];
+  db.query(insertCredit, params)
+    .then(result => result.rows[0].creditCardId)
+    .then(creditCardId => {
+      const insertOrder = `
+        insert into "orders" ("creditCardId", "cartId", "userId")
+         values ($1, $2, $3)
+      returning "creditCardId",
+                "userId",
+                "orderId",
+                "orderedAt";
+      `;
+      db.query(insertOrder, [
+        creditCardId,
+        req.session.cartId,
+        req.session.userId
+      ]).then(result => {
+        result.rows[0].name = req.body.name;
+        result.rows[0].creditCardNumber = req.body.creditCardNumber;
+        result.rows[0].cvv = req.body.cvv;
+        result.rows[0].billingAddress = req.body.billingAddress;
+        result.rows[0].address = req.body.address;
+        delete req.session.cartId;
+        return res.status(201).json(result.rows[0]);
+      });
     })
     .catch(err => next(err));
 });

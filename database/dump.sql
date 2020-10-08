@@ -29,6 +29,7 @@ ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pk;
 ALTER TABLE IF EXISTS ONLY public.restaurants DROP CONSTRAINT IF EXISTS restaurants_pk;
 ALTER TABLE IF EXISTS ONLY public.orders DROP CONSTRAINT IF EXISTS orders_pk;
 ALTER TABLE IF EXISTS ONLY public."menuItems" DROP CONSTRAINT IF EXISTS "menuItems_pk";
+ALTER TABLE IF EXISTS ONLY public."creditCard" DROP CONSTRAINT IF EXISTS "creditCard_pkey";
 ALTER TABLE IF EXISTS ONLY public.categories DROP CONSTRAINT IF EXISTS categories_pk;
 ALTER TABLE IF EXISTS ONLY public.cart DROP CONSTRAINT IF EXISTS cart_pk;
 ALTER TABLE IF EXISTS ONLY public."cartItems" DROP CONSTRAINT IF EXISTS "cartItems_pk";
@@ -38,6 +39,7 @@ ALTER TABLE IF EXISTS public.restaurants ALTER COLUMN "restaurantId" DROP DEFAUL
 ALTER TABLE IF EXISTS public.orders ALTER COLUMN "cartId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.orders ALTER COLUMN "orderId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public."menuItems" ALTER COLUMN "menuItemId" DROP DEFAULT;
+ALTER TABLE IF EXISTS public."creditCard" ALTER COLUMN "creditCardId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.categories ALTER COLUMN "categoryId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.cart ALTER COLUMN "cartId" DROP DEFAULT;
@@ -52,6 +54,8 @@ DROP TABLE IF EXISTS public.orders;
 DROP SEQUENCE IF EXISTS public."menuItems_menuItemId_seq";
 DROP TABLE IF EXISTS public."menuItems";
 DROP TABLE IF EXISTS public."favoriteRestaurants";
+DROP SEQUENCE IF EXISTS public."creditCard_creditCardId_seq";
+DROP TABLE IF EXISTS public."creditCard";
 DROP SEQUENCE IF EXISTS public."categories_categoryId_seq";
 DROP TABLE IF EXISTS public.categories;
 DROP SEQUENCE IF EXISTS public."cart_cartId_seq";
@@ -141,7 +145,8 @@ CREATE TABLE public.cart (
 CREATE TABLE public."cartItems" (
     "cartItemId" integer NOT NULL,
     "cartId" integer NOT NULL,
-    "menuId" integer NOT NULL
+    "menuItemId" integer NOT NULL,
+    price numeric
 );
 
 
@@ -217,6 +222,39 @@ ALTER SEQUENCE public."categories_categoryId_seq" OWNED BY public.categories."ca
 
 
 --
+-- Name: creditCard; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public."creditCard" (
+    "creditCardId" integer NOT NULL,
+    cvv integer NOT NULL,
+    "billingAddress" text NOT NULL,
+    "creditCardNumber" text NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."creditCard_creditCardId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."creditCard_creditCardId_seq" OWNED BY public."creditCard"."creditCardId";
+
+
+--
 -- Name: favoriteRestaurants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -267,8 +305,8 @@ CREATE TABLE public.orders (
     "orderId" integer NOT NULL,
     "cartId" integer NOT NULL,
     "userId" integer NOT NULL,
-    "creditCard" text NOT NULL,
-    "orderedAt" timestamp with time zone NOT NULL
+    "creditCardId" text NOT NULL,
+    "orderedAt" timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -407,6 +445,13 @@ ALTER TABLE ONLY public.categories ALTER COLUMN "categoryId" SET DEFAULT nextval
 
 
 --
+-- Name: creditCard creditCardId; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."creditCard" ALTER COLUMN "creditCardId" SET DEFAULT nextval('public."creditCard_creditCardId_seq"'::regclass);
+
+
+--
 -- Name: menuItems menuItemId; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -446,6 +491,23 @@ ALTER TABLE ONLY public.users ALTER COLUMN "userId" SET DEFAULT nextval('public.
 --
 
 COPY public.address ("addressId", "userId", address) FROM stdin;
+1	1	grove street
+2	1	grove street
+3	1	grove street
+4	1	grove street
+5	1	grove street
+6	1	grove street
+7	1	grove street
+8	1	grove street
+9	1	grove street
+10	1	grove street
+11	1	grove street
+12	1	grove street
+13	1	grove street
+14	1	grove street
+15	1	grove street
+16	1	grove street
+17	1	grove street
 \.
 
 
@@ -454,6 +516,18 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 --
 
 COPY public.cart ("cartId") FROM stdin;
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
 \.
 
 
@@ -461,7 +535,25 @@ COPY public.cart ("cartId") FROM stdin;
 -- Data for Name: cartItems; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public."cartItems" ("cartItemId", "cartId", "menuId") FROM stdin;
+COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin;
+1	4	9	1.65
+2	5	10	1.85
+3	6	10	1.85
+4	7	16	18
+5	8	4	1.60
+6	9	4	1.60
+7	9	9	1.65
+8	9	10	1.85
+9	9	2	2.40
+10	9	55	3.50
+11	9	21	20
+12	9	50	9.95
+13	9	50	9.95
+14	10	59	16.50
+15	10	59	16.50
+16	10	60	18.00
+17	11	2	2.40
+18	12	1	3.45
 \.
 
 
@@ -474,6 +566,34 @@ COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
 2	Fast Food	https://www.verdictfoodservice.com/wp-content/uploads/sites/31/2018/07/McDonaldsLunch_Dinner.jpg
 3	Italian	https://www.lux-review.com/wp-content/uploads/2020/03/Pasta-1.jpg
 4	Seafood	https://wallpapercave.com/wp/wp1912398.jpg
+\.
+
+
+--
+-- Data for Name: creditCard; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumber", name) FROM stdin;
+1	999	PO box 89888	5678	con
+2	998	PO box 89888	5678	con
+3	997	PO box 89888	5678	con
+4	996	PO box 89888	5678	con
+5	996	PO box 89888	5678	con
+6	996	PO box 89888	5678	con
+7	996	PO box 89888	5678	con
+8	996	PO box 89888	5678	con
+9	996	PO box 89888	5678	con
+10	996	PO box 89888	5678	con
+11	996	PO box 89888	5678	con
+12	996	PO box 89888	5678	con
+13	996	PO box 89888	5678	con
+14	995	PO box 89888	5678	con
+15	992	PO box 89888	5678	con
+16	990	PO box 89888	5678	con
+17	990	PO box 89888	5678	con
+18	209	PO box 89888	5678	con
+19	208	PO box 89888	5678	con
+20	208	PO box 89888	5678	tia
 \.
 
 
@@ -568,7 +688,15 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.orders ("orderId", "cartId", "userId", "creditCard", "orderedAt") FROM stdin;
+COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") FROM stdin;
+6	11	1	13	2020-10-07 21:48:53.948748+00
+7	11	1	14	2020-10-07 21:53:01.779037+00
+8	11	1	15	2020-10-07 21:55:29.555576+00
+9	11	1	16	2020-10-07 21:58:57.133735+00
+10	11	1	17	2020-10-07 21:59:25.208094+00
+11	11	1	18	2020-10-07 22:04:31.327508+00
+12	11	1	19	2020-10-07 22:05:21.004184+00
+13	12	1	20	2020-10-07 23:57:30.089243+00
 \.
 
 
@@ -591,6 +719,7 @@ Wendys 	6	33.652052	-117.823056	14386 Culver Dr, Irvine, CA 92604	2	https://dynl
 --
 
 COPY public.users ("userId") FROM stdin;
+1
 \.
 
 
@@ -598,21 +727,21 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 1, false);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 17, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 1, false);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 18, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 1, false);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 12, true);
 
 
 --
@@ -620,6 +749,13 @@ SELECT pg_catalog.setval('public."cart_cartId_seq"', 1, false);
 --
 
 SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
+
+
+--
+-- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 20, true);
 
 
 --
@@ -640,7 +776,7 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 13, true);
 
 
 --
@@ -654,7 +790,7 @@ SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 6, true);
 -- Name: users_userId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."users_userId_seq"', 1, false);
+SELECT pg_catalog.setval('public."users_userId_seq"', 1, true);
 
 
 --
@@ -687,6 +823,14 @@ ALTER TABLE ONLY public.cart
 
 ALTER TABLE ONLY public.categories
     ADD CONSTRAINT categories_pk PRIMARY KEY ("categoryId");
+
+
+--
+-- Name: creditCard creditCard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public."creditCard"
+    ADD CONSTRAINT "creditCard_pkey" PRIMARY KEY ("creditCardId");
 
 
 --
@@ -742,7 +886,7 @@ ALTER TABLE ONLY public."cartItems"
 --
 
 ALTER TABLE ONLY public."cartItems"
-    ADD CONSTRAINT "cartItems_fk1" FOREIGN KEY ("menuId") REFERENCES public."menuItems"("menuItemId");
+    ADD CONSTRAINT "cartItems_fk1" FOREIGN KEY ("menuItemId") REFERENCES public."menuItems"("menuItemId");
 
 
 --
