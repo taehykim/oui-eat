@@ -5,6 +5,7 @@ class RestaurantItem extends React.Component {
     super(props);
     this.handleRestaurantClick = this.handleRestaurantClick.bind(this);
     this.handleHeartClick = this.handleHeartClick.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
     this.state = { isFavorited: false };
   }
 
@@ -13,7 +14,19 @@ class RestaurantItem extends React.Component {
   }
 
   handleHeartClick() {
-    this.setState({ isFavorited: !this.state.isFavorited });
+    if (!this.state.isFavorited) {
+      this.addToFavorites();
+    }
+  }
+
+  addToFavorites() {
+    fetch('/api/favorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.props.restaurant.restaurantId)
+    })
+      .then(this.setState({ isFavorited: true }))
+      .catch(err => console.error(err));
   }
 
   render() {
