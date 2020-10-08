@@ -41,6 +41,7 @@ class RestaurantList extends React.Component {
             setView={this.props.setView}
             key={restaurant.restaurantId}
             restaurant={restaurant}
+            addToFavorites={this.props.addToFavorites}
           />
         ))}
       </div>

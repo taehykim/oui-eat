@@ -26,6 +26,7 @@ export default class App extends React.Component {
     this.getAllCategories = this.getAllCategories.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
   }
 
   getAllCategories() {
@@ -33,10 +34,26 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ categories: data });
-      });
+      })
+      .catch(err => console.error(err));
+  }
+
+  addToFavorites(id) {
+    fetch('/api/favorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(id)
+    })
+      .catch(err => console.error(err));
+  }
+
+  getLogin() {
+    fetch('/api/login')
+      .catch(err => console.error(err));
   }
 
   componentDidMount() {
+    this.getLogin();
     this.getAllCategories();
     setTimeout(() => {
       this.setState({ isLoading: false });
@@ -89,6 +106,7 @@ export default class App extends React.Component {
         <RestaurantList
           setView={this.setView}
           category={this.state.view.params}
+          addToFavorites={this.addToFavorites}
         />
       );
     } else if (this.state.view.name === 'categories') {
@@ -99,12 +117,18 @@ export default class App extends React.Component {
         />
       );
     } else if (this.state.view.name === 'home') {
-      viewing = <Home setView={this.setView} />;
+      viewing = (
+        <Home
+          setView={this.setView}
+          addToFavorites={this.addToFavorites}
+        />
+      );
     } else if (this.state.view.name === 'menu') {
       viewing = (
         <MenuList
           restaurant={this.state.view.params}
           addToCart={this.addToCart}
+          addToFavorites={this.addToFavorites}
         />
       );
     } else if (this.state.view.name === 'orders') {

@@ -4,8 +4,9 @@ import MenuItem from './menu-item';
 class MenuList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { menu: [] };
+    this.state = { menu: [], isFavorited: false };
     this.getMenuItems = this.getMenuItems.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
   }
 
   getMenuItems() {
@@ -15,6 +16,13 @@ class MenuList extends React.Component {
         this.setState({ menu: data });
       })
       .catch(err => console.error('Error:', err));
+  }
+
+  handleHeartClick() {
+    if (!this.state.isFavorited) {
+      this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
+      this.setState({ isFavorited: true });
+    }
   }
 
   componentDidMount() {
@@ -31,7 +39,10 @@ class MenuList extends React.Component {
             alt={this.props.restaurant.name}
             className="col-12 p-2"
           />
-          <div className="h4">{this.props.restaurant.name}</div>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="h4 mb-0">{this.props.restaurant.name}</div>
+            {this.state.isFavorited ? <i className="fas fa-heart text-danger" onClick={this.handleHeartClick}></i> : <i className="far fa-heart text-danger" onClick={this.handleHeartClick}></i>}
+          </div>
           <div className="d-flex h6">
             <div className="bg-light py-1 px-2 mr-2">
               {this.props.restaurant.rating}
