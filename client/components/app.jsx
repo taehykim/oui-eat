@@ -6,14 +6,16 @@ import Categories from './categories';
 import MenuList from './menu-list';
 import Orders from './orders';
 import Navbar from './navbar';
+import CartSummary from './cart-summary';
 import Account from './account';
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'home',
+        name: 'cartSummary',
         params: {},
         currentCategory: null
       },
@@ -22,6 +24,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getCartItems = this.getCartItems.bind(this);
   }
 
   getAllCategories() {
@@ -34,6 +37,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.getAllCategories();
+    this.getCartItems();
   }
 
   setView(inputName, inputParams) {
@@ -53,6 +57,17 @@ export default class App extends React.Component {
         const newCart = [...this.state.cart];
         newCart.push(data);
         this.setState({ cart: newCart });
+      })
+      .catch(err => console.error(err));
+  }
+
+  getCartItems() {
+    fetch('/api/cart')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          cart: data
+        });
       })
       .catch(err => console.error(err));
   }
@@ -92,6 +107,8 @@ export default class App extends React.Component {
           }
         />
       );
+    } else if (this.state.view.name === 'cartSummary') {
+      viewing = <CartSummary setView={this.setView} cartItems={this.state.cart}/>;
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
     }
