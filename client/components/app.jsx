@@ -5,13 +5,14 @@ import Home from './home';
 import Categories from './categories';
 import MenuList from './menu-list';
 import Navbar from './navbar';
+import Account from './account';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'home',
+        name: 'account',
         params: {},
         currentCategory: null
       },
@@ -80,6 +81,8 @@ export default class App extends React.Component {
           addToCart={this.addToCart}
         />
       );
+    } else if (this.state.view.name === 'account') {
+      viewing = <Account />;
     }
 
     return (
