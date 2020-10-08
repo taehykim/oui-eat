@@ -76,6 +76,12 @@ export default class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.view.name !== this.state.view.name) {
+      this.setState({ prevView: prevState.view });
+    }
+  }
+
   render() {
     let viewing = null;
     if (this.state.isLoading) {
@@ -105,6 +111,8 @@ export default class App extends React.Component {
         <MenuList
           restaurant={this.state.view.params}
           addToCart={this.addToCart}
+          setView={this.setView}
+          prevView={this.state.prevView}
         />
       );
     } else if (this.state.view.name === 'orders') {

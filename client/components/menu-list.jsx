@@ -6,6 +6,7 @@ class MenuList extends React.Component {
     super(props);
     this.state = { menu: [] };
     this.getMenuItems = this.getMenuItems.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   getMenuItems() {
@@ -17,6 +18,10 @@ class MenuList extends React.Component {
       .catch(err => console.error('Error:', err));
   }
 
+  handleBackClick() {
+    this.props.setView(this.props.prevView.name, this.props.prevView.params);
+  }
+
   componentDidMount() {
     this.getMenuItems();
   }
@@ -24,7 +29,13 @@ class MenuList extends React.Component {
   render() {
     return (
       <>
-        <div className="border-bottom mb-2 mt-5">
+        <div
+          className="col-12 text-muted font-weight-light mb-2 back mt-5"
+          onClick={this.handleBackClick}
+        >
+          <i className="fas fa-chevron-left"></i> Back
+        </div>
+        <div className="border-bottom mb-2">
           <img
             id={this.props.restaurant.restaurantId}
             src={this.props.restaurant.image}
