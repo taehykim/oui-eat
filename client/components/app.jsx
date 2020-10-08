@@ -82,7 +82,7 @@ export default class App extends React.Component {
         />
       );
     } else if (this.state.view.name === 'account') {
-      viewing = <Account />;
+      viewing = <Account setView={this.setView} />;
     }
 
     return (
