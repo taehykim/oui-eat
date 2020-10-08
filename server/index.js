@@ -176,7 +176,7 @@ app.get('/api/login', (req, res) => {
 });
 
 app.get('/api/orders', (req, res, next) => {
-  const selectAllOrders = `select 
+  const selectAllOrders = `select
       "r"."restaurantId",
       "r"."name" as "restaurantName",
       "r"."image" as "restaurantImage",
@@ -256,6 +256,25 @@ app.post('/api/orders', express.json(), (req, res, next) => {
         delete req.session.cartId;
         return res.status(201).json(result.rows[0]);
       });
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/favorites', (req, res, next) => {
+  const restaurantId = req.body.restaurantId;
+  const userId = req.session.userId;
+  if (!restaurantId) {
+    res.status(400).json({ error: 'Input Incorrect Values' });
+    return;
+  }
+  const sql =
+    `insert into "favoriteRestaurants" ("restaurantId", "userId")
+    values ($1, $2)
+    returning *`;
+  const values = [restaurantId, userId];
+  db.query(sql, values)
+    .then(data => {
+      res.status(201).json(data.rows[0]);
     })
     .catch(err => next(err));
 });
