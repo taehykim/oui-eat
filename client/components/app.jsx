@@ -6,6 +6,8 @@ import Categories from './categories';
 import MenuList from './menu-list';
 import Navbar from './navbar';
 import CartSummary from './cart-summary';
+import Account from './account';
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -96,6 +98,8 @@ export default class App extends React.Component {
       );
     } else if (this.state.view.name === 'cartSummary') {
       viewing = <CartSummary setView={this.setView} cartItems={this.state.cart}/>;
+    } else if (this.state.view.name === 'account') {
+      viewing = <Account setView={this.setView} />;
     }
 
     return (
