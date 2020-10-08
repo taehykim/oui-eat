@@ -262,15 +262,16 @@ app.post('/api/orders', express.json(), (req, res, next) => {
 
 app.post('/api/favorites', (req, res, next) => {
   const restaurantId = req.body.restaurantId;
+  const userId = req.session.userId;
   if (!restaurantId) {
     res.status(400).json({ error: 'Input Incorrect Values' });
     return;
   }
   const sql =
-    `insert into "favoriteRestaurants" ("restaurantId")
-    values ()
+    `insert into "favoriteRestaurants" ("restaurantId", "userId")
+    values ($1, $2)
     returning *`;
-  const values = [restaurantId];
+  const values = [restaurantId, userId];
   db.query(sql, values)
     .then(data => {
       res.status(201).json(data.rows[0]);
