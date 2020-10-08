@@ -36,7 +36,7 @@ export default class App extends React.Component {
     this.getAllCategories();
     setTimeout(() => {
       this.setState({ isLoading: false });
-    }, 3000);
+    }, 3500);
   }
 
   setView(inputName, inputParams) {
