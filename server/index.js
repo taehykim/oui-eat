@@ -175,6 +175,29 @@ app.get('/api/login', (req, res) => {
   res.json({ userId: req.session.userId });
 });
 
+app.get('/api/orders', (req, res, next) => {
+  const selectAllOrders = `select 
+      "r"."restaurantId",
+      "r"."name" as "restaurantName",
+      "r"."image" as "restaurantImage",
+      "mi"."menuItemId",
+      "mi"."name" as "menuItemName",
+      "mi"."price" as "menuItemPrice",
+      "mi"."description",
+      "ci"."cartId",
+      "o"."orderId",
+      "o"."userId",
+      "o"."orderedAt"
+    from "orders" as "o"
+    join "cartItems" as "ci" using ("cartId")
+    join "menuItems" as "mi" using ("menuItemId")
+    join "restaurants" as "r" using ("restaurantId")
+    `;
+  db.query(selectAllOrders)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.post('/api/orders', express.json(), (req, res, next) => {
   if (!req.session.cartId) {
     throw new ClientError('There must be a cartId in session', 400);
@@ -195,14 +218,20 @@ app.post('/api/orders', express.json(), (req, res, next) => {
     insert into "address" ("address", "userId")
           values ($1, $2);
   `;
-  db.query(insertAddress, [req.body.address, req.session.userId])
-    .catch(err => next(err));
+  db.query(insertAddress, [req.body.address, req.session.userId]).catch(err =>
+    next(err)
+  );
   const insertCredit = `
     insert into "creditCard" ("name", "creditCardNumber", "cvv", "billingAddress")
          values ($1, $2, $3, $4)
       returning "creditCardId";
   `;
-  const params = [req.body.name, req.body.creditCardNumber, req.body.cvv, req.body.billingAddress];
+  const params = [
+    req.body.name,
+    req.body.creditCardNumber,
+    req.body.cvv,
+    req.body.billingAddress
+  ];
   db.query(insertCredit, params)
     .then(result => result.rows[0].creditCardId)
     .then(creditCardId => {
@@ -214,16 +243,19 @@ app.post('/api/orders', express.json(), (req, res, next) => {
                 "orderId",
                 "orderedAt";
       `;
-      db.query(insertOrder, [creditCardId, req.session.cartId, req.session.userId])
-        .then(result => {
-          result.rows[0].name = req.body.name;
-          result.rows[0].creditCardNumber = req.body.creditCardNumber;
-          result.rows[0].cvv = req.body.cvv;
-          result.rows[0].billingAddress = req.body.billingAddress;
-          result.rows[0].address = req.body.address;
-          delete req.session.cartId;
-          return res.status(201).json(result.rows[0]);
-        });
+      db.query(insertOrder, [
+        creditCardId,
+        req.session.cartId,
+        req.session.userId
+      ]).then(result => {
+        result.rows[0].name = req.body.name;
+        result.rows[0].creditCardNumber = req.body.creditCardNumber;
+        result.rows[0].cvv = req.body.cvv;
+        result.rows[0].billingAddress = req.body.billingAddress;
+        result.rows[0].address = req.body.address;
+        delete req.session.cartId;
+        return res.status(201).json(result.rows[0]);
+      });
     })
     .catch(err => next(err));
 });
