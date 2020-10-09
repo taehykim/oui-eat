@@ -19,6 +19,17 @@ class RestaurantItem extends React.Component {
     }
   }
 
+  checkFavoriteRestaurants() {
+    fetch(`/api/favorites/${this.props.restaurant.restaurantId}`)
+      .then(res => res.json())
+      .then(boolean => boolean ? this.setState({ isFavorited: true }) : null)
+      .catch(err => console.error(err));
+  }
+
+  componentDidMount() {
+    this.checkFavoriteRestaurants();
+  }
+
   render() {
     return (
       <div className="card m-3">
