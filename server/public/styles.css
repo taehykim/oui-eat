@@ -37,7 +37,6 @@ img:hover {
   border-radius: 9%;
   background-size: cover;
   background-position: center;
-  /* background: linear-gradient(rgba(98, 98, 98, 0.69), rgba(98, 98, 98, 1.2)); */
   margin: .25rem;
 }
 
@@ -50,12 +49,17 @@ img:hover {
   font-size: 2rem;
 }
 
+.loader{
+  margin-left: 55px;
+  width: 480px;
+  height: auto;
+}
+
 .cart-input {
   width: 340px;
   height: 40px;
   left: 11px;
   top: 117px;
-
   background: #FFFFFF;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

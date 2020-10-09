@@ -507,6 +507,10 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 14	1	grove street
 15	1	grove street
 16	1	grove street
+17	1	grove street
+18	1	grove street
+19	1	grove street
+20	1	grove street
 \.
 
 
@@ -526,6 +530,11 @@ COPY public.cart ("cartId") FROM stdin;
 9
 10
 11
+12
+13
+14
+15
+16
 \.
 
 
@@ -551,6 +560,23 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 15	10	59	16.50
 16	10	60	18.00
 17	11	2	2.40
+18	12	1	3.45
+19	13	70	12.00
+20	13	71	16.50
+21	14	46	9.95
+22	14	47	9.95
+23	14	46	9.95
+24	14	54	3.50
+25	15	18	8
+26	15	19	11
+27	15	22	23
+28	15	22	23
+29	15	22	23
+30	16	59	16.50
+31	16	48	9.95
+32	16	15	3
+33	16	59	16.50
+34	16	63	14.50
 \.
 
 
@@ -563,6 +589,8 @@ COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
 2	Fast Food	https://www.verdictfoodservice.com/wp-content/uploads/sites/31/2018/07/McDonaldsLunch_Dinner.jpg
 3	Italian	https://www.lux-review.com/wp-content/uploads/2020/03/Pasta-1.jpg
 4	Seafood	https://wallpapercave.com/wp/wp1912398.jpg
+6	Vegan	https://crux.org.nz/assets/Uploads/Untitled-design-5-v2__ScaleWidthWzQwMF0.jpg
+5	Mexican	https://communityimpact.com/wp-content/uploads/2019/05/LFH-2019-05-15-1.jpg
 \.
 
 
@@ -590,6 +618,10 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 17	990	PO box 89888	5678	con
 18	209	PO box 89888	5678	con
 19	208	PO box 89888	5678	con
+20	208	PO box 89888	5678	tia
+21	208	PO box 89888	5678	real tia
+22	111	PO box 12345	5678	tia kim
+23	111	PO box 12345	5678	bose
 \.
 
 
@@ -598,6 +630,7 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 --
 
 COPY public."favoriteRestaurants" ("userId", "restaurantId") FROM stdin;
+1	3
 \.
 
 
@@ -677,6 +710,34 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 2	Chocolate panna cotta	69	9.00	Mascarpone crema + cacao nib
 2	Cannellini bean hummus	70	12.00	Sicilian pesto + pistachio + market vegetable + baguette
 2	Charred Octopus	71	16.50	Gigante bean + fennel + lemon yogurt + brown butter vinaigrette
+7	Burrito	72	7.75	Your choice of freshly grilled meat or sfritas wrapped in a warmed flour tortilla with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese
+7	Burrito Bowl	73	7.75	Your choice of freshly grilled meat or sofritas served in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese
+7	Salad	74	7.75	Served with our fresh supergreens lettuce blend made of Romaine, Baby Kale, and Baby Spinach. Add beans, queso blanco, salsa, guacamole, sour cream or cheese and top it off with our signature Chipotle-Honey Vinaigrette
+7	Three Tacos	75	7.75	3 Tacos!
+7	Keto Salad Bowl	76	10.15	Supergreens Lettuce Blend, Chicken, Tomatillo-Red Chili Salsa, Cheese  and Guacamole
+7	Paleo Salad Bowl	77	10.15	Supergreens Lettuce Blend, Chicken, Fajita Veggies, Tomatillo-Green Chili Salsa and Guacamole
+7	High Protein Bowl	78	12.00	White Rice, Chicken, Steak, Black Beans, Tomatillo-Red Chili Salsa, Cheese and Shredded Romaine Lettuce
+7	Vegan Bowl	79	7.75	Brown Rice, Sofritas, Black Beans, Fresh Tomato Salsa, Roasted Chili-Corn Salsa and Shredded Romaine Lettuce
+7	Vegetarian Bowl	80	7.75	Supergreens Lettuce Blend, Brown Rice, Black Beans, Fajita Veggies, Fresh Tomato Salsa and Guacamole
+7	Mexican Coca-Cola	81	3.20	Mexican Coca-Cola
+7	Blackberry Izze	82	3.00	Blackberry Izze
+7	Bottled Water	83	2.60	Bottled Water
+7	Pineapple Orange Banana Juice	84	3.00	Pineapple + Orange + Banana
+7	Pressed Apple Juice	85	3.00	Pressed Apple Juice
+8	Crispy Cauliflower	86	8.45	fresh cauliflower florets in panko breading choice of buffalo-style or orange dipping sauce
+8	Kids Veggie Burger	87	8.95	House made veggie burger with lettuce, tomato, pickles and ketchup on a sesame bun
+8	Pesto Zucchini Noodles	88	11.95	lightly seared zucchini noodles in basil pesto with arugula, parmesan, spicy italian sausage crumbles and roasted baby tomatoes
+8	Far East Bowl	89	12.50	choice of grilled tempeh or crispy sesame chickin with  wild rice, broccolini, pickled vegetables, fresh herbs, and thai coconut curry sauce
+8	Greek Mezze Salad	90	10.15	vg lettuce blend, tossed in our house vinaigrette with fresh herbs, marinated gigande beans, feta, roasted baby tomatoes, kalamata olives, cucumber, and 3-seed crunch
+8	Catalina Taco Salad	91	11.95	achiote crumbles, lettuce mix, cabbage, tomato corn salsa, ranchero beans, jicama and avocado, tossed in catalina dressing
+8	House Veggie Burger	92	12.00	wild rice mushroom burger, arugula, baby tomatoes, basil aioli, pickled onion on a whole grain sesame bun
+8	Sweet Potato Fries	93	5.45	served with ketchup and chipotle aioli
+8	The Caprese	94	8.20	layers of fresh tomato, farmers cheese, arugula, basil pesto, soft wheat roll
+8	7 Layer Burrito	95	7.95	our play on a classic: layers of ranchero beans, wild rice, romaine lettuce, pico de gallo, mashed avocado, shredded cheddar cheese, chipotle cream, all wrapped in a warmed flour tortilla
+8	La Colombe- Oat Milk Latte	96	4.75	oat milk latte
+8	Oatmeal Cookie	97	2.75	Enriched flour, brown sugar, raisins, oats, natural vanilla flour, cinnamon
+8	Carrot Cake	98	4.25	Fresh carrots, walnuts, VG cream cheese frosting
+8	Chocolate Parfait	99	4.50	Layers of chocolate pudding and chocolate cookie crumbles, crema, and chocolate syrup
 \.
 
 
@@ -692,6 +753,10 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") 
 10	11	1	17	2020-10-07 21:59:25.208094+00
 11	11	1	18	2020-10-07 22:04:31.327508+00
 12	11	1	19	2020-10-07 22:05:21.004184+00
+13	12	1	20	2020-10-07 23:57:30.089243+00
+14	13	1	21	2020-10-08 01:20:25.190776+00
+15	14	1	22	2020-10-08 02:34:10.741586+00
+16	15	1	23	2020-10-08 03:17:53.919305+00
 \.
 
 
@@ -706,6 +771,8 @@ Gulfstream	3	33.6060070000	-117.8752780000	850 Avocado Ave, Newport Beach 92660	
 In-N-Out Burger	4	33.65019	-117.84073	4115 Campus Drive, 92612	2	https://www.in-n-out.com/Frontend-Assembly/Telerik.Sitefinity.Frontend/content/images/homepage/double-double.png?package=INNOUT	1.5	4.2
 EMC Seafood	5	33.669445	-117.823059	Heritage Plaza, 14346 Culver Dr, Irvine, CA 92604	4	https://www.emcseafood.com/wp-content/uploads/2014/05/emc-seafood-pasta.jpg	2	4.4
 Wendys 	6	33.652052	-117.823056	14386 Culver Dr, Irvine, CA 92604	2	https://dynl.mktgcdn.com/p/IqIuwfyfi12qOxK54MtSfQYHxfpxRFtNL8AMbSeNACk/1900x1068.jpg	1.5	4.0
+Chipotle Mexican Grill	7	33.652126	-117.838115	4255 Campus Dr Ste A116, Irvine, CA 92612	5	https://i.insider.com/59c54032ba785e4a8e7a59f5?width=1100&format=jpeg&auto=webp	1.5	4.1
+Veggie Grill	8	33.649728	-117.744836	732 Spectrum Center Dr, Irvine, CA 92618	6	https://cdn.vox-cdn.com/thumbor/sbhOTXRJki644945wjQVYRZbAig=/0x0:2000x1600/1200x0/filters:focal(0x0:2000x1600):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/13055019/VeggieGrill_PChang_5196.jpg	1.5	4.3
 \.
 
 
@@ -722,42 +789,42 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 16, true);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 20, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 17, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 34, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 11, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 16, true);
 
 
 --
 -- Name: categories_categoryId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."categories_categoryId_seq"', 4, true);
+SELECT pg_catalog.setval('public."categories_categoryId_seq"', 6, true);
 
 
 --
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 19, true);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 23, true);
 
 
 --
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 71, true);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 99, true);
 
 
 --
@@ -771,14 +838,14 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 12, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 16, true);
 
 
 --
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 6, true);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 8, true);
 
 
 --

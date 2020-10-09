@@ -106,7 +106,9 @@ app.get('/api/cart', (req, res, next) => {
 app.post('/api/cart', express.json(), (req, res, next) => {
   const menuItemId = parseInt(req.body.menuItemId, 10);
   if (!menuItemId || menuItemId < 0) {
-    return next(new ClientError('The menuItemId must be a positive integer', 400));
+    return next(
+      new ClientError('The menuItemId must be a positive integer', 400)
+    );
   }
   const selectMenuPrice = `
     select "price"
@@ -125,7 +127,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           from "cart"
           where "cartId" = $1;
       `;
-        return db.query(selectCartId, [req.session.cartId])
+        return db
+          .query(selectCartId, [req.session.cartId])
           .then(result => Object.assign(price, result.rows[0]));
       } else {
         const insertCart = `
@@ -133,7 +136,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
               values (default)
           returning "cartId";
       `;
-        return db.query(insertCart)
+        return db
+          .query(insertCart)
           .then(result => Object.assign(price, result.rows[0]));
       }
     })
@@ -144,7 +148,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
                         values ($1, $2, $3)
                      returning "cartItemId";
       `;
-      return db.query(insertItem, [cart.cartId, menuItemId, cart.price])
+      return db
+        .query(insertItem, [cart.cartId, menuItemId, cart.price])
         .then(result => result.rows[0].cartItemId);
     })
     .then(cartItemId => {
@@ -158,7 +163,8 @@ app.post('/api/cart', express.json(), (req, res, next) => {
           join "menuItems" as "m" using ("menuItemId")
          where "c"."cartItemId" = $1;
       `;
-      return db.query(select, [cartItemId])
+      return db
+        .query(select, [cartItemId])
         .then(result => res.status(201).json(result.rows[0]));
     })
     .catch(err => next(err));
@@ -169,7 +175,30 @@ app.get('/api/login', (req, res) => {
   res.json({ userId: req.session.userId });
 });
 
-app.post('/api/orders', (req, res, next) => {
+app.get('/api/orders', (req, res, next) => {
+  const selectAllOrders = `select
+      "r"."restaurantId",
+      "r"."name" as "restaurantName",
+      "r"."image" as "restaurantImage",
+      "mi"."menuItemId",
+      "mi"."name" as "menuItemName",
+      "mi"."price" as "menuItemPrice",
+      "mi"."description",
+      "ci"."cartId",
+      "o"."orderId",
+      "o"."userId",
+      "o"."orderedAt"
+    from "orders" as "o"
+    join "cartItems" as "ci" using ("cartId")
+    join "menuItems" as "mi" using ("menuItemId")
+    join "restaurants" as "r" using ("restaurantId")
+    `;
+  db.query(selectAllOrders)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/orders', express.json(), (req, res, next) => {
   if (!req.session.cartId) {
     throw new ClientError('There must be a cartId in session', 400);
   } else if (!req.session.userId) {
@@ -189,14 +218,20 @@ app.post('/api/orders', (req, res, next) => {
     insert into "address" ("address", "userId")
           values ($1, $2);
   `;
-  db.query(insertAddress, [req.body.address, req.session.userId])
-    .catch(err => next(err));
+  db.query(insertAddress, [req.body.address, req.session.userId]).catch(err =>
+    next(err)
+  );
   const insertCredit = `
     insert into "creditCard" ("name", "creditCardNumber", "cvv", "billingAddress")
          values ($1, $2, $3, $4)
       returning "creditCardId";
   `;
-  const params = [req.body.name, req.body.creditCardNumber, req.body.cvv, req.body.billingAddress];
+  const params = [
+    req.body.name,
+    req.body.creditCardNumber,
+    req.body.cvv,
+    req.body.billingAddress
+  ];
   db.query(insertCredit, params)
     .then(result => result.rows[0].creditCardId)
     .then(creditCardId => {
@@ -208,18 +243,58 @@ app.post('/api/orders', (req, res, next) => {
                 "orderId",
                 "orderedAt";
       `;
-      db.query(insertOrder, [creditCardId, req.session.cartId, req.session.userId])
-        .then(result => {
-          result.rows[0].name = req.body.name;
-          result.rows[0].creditCardNumber = req.body.creditCardNumber;
-          result.rows[0].cvv = req.body.cvv;
-          result.rows[0].billingAddress = req.body.billingAddress;
-          result.rows[0].address = req.body.address;
-          delete req.session.cartId;
-          return res.status(201).json(result.rows[0]);
-        });
+      db.query(insertOrder, [
+        creditCardId,
+        req.session.cartId,
+        req.session.userId
+      ]).then(result => {
+        result.rows[0].name = req.body.name;
+        result.rows[0].creditCardNumber = req.body.creditCardNumber;
+        result.rows[0].cvv = req.body.cvv;
+        result.rows[0].billingAddress = req.body.billingAddress;
+        result.rows[0].address = req.body.address;
+        delete req.session.cartId;
+        return res.status(201).json(result.rows[0]);
+      });
     })
     .catch(err => next(err));
+});
+
+app.post('/api/favorites', (req, res, next) => {
+  const restaurantId = req.body.restaurantId;
+  const userId = req.session.userId;
+  if (!restaurantId) {
+    res.status(400).json({ error: 'Input Incorrect Values' });
+    return;
+  }
+  const sql =
+    `insert into "favoriteRestaurants" ("restaurantId", "userId")
+    values ($1, $2)
+    returning *`;
+  const values = [restaurantId, userId];
+  db.query(sql, values)
+    .then(data => {
+      res.status(201).json(data.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/favorites/:restaurantId', (req, res, next) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  if (!restaurantId || restaurantId < 1) {
+    next(new ClientError('The restaurantId must be a positive integer', 400));
+  } else {
+    const selectFav = `
+      select "restaurantId"
+        from "favoriteRestaurants"
+       where "restaurantId" = $1;
+    `;
+    db.query(selectFav, [restaurantId])
+      .then(result => {
+        return result.rows[0] ? res.send(true) : res.send(false);
+      })
+      .catch(err => next(err));
+  }
 });
 
 app.use('/api', (req, res, next) => {

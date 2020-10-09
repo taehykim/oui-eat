@@ -4,8 +4,10 @@ import MenuItem from './menu-item';
 class MenuList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { menu: [] };
+    this.state = { menu: [], isFavorited: false };
     this.getMenuItems = this.getMenuItems.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
+    this.handleHeartClick = this.handleHeartClick.bind(this);
   }
 
   getMenuItems() {
@@ -17,6 +19,17 @@ class MenuList extends React.Component {
       .catch(err => console.error('Error:', err));
   }
 
+  handleBackClick() {
+    this.props.setView(this.props.prevView.name, this.props.prevView.params);
+  }
+
+  handleHeartClick() {
+    if (!this.state.isFavorited) {
+      this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
+      this.setState({ isFavorited: true });
+    }
+  }
+
   componentDidMount() {
     this.getMenuItems();
   }
@@ -24,14 +37,23 @@ class MenuList extends React.Component {
   render() {
     return (
       <>
-        <div className="border-bottom mb-2 mt-5">
+        <div
+          className="col-12 text-muted font-weight-light mb-2 back mt-5"
+          onClick={this.handleBackClick}
+        >
+          <i className="fas fa-chevron-left"></i> Back
+        </div>
+        <div className="border-bottom mb-2">
           <img
             id={this.props.restaurant.restaurantId}
             src={this.props.restaurant.image}
             alt={this.props.restaurant.name}
             className="col-12 p-2"
           />
-          <div className="h4">{this.props.restaurant.name}</div>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="h4 mb-0">{this.props.restaurant.name}</div>
+            {this.state.isFavorited ? <i className="fas fa-heart text-danger" onClick={this.handleHeartClick}></i> : <i className="far fa-heart text-danger" onClick={this.handleHeartClick}></i>}
+          </div>
           <div className="d-flex h6">
             <div className="bg-light py-1 px-2 mr-2">
               {this.props.restaurant.rating}
