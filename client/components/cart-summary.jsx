@@ -105,6 +105,13 @@ class CartSummary extends React.Component {
   }
 
   render() {
+    if (this.props.cartItems.length === 0) {
+      return (
+        <div className="col-12 modal-container1 d-flex justify-content-center align-items-center">
+          <p className="col-10 p-3 rounded modal1 d-flex justify-content-center position-fixed">Your cart is empty!</p>
+        </div>
+      );
+    }
     return (
       <>
         <div className="h5 mt-5">Billing Information</div>

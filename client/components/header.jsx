@@ -62,11 +62,12 @@ class Header extends React.Component {
       );
     } else if (this.props.view.name === 'cartSummary') {
       return (
-        <header className="row justify-content-between align-items-center">
-          <div className="h5 m-3" onClick={this.onBackClick}>
+        <header className="row justify-content-between align-items-center p-2">
+          <div className="h5 mb-0" onClick={this.onBackClick}>
             <i className="fas fa-times"></i> Your Cart
           </div>
-          <div className="m-3">
+          <div className="cart-icon mr-1">
+            {this.props.cart.length} items
             <i
               className="fas fa-shopping-cart"
               onClick={this.handleCartClick}

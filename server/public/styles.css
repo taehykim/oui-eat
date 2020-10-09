@@ -25,8 +25,10 @@ header {
   color: gold;
 }
 
-.category-item{
-  height: 8rem;
+.category-item {
+  height: 120px;
+  width: 160px;
+  border-radius: 9%;
   background-size: cover;
   background-position: center;
 }
@@ -40,7 +42,7 @@ header {
   font-size: 2rem;
 }
 
-.loader{
+.loader {
   margin-left: 55px;
   width: 480px;
   height: auto;
@@ -55,32 +57,11 @@ header {
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.order-success-box {
-  position: absolute;
-  font-size: 35px;
-  width: 296px;
-  height: 260px;
-  left: 33px;
-  top: 125px;
-  background: #45433E;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
+.modal-container1 {
+  height: 100vh;
 }
 
-.order-success-box-text {
+.modal1 {
   color: white;
-  position: absolute;
-  width: 230px;
-  height: 83px;
-  left: 30px;
-  top: 100px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  text-align: center;
+  background: #45433E;
 }
