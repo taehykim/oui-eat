@@ -9,7 +9,7 @@ class CartSummary extends React.Component {
       cvv: '',
       billingAddress: '',
       address: '',
-      creditCard: '',
+      creditCardNumber: '',
       items: {}
     };
 
@@ -46,8 +46,20 @@ class CartSummary extends React.Component {
 
   placeOrder(event) {
     event.preventDefault();
-    this.props.setView('checkout', {});
-    this.props.placeOrder(this.state);
+
+    const init = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
+    };
+
+    fetch('/api/orders', init)
+      .then(res => res.json())
+      .then(data => {
+        this.props.resetCart();
+        this.props.setView('checkout', {});
+      })
+      .catch(err => console.error(err));
   }
 
   getSubTotal() {
@@ -104,6 +116,7 @@ class CartSummary extends React.Component {
               className="form-control"
               id="name"
               name="name"
+              autoComplete="off"
               value={this.state.name}
               onChange={this.handleChange}
             />
@@ -115,18 +128,20 @@ class CartSummary extends React.Component {
               className="form-control"
               id="billingAddress"
               name="billingAddress"
+              autoComplete="off"
               value={this.state.billingAddress}
               onChange={this.handleChange}
             />
           </div>
-          <label htmlFor="creditCard">Credit Card</label>
+          <label htmlFor="creditCardNumber">Credit Card</label>
           <div className="input-group mb-3">
             <input
               type="text"
               className="form-control"
-              id="creditCard"
-              name="creditCard"
-              value={this.state.creditCard}
+              id="creditCardNumber"
+              name="creditCardNumber"
+              autoComplete="off"
+              value={this.state.creditCardNumber}
               onChange={this.handleChange}
             />
           </div>
@@ -137,6 +152,7 @@ class CartSummary extends React.Component {
               className="form-control"
               id="cvv"
               name="cvv"
+              autoComplete="off"
               value={this.state.cvv}
               onChange={this.handleChange}
             />
@@ -151,6 +167,7 @@ class CartSummary extends React.Component {
               className="form-control"
               id="address"
               name="address"
+              autoComplete="off"
               value={this.state.address}
               onChange={this.handleChange}
             />
