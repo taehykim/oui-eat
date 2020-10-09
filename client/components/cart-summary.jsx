@@ -6,10 +6,10 @@ class CartSummary extends React.Component {
     super(props);
     this.state = {
       name: '',
-      address: '',
-      billingAddress: '',
-      creditCard: '',
       cvv: '',
+      billingAddress: '',
+      address: '',
+      creditCard: '',
       items: {}
     };
 
@@ -45,7 +45,9 @@ class CartSummary extends React.Component {
   }
 
   placeOrder() {
+    event.preventDefault();
     this.props.setView('checkout', {});
+    this.props.placeOrder(this.state);
   }
 
   getSubTotal() {
@@ -79,12 +81,10 @@ class CartSummary extends React.Component {
   }
 
   handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
     this.setState({
-      name: event.target.name,
-      address: event.target.address,
-      billingAddress: event.target.billingAddress,
-      creditCard: event.target.creditCard,
-      cvv: event.target.cvv
+      [name]: value
     });
   }
 
@@ -103,6 +103,7 @@ class CartSummary extends React.Component {
               type="text"
               className="form-control"
               id="name"
+              name="name"
               value={this.state.name}
               onChange={this.handleChange}
             />
@@ -113,6 +114,7 @@ class CartSummary extends React.Component {
               type="text"
               className="form-control"
               id="billingAddress"
+              name="billingAddress"
               value={this.state.billingAddress}
               onChange={this.handleChange}
             />
@@ -122,7 +124,8 @@ class CartSummary extends React.Component {
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="creditCard"
+              name="creditCard"
               value={this.state.creditCard}
               onChange={this.handleChange}
             />
@@ -132,7 +135,8 @@ class CartSummary extends React.Component {
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="cvv"
+              name="cvv"
               value={this.state.cvv}
               onChange={this.handleChange}
             />
@@ -146,6 +150,7 @@ class CartSummary extends React.Component {
               type="text"
               className="form-control"
               id="address"
+              name="address"
               value={this.state.address}
               onChange={this.handleChange}
             />

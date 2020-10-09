@@ -63,3 +63,33 @@ img:hover {
   background: #FFFFFF;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
+.order-success-box {
+  position: absolute;
+  font-size: 35px;
+  width: 296px;
+  height: 260px;
+  left: 33px;
+  top: 125px;
+  background: #45433E;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+}
+
+.order-success-box-text {
+  color: white;
+  position: absolute;
+  width: 230px;
+  height: 83px;
+  left: 30px;
+  top: 100px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+}
