@@ -20,12 +20,24 @@ class MenuList extends React.Component {
   }
 
   handleBackClick() {
-    this.props.setView(this.props.prevView.name, this.props.prevView.params);
+    if (
+      this.props.currView.name === 'menu' &&
+      this.props.prevView.name === 'cartSummary'
+    ) {
+      this.props.setView(
+        this.props.prevMenuView.name,
+        this.props.prevMenuView.params
+      );
+    } else {
+      this.props.setView(this.props.prevView.name, this.props.prevView.params);
+    }
   }
 
   handleHeartClick() {
     if (!this.state.isFavorited) {
-      this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
+      this.props.addToFavorites({
+        restaurantId: this.props.restaurant.restaurantId
+      });
       this.setState({ isFavorited: true });
     } else {
       this.props.removeFromFavorites(this.props.restaurant.restaurantId);
@@ -36,7 +48,9 @@ class MenuList extends React.Component {
   checkFavoriteRestaurants() {
     fetch(`/api/favorites/${this.props.restaurant.restaurantId}`)
       .then(res => res.json())
-      .then(boolean => boolean ? this.setState({ isFavorited: true }) : null)
+      .then(boolean =>
+        boolean ? this.setState({ isFavorited: true }) : null
+      )
       .catch(err => console.error(err));
   }
 
@@ -63,7 +77,17 @@ class MenuList extends React.Component {
           />
           <div className="d-flex justify-content-between align-items-center">
             <div className="h4 mb-0">{this.props.restaurant.name}</div>
-            {this.state.isFavorited ? <i className="fas fa-heart text-danger" onClick={this.handleHeartClick}></i> : <i className="far fa-heart text-danger" onClick={this.handleHeartClick}></i>}
+            {this.state.isFavorited ? (
+              <i
+                className="fas fa-heart text-danger"
+                onClick={this.handleHeartClick}
+              ></i>
+            ) : (
+              <i
+                className="far fa-heart text-danger"
+                onClick={this.handleHeartClick}
+              ></i>
+            )}
           </div>
           <div className="d-flex h6">
             <div className="bg-light py-1 px-2 mr-2">
