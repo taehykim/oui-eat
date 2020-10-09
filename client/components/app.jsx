@@ -46,8 +46,7 @@ export default class App extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(id)
-    })
-      .catch(err => console.error(err));
+    }).catch(err => console.error(err));
   }
 
   removeFromFavorites(id) {
@@ -59,8 +58,7 @@ export default class App extends React.Component {
   }
 
   getLogin() {
-    fetch('/api/login')
-      .catch(err => console.error(err));
+    fetch('/api/login').catch(err => console.error(err));
   }
 
   componentDidMount() {
@@ -177,7 +175,13 @@ export default class App extends React.Component {
         />
       );
     } else if (this.state.view.name === 'cartSummary') {
-      viewing = <CartSummary setView={this.setView} cartItems={this.state.cart} placeOrder={this.placeOrder} />;
+      viewing = (
+        <CartSummary
+          setView={this.setView}
+          cartItems={this.state.cart}
+          placeOrder={this.placeOrder}
+        />
+      );
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
     } else if (this.state.view.name === 'checkout') {
@@ -190,6 +194,7 @@ export default class App extends React.Component {
           cart={this.state.cart}
           view={this.state.view}
           setView={this.setView}
+          prevView={this.state.prevView}
         />
         <div className="row p-3">{viewing}</div>
         <Navbar setView={this.setView} />
