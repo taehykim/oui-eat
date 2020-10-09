@@ -16,7 +16,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'categories',
+        name: 'home',
         params: {},
         currentCategory: null
       },
