@@ -26,12 +26,12 @@ class RestaurantList extends React.Component {
 
   render() {
     return (
-      <div className="row mt-2">
+      <>
         <div
-          className="col-12 text-muted font-weight-light mb-2 back mt-5"
+          className="col-12 text-muted font-weight-light mb-2 back mt-5 pl-0"
           onClick={this.handleBackClick}
         >
-          &lt; Categories
+          <i className="fas fa-chevron-left"></i> Categories
         </div>
         <p className="col-12 m-0">
           {this.state.restaurants.length} Results for {this.props.category.name}
@@ -45,7 +45,7 @@ class RestaurantList extends React.Component {
             removeFromFavorites={this.props.removeFromFavorites}
           />
         ))}
-      </div>
+      </>
     );
   }
 }

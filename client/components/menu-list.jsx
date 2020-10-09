@@ -49,7 +49,7 @@ class MenuList extends React.Component {
     return (
       <>
         <div
-          className="col-12 text-muted font-weight-light mb-2 back mt-5"
+          className="col-12 text-muted font-weight-light mb-2 back mt-5 pl-0"
           onClick={this.handleBackClick}
         >
           <i className="fas fa-chevron-left"></i> Back
