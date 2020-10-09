@@ -3,7 +3,6 @@ import React from 'react';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { prevView: null, prevParams: {} };
     this.onDeliveredClick = this.onDeliveredClick.bind(this);
     this.onPendingClick = this.onPendingClick.bind(this);
     this.handleCartClick = this.handleCartClick.bind(this);
@@ -28,16 +27,7 @@ class Header extends React.Component {
   }
 
   onBackClick() {
-    this.props.setView(this.state.prevView, this.state.prevParams);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps !== this.props) {
-      this.setState({
-        prevView: prevProps.view.name,
-        prevParams: prevProps.view.params
-      });
-    }
+    this.props.setView(this.props.prevView.name, this.props.prevView.params);
   }
 
   render() {
@@ -69,13 +59,9 @@ class Header extends React.Component {
     } else {
       return (
         <header className="row justify-content-between align-items-center p-2">
-          {this.props.view.name === 'cart' ? (
-            <i className="ml-2 fas fa-times"></i>
-          ) : (
-            <h2 className="mb-0" onClick={this.handleLogoClick}>
-              Oui<span className="logo">Eat</span>
-            </h2>
-          )}
+          <h2 className="mb-0" onClick={this.handleLogoClick}>
+            Oui<span className="logo">Eat</span>
+          </h2>
           <div className="cart-icon mr-1">
             {this.props.cart.length} items
             <i

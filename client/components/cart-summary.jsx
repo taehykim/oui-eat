@@ -44,7 +44,7 @@ class CartSummary extends React.Component {
     this.setState({ items: itemCount });
   }
 
-  placeOrder() {
+  placeOrder(event) {
     event.preventDefault();
     this.props.setView('checkout', {});
     this.props.placeOrder(this.state);
