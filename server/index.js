@@ -279,6 +279,24 @@ app.post('/api/favorites', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/favorites/:restaurantId', (req, res, next) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  if (!restaurantId || restaurantId < 1) {
+    next(new ClientError('The restaurantId must be a positive integer', 400));
+  } else {
+    const selectFav = `
+      select "restaurantId"
+        from "favoriteRestaurants"
+       where "restaurantId" = $1;
+    `;
+    db.query(selectFav, [restaurantId])
+      .then(result => {
+        return result.rows[0] ? res.send(true) : res.send(false);
+      })
+      .catch(err => next(err));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
