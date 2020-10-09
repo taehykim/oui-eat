@@ -6,10 +6,10 @@ class CartSummary extends React.Component {
     super(props);
     this.state = {
       name: '',
-      address: '',
+      creditCardNumber: '',
+      cvv: '',
       billingAddress: '',
-      creditCard: '',
-      CVV: ''
+      address: ''
     };
 
     this.getSubTotal = this.getSubTotal.bind(this);
@@ -20,7 +20,9 @@ class CartSummary extends React.Component {
   }
 
   placeOrder() {
+    event.preventDefault();
     this.props.setView('checkout', {});
+    this.props.placeOrder(this.state);
   }
 
   getSubTotal() {
@@ -52,12 +54,10 @@ class CartSummary extends React.Component {
   }
 
   handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
     this.setState({
-      name: event.target.name,
-      address: event.target.address,
-      billingAddress: event.target.billingAddress,
-      creditCard: event.target.creditCard,
-      CVV: event.target.CVV
+      [name]: value
     });
   }
 
@@ -65,15 +65,15 @@ class CartSummary extends React.Component {
     return (
       <form onSubmit={this.placeOrder} className="mt-5">
         <label>Name</label><br></br>
-        <input className="cart-input" type="text" value={this.state.name} onChange={this.handleChange}></input><br></br>
+        <input name="name" className="cart-input" type="text" value={this.state.name} onChange={this.handleChange}></input><br></br>
         <label className="mt-2">Address</label><br></br>
-        <input className="cart-input" type="text" value={this.state.address} onChange={this.handleChange}></input><br></br>
+        <input name="address" className="cart-input" type="text" value={this.state.address} onChange={this.handleChange}></input><br></br>
         <label className="mt-2">Billing Address</label><br></br>
-        <input className="cart-input" type="text" value={this.state.billingAddress} onChange={this.handleChange}></input><br></br>
+        <input name="billingAddress" className="cart-input" type="text" value={this.state.billingAddress} onChange={this.handleChange}></input><br></br>
         <label className="mt-2">Credit Card</label><br></br>
-        <input className="cart-input" type="text" value={this.state.creditCard} onChange={this.handleChange}></input><br></br>
+        <input name="creditCardNumber" className="cart-input" type="text" value={this.state.creditCardNumber} onChange={this.handleChange}></input><br></br>
         <label className="mt-2">CVV</label><br></br>
-        <input className="cart-input" type="text" value={this.state.CVV} onChange={this.handleChange}></input><br></br>
+        <input name="cvv" className="cart-input" type="text" value={this.state.cvv} onChange={this.handleChange}></input><br></br>
 
         <h5 className="mt-4">Your Order</h5>
 
@@ -87,7 +87,7 @@ class CartSummary extends React.Component {
         <p className="ml-3 mt-3">Delivery Fee ${this.getDeliveryFee()}</p>
         <h5 className="ml-5 mt-3">Total ${this.getTotal()}</h5>
 
-        <button type="button" className="btn btn-secondary mt-5">
+        <button className="btn btn-secondary mt-5">
           Place an Order
         </button>
       </form>

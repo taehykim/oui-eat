@@ -169,7 +169,7 @@ app.get('/api/login', (req, res) => {
   res.json({ userId: req.session.userId });
 });
 
-app.post('/api/orders', express.json(), (req, res, next) => {
+app.post('/api/orders', (req, res, next) => {
   if (!req.session.cartId) {
     throw new ClientError('There must be a cartId in session', 400);
   } else if (!req.session.userId) {
