@@ -30,6 +30,7 @@ class Home extends React.Component {
             key={restaurant.restaurantId}
             restaurant={restaurant}
             addToFavorites={this.props.addToFavorites}
+            removeFromFavorites={this.props.removeFromFavorites}
           />
         ))}
       </div>

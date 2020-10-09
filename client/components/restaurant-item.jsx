@@ -16,6 +16,9 @@ class RestaurantItem extends React.Component {
     if (!this.state.isFavorited) {
       this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
       this.setState({ isFavorited: true });
+    } else {
+      this.props.removeFromFavorites(this.props.restaurant.restaurantId);
+      this.setState({ isFavorited: false });
     }
   }
 
