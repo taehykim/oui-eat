@@ -121,7 +121,27 @@ export default class App extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.view.name !== this.state.view.name) {
-      this.setState({ prevView: prevState.view });
+      if (this.state.view.name === 'menu' && !this.state.prevMenuView) {
+        this.setState({
+          prevView: prevState.view,
+          prevMenuView: prevState.view
+        });
+      } else if (
+        this.state.view.name === 'menu' &&
+        this.state.prevView.name === 'cartSummary'
+      ) {
+        this.setState({
+          prevView: prevState.view,
+          prevMenuView: prevState.view
+        });
+      } else if (
+        this.state.view.name === 'categories' ||
+        this.state.view.name === 'account'
+      ) {
+        this.setState({ prevMenuView: null });
+      } else {
+        this.setState({ prevView: prevState.view });
+      }
     }
   }
 
@@ -163,6 +183,8 @@ export default class App extends React.Component {
           restaurant={this.state.view.params}
           addToCart={this.addToCart}
           setView={this.setView}
+          currView={this.state.view}
+          prevMenuView={this.state.prevMenuView}
           prevView={this.state.prevView}
           addToFavorites={this.addToFavorites}
           removeFromFavorites={this.removeFromFavorites}
@@ -201,7 +223,7 @@ export default class App extends React.Component {
           setView={this.setView}
           prevView={this.state.prevView}
         />
-        <div className="row p-3">{viewing}</div>
+        <div className="row p-3 justify-content-center">{viewing}</div>
         <Navbar setView={this.setView} />
       </>
     );

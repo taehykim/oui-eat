@@ -3,6 +3,10 @@ import React from 'react';
 class Header extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      deliveredClassNames: 'h5 m-0 font-weight-bold',
+      pendingClassNames: 'h5 m-0 font-weight-light'
+    };
     this.onDeliveredClick = this.onDeliveredClick.bind(this);
     this.onPendingClick = this.onPendingClick.bind(this);
     this.handleCartClick = this.handleCartClick.bind(this);
@@ -11,10 +15,18 @@ class Header extends React.Component {
   }
 
   onDeliveredClick() {
+    this.setState({
+      deliveredClassNames: 'h5 m-0 font-weight-bold',
+      pendingClassNames: 'h5 m-0 font-weight-light'
+    });
     this.props.setView('orders', { status: 'delivered' });
   }
 
   onPendingClick() {
+    this.setState({
+      deliveredClassNames: 'h5 m-0 font-weight-light',
+      pendingClassNames: 'h5 m-0 font-weight-bold'
+    });
     this.props.setView('orders', { status: 'pending' });
   }
 
@@ -34,10 +46,16 @@ class Header extends React.Component {
     if (this.props.view.name === 'orders') {
       return (
         <header className="row justify-content-around align-items-center">
-          <div className="h5 m-0" onClick={this.onDeliveredClick}>
+          <div
+            className={this.state.deliveredClassNames}
+            onClick={this.onDeliveredClick}
+          >
             Delivered
           </div>
-          <div className="h5 m-0" onClick={this.onPendingClick}>
+          <div
+            className={this.state.pendingClassNames}
+            onClick={this.onPendingClick}
+          >
             Pending
           </div>
         </header>
