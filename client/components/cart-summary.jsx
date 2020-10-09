@@ -16,7 +16,6 @@ class CartSummary extends React.Component {
 
     this.getSubTotal = this.getSubTotal.bind(this);
     this.getDeliveryFee = this.getDeliveryFee.bind(this);
-    this.getTotal = this.getTotal.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getEachItemCount = this.getEachItemCount.bind(this);
@@ -67,31 +66,21 @@ class CartSummary extends React.Component {
   getSubTotal() {
     let subTotal = 0;
     for (let i = 0; i < this.props.cartItems.length; i++) {
-      subTotal += parseInt(this.props.cartItems[i].price);
+      subTotal += Number(this.props.cartItems[i].price);
     }
-    return subTotal;
+    return Number(subTotal).toFixed(2);
   }
 
   getDeliveryFee() {
     let subTotal = 0;
     for (let i = 0; i < this.props.cartItems.length; i++) {
-      subTotal += parseInt(this.props.cartItems[i].price);
+      subTotal += Number(this.props.cartItems[i].price);
     }
     if (subTotal * 0.05 < 5) {
-      return 5;
+      return Number(5).toFixed(2);
     }
-    return subTotal * 0.05;
-  }
 
-  getTotal() {
-    let subTotal = 0;
-    for (let i = 0; i < this.props.cartItems.length; i++) {
-      subTotal += parseInt(this.props.cartItems[i].price);
-    }
-    if (subTotal * 0.05 < 5) {
-      return 5 + subTotal;
-    }
-    return subTotal * 0.05 + subTotal;
+    return Number(subTotal * 0.05).toFixed(2);
   }
 
   handleChange(event) {
@@ -107,10 +96,10 @@ class CartSummary extends React.Component {
       let minDeliveryFee = Number(cartItems[0].deliveryFee);
       for (let i = 1; i < cartItems.length; i++) {
         if (Number(cartItems[i].deliveryFee) < minDeliveryFee) {
-          minDeliveryFee = cartItems[i].deliveryFee;
+          minDeliveryFee = Number(cartItems[i].deliveryFee);
         }
       }
-      return minDeliveryFee;
+      return Number(minDeliveryFee).toFixed(2);
     } else return 0;
   }
 
@@ -217,9 +206,18 @@ class CartSummary extends React.Component {
           </div>
           <div className="h6 font-weight-light">
             Delivery Fee $
-            {Number(this.getDeliveryFee()) + Number(this.state.minDeliveryFee)}
+            {(
+              Number(this.getDeliveryFee()) + Number(this.state.minDeliveryFee)
+            ).toFixed(2)}
           </div>
-          <div className="h5">Total ${this.getTotal()}</div>
+          <div className="h5">
+            Total $
+            {Number(
+              Number(this.getSubTotal()) +
+                Number(this.getDeliveryFee()) +
+                Number(this.state.minDeliveryFee)
+            ).toFixed(2)}
+          </div>
 
           <div className="d-flex justify-content-center w-100">
             <button type="submit" className="btn btn-secondary h5 w-100">
