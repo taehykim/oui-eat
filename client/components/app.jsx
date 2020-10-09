@@ -29,6 +29,7 @@ export default class App extends React.Component {
     this.getCartItems = this.getCartItems.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.addToFavorites = this.addToFavorites.bind(this);
+    this.removeFromFavorites = this.removeFromFavorites.bind(this);
   }
 
   getAllCategories() {
@@ -46,6 +47,14 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(id)
     }).catch(err => console.error(err));
+  }
+
+  removeFromFavorites(id) {
+    fetch(`/api/favorites/${id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .catch(err => console.error(err));
   }
 
   getLogin() {
@@ -126,6 +135,7 @@ export default class App extends React.Component {
           setView={this.setView}
           category={this.state.view.params}
           addToFavorites={this.addToFavorites}
+          removeFromFavorites={this.removeFromFavorites}
         />
       );
     } else if (this.state.view.name === 'categories') {
@@ -137,7 +147,11 @@ export default class App extends React.Component {
       );
     } else if (this.state.view.name === 'home') {
       viewing = (
-        <Home setView={this.setView} addToFavorites={this.addToFavorites} />
+        <Home
+          setView={this.setView}
+          addToFavorites={this.addToFavorites}
+          removeFromFavorites={this.removeFromFavorites}
+        />
       );
     } else if (this.state.view.name === 'menu') {
       viewing = (
@@ -147,6 +161,7 @@ export default class App extends React.Component {
           setView={this.setView}
           prevView={this.state.prevView}
           addToFavorites={this.addToFavorites}
+          removeFromFavorites={this.removeFromFavorites}
         />
       );
     } else if (this.state.view.name === 'orders') {
