@@ -511,6 +511,11 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 18	1	grove street
 19	1	grove street
 20	1	grove street
+21	1	123 Apple St, Irvine, CA 91000
+22	1	123 Test St, Irvine, CA 91000
+23	1	123 Test St, Irvine, CA 92000
+24	1	123 Apple St, Irvine, CA 92000
+25	1	123 test Irvine
 \.
 
 
@@ -535,6 +540,10 @@ COPY public.cart ("cartId") FROM stdin;
 14
 15
 16
+17
+18
+19
+20
 \.
 
 
@@ -577,6 +586,17 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 32	16	15	3
 33	16	59	16.50
 34	16	63	14.50
+35	17	34	27
+36	18	59	16.50
+37	18	59	16.50
+38	18	60	18.00
+39	18	63	14.50
+40	19	48	9.95
+41	19	54	3.50
+42	19	57	11.95
+43	20	61	17.00
+44	20	61	17.00
+45	20	60	18.00
 \.
 
 
@@ -622,6 +642,11 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 21	208	PO box 89888	5678	real tia
 22	111	PO box 12345	5678	tia kim
 23	111	PO box 12345	5678	bose
+24	123	123 Apple St, Irvine, CA 91000	1234 0000 0000 0000	Cinnamon Roll
+25	123	123 Test St, Irvine, CA 91000	0000 0000 0000 0000	Test Kim
+26	982	123 Test St, Irvine, CA 92000	0928 3728 4738 1234	Ti Kim
+27	123	123 Apple St, Irvine, CA 92000	1247 8192 9012 1293	Tia Kim
+28	123	123 test irvine 	1234 0000 0000 0000	Testing
 \.
 
 
@@ -757,6 +782,11 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") 
 14	13	1	21	2020-10-08 01:20:25.190776+00
 15	14	1	22	2020-10-08 02:34:10.741586+00
 16	15	1	23	2020-10-08 03:17:53.919305+00
+17	16	1	24	2020-10-09 05:09:39.670251+00
+18	17	1	25	2020-10-09 05:14:05.06845+00
+19	18	1	26	2020-10-09 05:17:24.760906+00
+20	19	1	27	2020-10-09 05:19:08.272191+00
+21	20	1	28	2020-10-09 05:28:19.089588+00
 \.
 
 
@@ -789,21 +819,21 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 20, true);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 25, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 34, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 45, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 16, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 20, true);
 
 
 --
@@ -817,7 +847,7 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 6, true);
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 23, true);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
 
 
 --
@@ -838,7 +868,7 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 16, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 21, true);
 
 
 --
