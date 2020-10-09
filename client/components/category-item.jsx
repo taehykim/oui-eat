@@ -16,7 +16,7 @@ class CategoryItem extends React.Component {
         <div
           className="col-5 category-item m-2 rounded"
           style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.13), rgba(255, 255, 250, 0.13)), url(${this.props.image})`
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${this.props.image})`
           }}
           onClick={this.handleCategoryClick}
         >
