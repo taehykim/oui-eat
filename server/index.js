@@ -203,7 +203,7 @@ app.post('/api/orders', express.json(), (req, res, next) => {
     throw new ClientError('There must be a cartId in session', 400);
   } else if (!req.session.userId) {
     throw new ClientError('There must be a userId in session', 400);
-  } else if (!Number(req.body.creditCardNumber)) {
+  } else if (!req.body.creditCardNumber) {
     throw new ClientError('There must be a creditCardNumber included', 400);
   } else if (!req.body.address) {
     throw new ClientError('There must be an address included', 400);
@@ -267,8 +267,7 @@ app.post('/api/favorites', (req, res, next) => {
     res.status(400).json({ error: 'Input Incorrect Values' });
     return;
   }
-  const sql =
-    `insert into "favoriteRestaurants" ("restaurantId", "userId")
+  const sql = `insert into "favoriteRestaurants" ("restaurantId", "userId")
     values ($1, $2)
     returning *`;
   const values = [restaurantId, userId];
@@ -309,7 +308,14 @@ app.delete('/api/favorites/:restaurantId', (req, res, next) => {
     `;
     db.query(deleteFav, [restaurantId])
       .then(result => {
-        return result.rows[0] ? res.sendStatus(204) : next(new ClientError('The restaurantId does not exist in the favoriteRestaurants table', 400));
+        return result.rows[0]
+          ? res.sendStatus(204)
+          : next(
+            new ClientError(
+              'The restaurantId does not exist in the favoriteRestaurants table',
+              400
+            )
+          );
       })
       .catch(err => next(err));
   }

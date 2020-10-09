@@ -24,12 +24,17 @@ export default class App extends React.Component {
       isLoading: true
     };
     this.setView = this.setView.bind(this);
+    this.resetCart = this.resetCart.bind(this);
     this.getAllCategories = this.getAllCategories.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.addToFavorites = this.addToFavorites.bind(this);
     this.removeFromFavorites = this.removeFromFavorites.bind(this);
+  }
+
+  resetCart() {
+    this.setState({ cart: [] });
   }
 
   getAllCategories() {
@@ -53,8 +58,7 @@ export default class App extends React.Component {
     fetch(`/api/favorites/${id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
-    })
-      .catch(err => console.error(err));
+    }).catch(err => console.error(err));
   }
 
   getLogin() {
@@ -180,6 +184,7 @@ export default class App extends React.Component {
           setView={this.setView}
           cartItems={this.state.cart}
           placeOrder={this.placeOrder}
+          resetCart={this.resetCart}
         />
       );
     } else if (this.state.view.name === 'account') {
