@@ -511,6 +511,11 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 18	1	grove street
 19	1	grove street
 20	1	grove street
+21	1	123 Apple St, Irvine, CA 91000
+22	1	123 Test St, Irvine, CA 91000
+23	1	123 Test St, Irvine, CA 92000
+24	1	123 Apple St, Irvine, CA 92000
+25	1	123 test Irvine
 \.
 
 
@@ -535,6 +540,10 @@ COPY public.cart ("cartId") FROM stdin;
 14
 15
 16
+17
+18
+19
+20
 \.
 
 
@@ -577,6 +586,17 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 32	16	15	3
 33	16	59	16.50
 34	16	63	14.50
+35	17	34	27
+36	18	59	16.50
+37	18	59	16.50
+38	18	60	18.00
+39	18	63	14.50
+40	19	48	9.95
+41	19	54	3.50
+42	19	57	11.95
+43	20	61	17.00
+44	20	61	17.00
+45	20	60	18.00
 \.
 
 
@@ -591,6 +611,8 @@ COPY public.categories ("categoryId", name, "imageUrl") FROM stdin;
 4	Seafood	https://wallpapercave.com/wp/wp1912398.jpg
 6	Vegan	https://crux.org.nz/assets/Uploads/Untitled-design-5-v2__ScaleWidthWzQwMF0.jpg
 5	Mexican	https://communityimpact.com/wp-content/uploads/2019/05/LFH-2019-05-15-1.jpg
+7	Coffee & Tea	https://static.wixstatic.com/media/861937_199818bd4e0a4ecab711c7cab4608778~mv2.jpg
+8	Desserts	https://c1.wallpaperflare.com/preview/665/948/925/food-drink-food.jpg
 \.
 
 
@@ -622,6 +644,11 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 21	208	PO box 89888	5678	real tia
 22	111	PO box 12345	5678	tia kim
 23	111	PO box 12345	5678	bose
+24	123	123 Apple St, Irvine, CA 91000	1234 0000 0000 0000	Cinnamon Roll
+25	123	123 Test St, Irvine, CA 91000	0000 0000 0000 0000	Test Kim
+26	982	123 Test St, Irvine, CA 92000	0928 3728 4738 1234	Ti Kim
+27	123	123 Apple St, Irvine, CA 92000	1247 8192 9012 1293	Tia Kim
+28	123	123 test irvine 	1234 0000 0000 0000	Testing
 \.
 
 
@@ -738,6 +765,20 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 8	Oatmeal Cookie	97	2.75	Enriched flour, brown sugar, raisins, oats, natural vanilla flour, cinnamon
 8	Carrot Cake	98	4.25	Fresh carrots, walnuts, VG cream cheese frosting
 8	Chocolate Parfait	99	4.50	Layers of chocolate pudding and chocolate cookie crumbles, crema, and chocolate syrup
+9	Vanilla Frappuccino	100	3.95	
+9	Iced Coffee	101	2.95	
+9	White Chocolate Mocha	102	4.45	
+9	Cold Brew	103	4.50	
+9	Iced Black Tea	104	2.75	
+9	Iced Matcha Green Tea	105	3.25	
+9	Iced Chai Tea Latte	106	3.75	
+10	King Cream Donut	107	3.95	Soft Donut, Bavarian Cream, Powdered Sugar Contains: Egg, Milk, Soy, Wheat
+10	Strawberry Croissant	108	4.31	Wheat flour, butter, sugar, milk powder, strawberries, choux cream, heavy cream, glaze, snow sugar Contains: Milk, Wheat
+10	Almond Croissant	109	3.94	Wheat Flour, Almond Cream, Almond Contains: Almond, Coconut, Egg, Milk, Wheat
+10	Honey & Garlic Baguette	110	3.11	Baguette, Garlic Cream, Honey Contains: Milk, Wheat
+10	Fruit Bite (Blackberry & Kiwi)	111	2.39	Wheat Flour, Bavarian Cream, Blackberry, Kiwi Contains: Coconut, Milk, Wheat
+10	Tiramisu Tart	112	3.35	Cream Cheese, chocolate Powder Contains: Egg, Milk, Wheat
+10	Soft Cream Bread	113	5.94	 Coconut, Egg, Milk, Soy, Wheat 
 \.
 
 
@@ -757,6 +798,11 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") 
 14	13	1	21	2020-10-08 01:20:25.190776+00
 15	14	1	22	2020-10-08 02:34:10.741586+00
 16	15	1	23	2020-10-08 03:17:53.919305+00
+17	16	1	24	2020-10-09 05:09:39.670251+00
+18	17	1	25	2020-10-09 05:14:05.06845+00
+19	18	1	26	2020-10-09 05:17:24.760906+00
+20	19	1	27	2020-10-09 05:19:08.272191+00
+21	20	1	28	2020-10-09 05:28:19.089588+00
 \.
 
 
@@ -773,6 +819,8 @@ EMC Seafood	5	33.669445	-117.823059	Heritage Plaza, 14346 Culver Dr, Irvine, CA 
 Wendys 	6	33.652052	-117.823056	14386 Culver Dr, Irvine, CA 92604	2	https://dynl.mktgcdn.com/p/IqIuwfyfi12qOxK54MtSfQYHxfpxRFtNL8AMbSeNACk/1900x1068.jpg	1.5	4.0
 Chipotle Mexican Grill	7	33.652126	-117.838115	4255 Campus Dr Ste A116, Irvine, CA 92612	5	https://i.insider.com/59c54032ba785e4a8e7a59f5?width=1100&format=jpeg&auto=webp	1.5	4.1
 Veggie Grill	8	33.649728	-117.744836	732 Spectrum Center Dr, Irvine, CA 92618	6	https://cdn.vox-cdn.com/thumbor/sbhOTXRJki644945wjQVYRZbAig=/0x0:2000x1600/1200x0/filters:focal(0x0:2000x1600):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/13055019/VeggieGrill_PChang_5196.jpg	1.5	4.3
+Starbucks	9	33.65921	-117.748	14061 Jeffrey Rd, Irvine, CA 92620	7	https://i.pinimg.com/originals/ce/12/b8/ce12b8f50739dcaa3f0d61ff6b79e443.jpg	1.5	4.4
+Paris Baguette	10	33.718496	-117.759125	4800 Irvine Blvd, Irvine, CA 92620	8	https://amazingsigns.com/wp-content/uploads/2017/07/523.jpg	1.5	4.6
 \.
 
 
@@ -789,42 +837,42 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 20, true);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 25, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 34, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 45, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 16, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 20, true);
 
 
 --
 -- Name: categories_categoryId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."categories_categoryId_seq"', 6, true);
+SELECT pg_catalog.setval('public."categories_categoryId_seq"', 8, true);
 
 
 --
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 23, true);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
 
 
 --
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 99, true);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 113, true);
 
 
 --
@@ -838,14 +886,14 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 16, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 21, true);
 
 
 --
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 8, true);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 10, true);
 
 
 --
