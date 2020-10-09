@@ -26,12 +26,9 @@ header {
 }
 
 .category-item{
-  height: 120px;
-  width: 160px;
-  border-radius: 9%;
+  height: 8rem;
   background-size: cover;
   background-position: center;
-  margin: .25rem;
 }
 
 .navbar {
