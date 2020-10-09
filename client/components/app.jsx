@@ -16,7 +16,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       view: {
-        name: 'home',
+        name: 'categories',
         params: {},
         currentCategory: null
       },
@@ -201,7 +201,7 @@ export default class App extends React.Component {
           setView={this.setView}
           prevView={this.state.prevView}
         />
-        <div className="row p-3">{viewing}</div>
+        <div className="row p-3 justify-content-center">{viewing}</div>
         <Navbar setView={this.setView} />
       </>
     );
