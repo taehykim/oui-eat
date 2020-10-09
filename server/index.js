@@ -279,6 +279,35 @@ app.post('/api/favorites', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/favorites', (req, res, next) => {
+  const query = `
+  select *
+    from "favoriteRestaurants"
+    join "restaurants" using ("restaurantId");
+  `;
+  db.query(query)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.delete('/api/favorites/:restaurantId', (req, res, next) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  if (!restaurantId || restaurantId < 1) {
+    next(new ClientError('The restaurantId must be a positive integer', 400));
+  } else {
+    const deleteFav = `
+      delete from "favoriteRestaurants"
+            where "restaurantId" = $1
+        returning *;
+    `;
+    db.query(deleteFav, [restaurantId])
+      .then(result => {
+        return result.rows[0] ? res.sendStatus(204) : next(new ClientError('The restaurantId does not exist in the favoriteRestaurants table', 400));
+      })
+      .catch(err => next(err));
+  }
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });

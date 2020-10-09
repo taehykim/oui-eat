@@ -9,6 +9,8 @@ import Navbar from './navbar';
 import LandingPage from './landing-page';
 import CartSummary from './cart-summary';
 import Account from './account';
+import SavedRestaurants from './saved-restaurants-list';
+import SavedRestaurantItem from './saved-restaurants-item';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -155,6 +157,8 @@ export default class App extends React.Component {
       );
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
+    } else if (this.state.view.name === 'favoriteRestaurants') {
+      viewing = <SavedRestaurants setView={this.setView} />;
     }
 
     return (
