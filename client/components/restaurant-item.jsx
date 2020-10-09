@@ -16,7 +16,21 @@ class RestaurantItem extends React.Component {
     if (!this.state.isFavorited) {
       this.props.addToFavorites({ restaurantId: this.props.restaurant.restaurantId });
       this.setState({ isFavorited: true });
+    } else {
+      this.props.removeFromFavorites(this.props.restaurant.restaurantId);
+      this.setState({ isFavorited: false });
     }
+  }
+
+  checkFavoriteRestaurants() {
+    fetch(`/api/favorites/${this.props.restaurant.restaurantId}`)
+      .then(res => res.json())
+      .then(boolean => boolean ? this.setState({ isFavorited: true }) : null)
+      .catch(err => console.error(err));
+  }
+
+  componentDidMount() {
+    this.checkFavoriteRestaurants();
   }
 
   render() {

@@ -12,7 +12,7 @@ class SavedRestaurantItem extends React.Component {
 
   render() {
     return (
-      <div className="card m-3">
+      <div className="card m-3 mt-5">
         <img
           onClick={this.handleRestaurantClick}
           id={this.props.savedRestaurant.restaurantId}
@@ -36,7 +36,7 @@ class SavedRestaurantItem extends React.Component {
           </div>
         </div>
 
-        <button onClick={this.props.removeFromFavorites(this.props.savedRestaurant.restaurantId)}>Remove</button>
+        <button className="btn btn-secondary btn-danger btn-sm" onClick={() => this.props.removeFromFavorites(this.props.savedRestaurant.restaurantId)}>Remove</button>
       </div>
     );
   }

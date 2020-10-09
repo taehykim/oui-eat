@@ -25,7 +25,9 @@ class SavedRestaurants extends React.Component {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     })
+      .then(this.getSavedRestaurants())
       .catch(err => console.error(err));
+
   }
 
   render() {

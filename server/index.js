@@ -92,9 +92,11 @@ app.get('/api/cart', (req, res, next) => {
              "c"."price",
              "m"."menuItemId",
              "m"."name",
-             "m"."description"
+             "m"."description",
+             "r"."deliveryFee"
         from "cartItems" as "c"
         join "menuItems" as "m" using ("menuItemId")
+        join "restaurants" as "r" using ("restaurantId")
        where "c"."cartId" = $1;
     `;
     db.query(getCart, [req.session.cartId])
@@ -170,6 +172,34 @@ app.post('/api/cart', express.json(), (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const cartItemId = parseInt(req.params.cartItemId, 10);
+  if (!req.session.cartId) {
+    next(new ClientError('There must be a cartId in session', 400));
+  } else if (!cartItemId || cartItemId < 1) {
+    next(new ClientError('The cartItemId must be a positive integer', 400));
+  } else {
+    const deleteCartItem = `
+      delete from "cartItems"
+            where "cartItemId" = $1
+              and "cartId" = $2
+        returning *;
+    `;
+    db.query(deleteCartItem, [cartItemId, req.session.cartId])
+      .then(result => {
+        return result.rows[0]
+          ? res.sendStatus(204)
+          : next(
+            new ClientError(
+              'The cartItemId does not exist in the cartItems table',
+              400
+            )
+          );
+      })
+      .catch(err => console.error(err));
+  }
+});
+
 app.get('/api/login', (req, res) => {
   req.session.userId = 1;
   res.json({ userId: req.session.userId });
@@ -203,7 +233,7 @@ app.post('/api/orders', express.json(), (req, res, next) => {
     throw new ClientError('There must be a cartId in session', 400);
   } else if (!req.session.userId) {
     throw new ClientError('There must be a userId in session', 400);
-  } else if (!Number(req.body.creditCardNumber)) {
+  } else if (!req.body.creditCardNumber) {
     throw new ClientError('There must be a creditCardNumber included', 400);
   } else if (!req.body.address) {
     throw new ClientError('There must be an address included', 400);
@@ -267,8 +297,7 @@ app.post('/api/favorites', (req, res, next) => {
     res.status(400).json({ error: 'Input Incorrect Values' });
     return;
   }
-  const sql =
-    `insert into "favoriteRestaurants" ("restaurantId", "userId")
+  const sql = `insert into "favoriteRestaurants" ("restaurantId", "userId")
     values ($1, $2)
     returning *`;
   const values = [restaurantId, userId];
@@ -290,6 +319,24 @@ app.get('/api/favorites', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/favorites/:restaurantId', (req, res, next) => {
+  const restaurantId = parseInt(req.params.restaurantId, 10);
+  if (!restaurantId || restaurantId < 1) {
+    next(new ClientError('The restaurantId must be a positive integer', 400));
+  } else {
+    const selectFav = `
+      select "restaurantId"
+        from "favoriteRestaurants"
+       where "restaurantId" = $1;
+    `;
+    db.query(selectFav, [restaurantId])
+      .then(result => {
+        return result.rows[0] ? res.send(true) : res.send(false);
+      })
+      .catch(err => next(err));
+  }
+});
+
 app.delete('/api/favorites/:restaurantId', (req, res, next) => {
   const restaurantId = parseInt(req.params.restaurantId, 10);
   if (!restaurantId || restaurantId < 1) {
@@ -302,7 +349,14 @@ app.delete('/api/favorites/:restaurantId', (req, res, next) => {
     `;
     db.query(deleteFav, [restaurantId])
       .then(result => {
-        return result.rows[0] ? res.sendStatus(204) : next(new ClientError('The restaurantId does not exist in the favoriteRestaurants table', 400));
+        return result.rows[0]
+          ? res.sendStatus(204)
+          : next(
+            new ClientError(
+              'The restaurantId does not exist in the favoriteRestaurants table',
+              400
+            )
+          );
       })
       .catch(err => next(err));
   }

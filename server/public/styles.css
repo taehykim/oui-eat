@@ -7,7 +7,7 @@ header {
 }
 
 .logo {
-  color: rgb(187, 84, 199);
+  color: rgb(125, 101, 193);
 }
 
 .fa-tag,
@@ -25,19 +25,12 @@ header {
   color: gold;
 }
 
-.back:hover,
-.cart-icon:hover,
-img:hover {
-  cursor: pointer;
-}
-
-.category-item{
+.category-item {
   height: 120px;
   width: 160px;
   border-radius: 9%;
   background-size: cover;
   background-position: center;
-  margin: .25rem;
 }
 
 .navbar {
@@ -49,7 +42,7 @@ img:hover {
   font-size: 2rem;
 }
 
-.loader{
+.loader {
   margin-left: 55px;
   width: 480px;
   height: auto;
@@ -62,4 +55,13 @@ img:hover {
   top: 117px;
   background: #FFFFFF;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.modal-container1 {
+  height: 100vh;
+}
+
+.modal1 {
+  color: white;
+  background: #45433E;
 }

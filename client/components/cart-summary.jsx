@@ -6,10 +6,11 @@ class CartSummary extends React.Component {
     super(props);
     this.state = {
       name: '',
-      address: '',
-      billingAddress: '',
-      creditCard: '',
       cvv: '',
+      billingAddress: '',
+      address: '',
+      creditCardNumber: '',
+      minDeliveryFee: 0,
       items: {}
     };
 
@@ -19,6 +20,7 @@ class CartSummary extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getEachItemCount = this.getEachItemCount.bind(this);
+    this.getMinimumDeliveryFee = this.getMinimumDeliveryFee.bind(this);
   }
 
   getEachItemCount() {
@@ -44,8 +46,22 @@ class CartSummary extends React.Component {
     this.setState({ items: itemCount });
   }
 
-  placeOrder() {
-    this.props.setView('checkout', {});
+  placeOrder(event) {
+    event.preventDefault();
+
+    const init = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
+    };
+
+    fetch('/api/orders', init)
+      .then(res => res.json())
+      .then(data => {
+        this.props.resetCart();
+        this.props.setView('checkout', {});
+      })
+      .catch(err => console.error(err));
   }
 
   getSubTotal() {
@@ -79,30 +95,59 @@ class CartSummary extends React.Component {
   }
 
   handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
     this.setState({
-      name: event.target.name,
-      address: event.target.address,
-      billingAddress: event.target.billingAddress,
-      creditCard: event.target.creditCard,
-      cvv: event.target.cvv
+      [name]: value
     });
+  }
+
+  getMinimumDeliveryFee(cartItems) {
+    if (cartItems) {
+      let minDeliveryFee = Number(cartItems[0].deliveryFee);
+      for (let i = 1; i < cartItems.length; i++) {
+        if (Number(cartItems[i].deliveryFee) < minDeliveryFee) {
+          minDeliveryFee = cartItems[i].deliveryFee;
+        }
+      }
+      return minDeliveryFee;
+    } else return 0;
   }
 
   componentDidMount() {
     this.getEachItemCount();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (Number(this.state.minDeliveryFee) === 0) {
+      this.setState({
+        minDeliveryFee: this.getMinimumDeliveryFee(this.props.cartItems)
+      });
+    }
+  }
+
   render() {
+    if (this.props.cartItems.length === 0) {
+      return (
+        <div className="col-12 modal-container1 d-flex justify-content-center align-items-center">
+          <p className="col-10 p-3 rounded modal1 d-flex justify-content-center position-fixed">
+            Your cart is empty!
+          </p>
+        </div>
+      );
+    }
     return (
       <>
-        <div className="h5 mt-5">Billing Information</div>
         <form onSubmit={this.placeOrder} className="w-100">
+          <div className="h5 mt-5">Billing Information</div>
           <label htmlFor="name">Name</label>
           <div className="input-group mb-3 w-100">
             <input
               type="text"
               className="form-control"
               id="name"
+              name="name"
+              autoComplete="off"
               value={this.state.name}
               onChange={this.handleChange}
             />
@@ -113,17 +158,21 @@ class CartSummary extends React.Component {
               type="text"
               className="form-control"
               id="billingAddress"
+              name="billingAddress"
+              autoComplete="off"
               value={this.state.billingAddress}
               onChange={this.handleChange}
             />
           </div>
-          <label htmlFor="creditCard">Credit Card</label>
+          <label htmlFor="creditCardNumber">Credit Card</label>
           <div className="input-group mb-3">
             <input
               type="text"
               className="form-control"
-              id="name"
-              value={this.state.creditCard}
+              id="creditCardNumber"
+              name="creditCardNumber"
+              autoComplete="off"
+              value={this.state.creditCardNumber}
               onChange={this.handleChange}
             />
           </div>
@@ -132,7 +181,9 @@ class CartSummary extends React.Component {
             <input
               type="text"
               className="form-control"
-              id="name"
+              id="cvv"
+              name="cvv"
+              autoComplete="off"
               value={this.state.cvv}
               onChange={this.handleChange}
             />
@@ -146,6 +197,8 @@ class CartSummary extends React.Component {
               type="text"
               className="form-control"
               id="address"
+              name="address"
+              autoComplete="off"
               value={this.state.address}
               onChange={this.handleChange}
             />
@@ -163,7 +216,8 @@ class CartSummary extends React.Component {
             Subtotal ${this.getSubTotal()}
           </div>
           <div className="h6 font-weight-light">
-            Delivery Fee ${this.getDeliveryFee()}
+            Delivery Fee $
+            {Number(this.getDeliveryFee()) + Number(this.state.minDeliveryFee)}
           </div>
           <div className="h5">Total ${this.getTotal()}</div>
 
