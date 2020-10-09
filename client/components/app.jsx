@@ -120,6 +120,10 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.cart.length !== this.state.cart.length) {
+      this.getCartItems();
+    }
+
     if (prevState.view.name !== this.state.view.name) {
       if (this.state.view.name === 'menu' && !this.state.prevMenuView) {
         this.setState({

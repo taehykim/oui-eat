@@ -10,6 +10,7 @@ class CartSummary extends React.Component {
       billingAddress: '',
       address: '',
       creditCardNumber: '',
+      minDeliveryFee: 0,
       items: {}
     };
 
@@ -19,6 +20,7 @@ class CartSummary extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getEachItemCount = this.getEachItemCount.bind(this);
+    this.getMinimumDeliveryFee = this.getMinimumDeliveryFee.bind(this);
   }
 
   getEachItemCount() {
@@ -100,22 +102,44 @@ class CartSummary extends React.Component {
     });
   }
 
+  getMinimumDeliveryFee(cartItems) {
+    if (cartItems) {
+      let minDeliveryFee = Number(cartItems[0].deliveryFee);
+      for (let i = 1; i < cartItems.length; i++) {
+        if (Number(cartItems[i].deliveryFee) < minDeliveryFee) {
+          minDeliveryFee = cartItems[i].deliveryFee;
+        }
+      }
+      return minDeliveryFee;
+    } else return 0;
+  }
+
   componentDidMount() {
     this.getEachItemCount();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (Number(this.state.minDeliveryFee) === 0) {
+      this.setState({
+        minDeliveryFee: this.getMinimumDeliveryFee(this.props.cartItems)
+      });
+    }
   }
 
   render() {
     if (this.props.cartItems.length === 0) {
       return (
         <div className="col-12 modal-container1 d-flex justify-content-center align-items-center">
-          <p className="col-10 p-3 rounded modal1 d-flex justify-content-center position-fixed">Your cart is empty!</p>
+          <p className="col-10 p-3 rounded modal1 d-flex justify-content-center position-fixed">
+            Your cart is empty!
+          </p>
         </div>
       );
     }
     return (
       <>
-        <div className="h5 mt-5">Billing Information</div>
         <form onSubmit={this.placeOrder} className="w-100">
+          <div className="h5 mt-5">Billing Information</div>
           <label htmlFor="name">Name</label>
           <div className="input-group mb-3 w-100">
             <input
@@ -192,7 +216,8 @@ class CartSummary extends React.Component {
             Subtotal ${this.getSubTotal()}
           </div>
           <div className="h6 font-weight-light">
-            Delivery Fee ${this.getDeliveryFee()}
+            Delivery Fee $
+            {Number(this.getDeliveryFee()) + Number(this.state.minDeliveryFee)}
           </div>
           <div className="h5">Total ${this.getTotal()}</div>
 

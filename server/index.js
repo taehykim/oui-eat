@@ -92,9 +92,11 @@ app.get('/api/cart', (req, res, next) => {
              "c"."price",
              "m"."menuItemId",
              "m"."name",
-             "m"."description"
+             "m"."description",
+             "r"."deliveryFee"
         from "cartItems" as "c"
         join "menuItems" as "m" using ("menuItemId")
+        join "restaurants" as "r" using ("restaurantId")
        where "c"."cartId" = $1;
     `;
     db.query(getCart, [req.session.cartId])
