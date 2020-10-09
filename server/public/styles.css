@@ -7,7 +7,7 @@ header {
 }
 
 .logo {
-  color: rgb(187, 84, 199);
+  color: rgb(125, 101, 193);
 }
 
 .fa-tag,
@@ -23,12 +23,6 @@ header {
 
 .fa-star {
   color: gold;
-}
-
-.back:hover,
-.cart-icon:hover,
-img:hover {
-  cursor: pointer;
 }
 
 .category-item{
