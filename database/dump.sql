@@ -821,6 +821,17 @@ Chipotle Mexican Grill	7	33.652126	-117.838115	4255 Campus Dr Ste A116, Irvine, 
 Veggie Grill	8	33.649728	-117.744836	732 Spectrum Center Dr, Irvine, CA 92618	6	https://cdn.vox-cdn.com/thumbor/sbhOTXRJki644945wjQVYRZbAig=/0x0:2000x1600/1200x0/filters:focal(0x0:2000x1600):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/13055019/VeggieGrill_PChang_5196.jpg	1.5	4.3
 Starbucks	9	33.65921	-117.748	14061 Jeffrey Rd, Irvine, CA 92620	7	https://i.pinimg.com/originals/ce/12/b8/ce12b8f50739dcaa3f0d61ff6b79e443.jpg	1.5	4.4
 Paris Baguette	10	33.718496	-117.759125	4800 Irvine Blvd, Irvine, CA 92620	8	https://amazingsigns.com/wp-content/uploads/2017/07/523.jpg	1.5	4.6
+Hokkaido Ramen Santouka	11	33.707023	-117.783469	El Camino Real, Irvine, CA 92604	1	https://uvillage.com/wp-content/uploads/2017/07/sakeikura-Combo-AJITAMA.jpg	3	4.6
+Fukada	12	33.644371	-117.743044	8683 Irvine Center Dr, Irvine, CA 92618	1	https://s3-media0.fl.yelpcdn.com/bphoto/r0EcyFvjLgE1USJxsHcSxA/o.jpg	3	4.6
+Sam Woo Seafood Restaurant	13	33.696262	-117.798458	15333 Culver Dr #720, Irvine, CA 92606	4	https://b.zmtcdn.com/data/reviews_photos/8bd/2aeb1bac7672a50896608fdc86fc98bd_1450942642.jpg?fit=around|750:500&crop=750:500;*,*	3	4.2
+North Italia 	14	33.672127	-117.845028	2957 Michelson Dr, Irvine, CA 92612	3	https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3276d233456403.56ab8e1d3b564.jpg	3	4.6
+Urban Plates	15	33.729167	-117.789399	13380 Jamboree Rd, Irvine, CA 92602	6	https://urbanplates.com/wp-content/uploads/2017/10/Screen-Shot-2017-11-08-at-16.26.26.png	3	4.2
+Tastea 	16	33.685395	-117.81045	3972 Barranca Pkwy K, Irvine, CA 92606	7	https://img.pagecloud.com/5DoaOSjW5ooaI0JK2hH_1VOr7nU=/432x0/filters:no_upscale()/tastea-2019/images/1-r353a.png	1.5	4.4
+Ace Donut 	17	33.705553	-117.786928	14474 Culver Dr, Irvine, CA 92604	8	https://s3-media0.fl.yelpcdn.com/bphoto/WAJTplL7k6CjC8v9GnvBfA/o.jpg	1.5	4.0
+SomiSomi 	18	33.651293	-117.745603	640 Spectrum Center Dr, Irvine, CA 92618	8	https://kirbiecravings.com/wp-content/uploads/2017/10/somi-somi-2ab.jpg	2.5	4.0
+Slapfish 	19	33.650071	-117.838983	4249 Campus Dr Suite B148, Irvine, CA 92612	4	https://www.ocregister.com/wp-content/uploads/migration/npb/npbzc3-b88424176z.120150602115508000g40a2ql1.10.jpg?w=620	3	4.0
+Tacos and Co  	20	33.669118	-117.765128	6616 Irvine Center Dr, Irvine, CA 92618	5	https://media-cdn.tripadvisor.com/media/photo-s/0c/60/36/10/excellent-chicken-tostada.jpg	3	4.4
+The Kickin Crab	21	33.688816	-117.832866	2740 Alton Pkwy, Irvine, CA 92606	4	https://i.pinimg.com/originals/0c/25/0c/0c250cb7af0217e8efc8121fd9440a3f.jpg	3	4.4
 \.
 
 
@@ -893,7 +904,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 21, true);
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 10, true);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 21, true);
 
 
 --
