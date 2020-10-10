@@ -779,6 +779,55 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 10	Fruit Bite (Blackberry & Kiwi)	111	2.39	Wheat Flour, Bavarian Cream, Blackberry, Kiwi Contains: Coconut, Milk, Wheat
 10	Tiramisu Tart	112	3.35	Cream Cheese, chocolate Powder Contains: Egg, Milk, Wheat
 10	Soft Cream Bread	113	5.94	 Coconut, Egg, Milk, Soy, Wheat 
+11	Salt Ramen	114	7.99	Our signature ramen; silky tonkotsu broth enhanced with simple salt flavor.
+11	Soy Sauce Ramen	115	8.99	Savory & complex flavor of soy sauce combined with silky tonkotsu broth with a hint of bonito dashi.
+11	Miso Ramen	116	8.99	Robust miso paste and silky broth, with a hint of bonito dashi creates the gentle balance flavor.
+11	Spicy Miso Ramen	117	9.99	Miso based ramen with a hint of spiciness gives a nice kick to the flavor.
+11	Shiyake Ikura Gohan	118	8.49	Rice bowl topped with grilled salmon & salmon roe.
+11	Chashu Gohan	119	8.49	Rice bowl topped with Cha-Shu (braised pork belly) with simmering stock.
+11	Flavored Egg	120	0.99	Marinated soft boiled egg.
+11	Takoyaki	121	12	Fried octopus balls dizzled with takoyaki sauce, Japanese mayo, topped with bonito flakes.
+11	Gyoza	122	4.50	Pork & chicken pot stickers 5 pieces.
+13	Blossom Platter	123	38	Our famous barbecue combination platter with jelly fish, pork hock, roast duck, B.B.Q. chicken, spicy beef shank, B.B.Q. pork and pickle vegetable.
+13	Chinese Chicken Salad	124	10.95	Poach boneless & skinless chicken breast with fresh lettuce, rice noodle tossed in our sweet pickle & ginger sauce.
+13	Guilin Shrimp Ball	125	15.95	A unique mixture of succulent shrimp paste, crumbly bread crispy cooked in perfect hue with Sam Woo plum sauce or sweet & sour sauce.
+13	Deep Fried Stuffed Crab Claw (2)	126	12.95	Stuffed crab claw with shrimp paste, deep fried in light batter, served with sweet and sour sauce (option).
+13	B.B.Q. Spareribs (4)	127	11.95	Barbecue honey-glazed back ribs, using our age-old technique, marinated in a well-guarded family B.B.Q. formula. You must try!
+13	B.B.Q. Pork	128	9.95	Barbecue honey-glazed pork prepared in a secret flavoring using our ancient technique. You must try!
+13	Fried Wonton (10)	129	7.95	Crispy and breakable noodle wrapper with shrimp paste, served with our fruity sweet & sour flavored sauce.
+12	Cage Free Chicken Salad	131	7	Organic salad with chicken served with spicy miso dressing.
+12	Crab Avocado Salad	132	8.50	Organic salad with crab and avocado served with creamy tomato dressing.
+12	Giant Shrimp Ten Zaru	133	13	Shrimp tempura and asparagus in a roll with tempura batter on top.
+12	Oyako Don 	134	8.50	Cage free chicken and egg cooked with special sauce served over organic brown rice, and includeds salad and miso soup.
+12	Chicken Teriyaki Don	135	9	Cage free chicken with original teriyaki sauce
+12	Crunchy Roll	136	5	Shrimp Tempura and asparagus along with various vegetables.
+12	Wild Salmon Teriyaki	137	13	Grilled king salmon with original teriyaki sauce.
+12	Prime Beef Steak 	138	15	Charbroiled prime rib eye with yuzu soy sauce.
+14	Proscuitto Bruschetta	139	13	Crecenza cheese, grilled asparagus, truffle, grana padano
+14	Italian Salad	140	15	Salami, provolone, pepperoncini, olive, campari tomato, red onion, cucumber, roasted pepper, oregano vinaigrette.
+14	Crispy Pesto Chicken Sandwich	141	15	Fresh mozzarella, campari tomato, arugula, calabrian pesto aioli.
+14	Famous Meatball Sandwich	142	15	Braised meatballs, marinara, scamorza cheese.
+14	Chicken Parmesan	143	22	Crushed tomato, aged provolone, mozzarella, parmesan rigatoni.
+14	Chicken Pesto	144	19	Gigli pasta, toasted pine nut, garlic, basil, crispy caper.
+14	Strozzapreti	145	20	Chicken, roasted mushroom, spinach, toasted pine nut, parmesan cream.
+14	Italian Grinder 	146	15	Rosemary ham, molinari salami, calabrese, fresh mozzarella, romaine, tomato, italian vinaigrette.
+13	Fried Crab Puffs (8)	130	7.95	Crispy wheat wrapper stuffed with a tasty mixture of crab meat and cream cheese, served with plum sauce. Great starter!
+15	AntiOxidant Salad	147	11.75	Lettuce blend, organic kale, cucumbers,  celery, mint, pickled onions, raw walnuts, grapes, mint vinaigrette.
+15	Local Mixed Beet	148	11.75	Arugala, up lettuce blend, roasted tomatoes, organic carrot, jicama, preserved lemon vinaigrette.
+15	Beets and Avocado	149	10	Organic red and white quinoa, beets, avocado, walnuts, pickled red onion, dates, hemp seeds, cabbage, coconut, miso lemongrass seasoning.
+15	Chickpea and Sweet Potato Bowl	150	10	Organic lentils, cabbage, gogi berries, chia seeds, kale pesto, harissa sauce.
+15	Curry Tofu and Vegetable Braise	151	10	Organic tofu slow cooked with organic carrots, organic apples and zucchini, in a green curry-coconut sauce, with ginger and garlic.
+15	Caesar	152	15.50	Organic romaine lettuce, organic baby kale, organic tomatoes, garlic croutons, shaved asiago, caesar dressing
+15	Cowgirl Cookie	153	2.75	Trail mix cookie! Made with organic sugar, organic flour, sunflower seeds, oats, dried cranberries, shredded coconut.
+15	Chocolate Chunk Cookie	154	2.75	Made with organic earth balance, organic sugar, organic flour, bittersweet chocolate.
+16	Pumpkin Pie Milk Tea	155	4.95	Pumpkin Topped with cheese foam and a sprinkle of nutmeg
+16	Peach Me SweetTea	156	4.95	Peach & strawberry black tea with bits of both
+16	Lychee Peachee	157	4.95	Peach black tea with diced lychee
+16	Strawberry Ecsteasy	158	4.95	Strawberry black tea with black jelly
+16	Sunset Peach	159	4.95	Peach, raspberry black tea with mango bits
+16	Bootea Shaker	160	4.95	Mango, peach & pineapple tea with black jelly
+16	Tootea Fruitea	161	4.95	Kiwi & pineapple black tea with diced jackfruit, lychee & longan
+16	Jasmine Sunrise	162	5.95	Freshly squeezed orange juice with premium jasmine green iced tea
 \.
 
 
@@ -883,7 +932,7 @@ SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 113, true);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 162, true);
 
 
 --
