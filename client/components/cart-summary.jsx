@@ -10,7 +10,7 @@ class CartSummary extends React.Component {
       billingAddress: '',
       address: '',
       creditCardNumber: '',
-      minDeliveryFee: 0,
+      minDeliveryFee: null,
       items: {}
     };
 
@@ -20,6 +20,11 @@ class CartSummary extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.getEachItemCount = this.getEachItemCount.bind(this);
     this.getMinimumDeliveryFee = this.getMinimumDeliveryFee.bind(this);
+    this.updateCart = this.updateCart.bind(this);
+  }
+
+  updateCart() {
+    this.props.setView('cartSummary', { status: 'removed' });
   }
 
   getEachItemCount() {
@@ -92,7 +97,7 @@ class CartSummary extends React.Component {
   }
 
   getMinimumDeliveryFee(cartItems) {
-    if (cartItems) {
+    if (cartItems.length !== 0) {
       let minDeliveryFee = Number(cartItems[0].deliveryFee);
       for (let i = 1; i < cartItems.length; i++) {
         if (Number(cartItems[i].deliveryFee) < minDeliveryFee) {
@@ -108,7 +113,11 @@ class CartSummary extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (Number(this.state.minDeliveryFee) === 0) {
+    if (prevProps.cartItems.length !== this.props.cartItems.length) {
+      this.getEachItemCount();
+    }
+
+    if (this.state.minDeliveryFee === null) {
       this.setState({
         minDeliveryFee: this.getMinimumDeliveryFee(this.props.cartItems)
       });
@@ -197,7 +206,12 @@ class CartSummary extends React.Component {
 
           <div className="pb-2 border-bottom">
             {Object.keys(this.state.items).map(menuId => (
-              <CartSummaryItem key={menuId} item={this.state.items[menuId]} />
+              <CartSummaryItem
+                key={menuId}
+                item={this.state.items[menuId]}
+                cartItems={this.props.cartItems}
+                updateCart={this.updateCart}
+              />
             ))}
           </div>
 

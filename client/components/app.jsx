@@ -125,6 +125,11 @@ export default class App extends React.Component {
       this.getCartItems();
     }
 
+    if (this.state.view.params.status === 'removed') {
+      this.getCartItems();
+      this.setView('cartSummary', {});
+    }
+
     if (prevState.view.name !== this.state.view.name) {
       if (this.state.view.name === 'menu' && !this.state.prevMenuView) {
         this.setState({
