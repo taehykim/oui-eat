@@ -828,6 +828,46 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 16	Bootea Shaker	160	4.95	Mango, peach & pineapple tea with black jelly
 16	Tootea Fruitea	161	4.95	Kiwi & pineapple black tea with diced jackfruit, lychee & longan
 16	Jasmine Sunrise	162	5.95	Freshly squeezed orange juice with premium jasmine green iced tea
+17	Raisin Bran	179	1.25	
+17	Bluberry 	180	1.25	
+17	Banana Nut	181	1.25	
+17	Glazed	182	0.50	
+17	Old-Fashion	183	0.75	
+17	Donut Holes	184	1.99	
+17	Maple Bars	185	0.75	
+17	Chocolate Chip	186	1.25	
+18	Milk Ice Cream	187	5.95	
+18	Ube Ice Cream	188	5.95	
+18	Milk Tea Ice Cream	189	5.95	
+18	Matcha Ice Cream	190	6.95	
+18	Chocolate Ice Cream	191	5.95	
+18	Coffee Ice Cream	192	5.95	
+18	Horchata Ice Cream	193	6.95	
+18	Banana Ice Cream	194	6.95	
+20	Chorizo Burrito	203	5.99	Chorizo, Eggs, Potatoes, Beans and Cheese
+20	Mexican Omelette	204	9.49	Served with rice & beans, Potatoes, Salsa Fresca, choice of Chicken, Al pastor, or Carnitas Substitute Carne Asad
+20	Huevos a La Mexicana	205	7.99	Two scrambled eggs mixed with pico de gallo. Served with rice, beans and corn. Choice of corn or flour tortillas
+20	Huevos Rancheros	206	8.49	Two over easy eggs over a fried tortilla topped with salsa ranchera. Served with guacamole, sour cream, rice, beans, and corn. Choice of corn or flour tortillas
+20	Burrito Gordo	207	12.79	Made with Rice, Beans, Lettuce, Tomatoes, Guacamole, Cheese, Sour Cream. Choice of Chicken, Carnitas, or Al Pastor. Carne Asada
+20	Burrito Bad Boy	208	3.59	1/2 lb of meat, Lettuce, Tomatoes, Avocado, Cheese and salsa fresca. Choice of Chicken, Carnitas, Al Pastor Carne Asada
+20	Sonara Fish Taco	209	3.59	Fried Breaded Fish, Cabbage, Tomatoes, and White Sauce
+20	Taco Gringo 	210	3.29	Flour Tortilla, Lettuce, Tomatoes, Cheese, Avocado & Choice of Chicken, Carnitas or Al Pastor
+21	Half-Dozen Raw Oysters	211	14.99	Freshly shucked oysters served with cocktail sauce, tabasco, and lime wedges
+21	Kickin Wings	212	8.99	(6 pieces) Crispy fried chicken wings coated with garlic butter and our dry Cajun rub
+21	Chicken Tenders n Fries	213	9.99	(4 pieces) Crispy fried chicken tenders, Cajun fries, served with ranch dressing
+21	Fried Calamari	214	11.49	thinly sliced battered calamari, fried and coated with Cajun seasoning; served with cocktail sauce
+21	Garlic Noodles	215	10.99	Sautéed in garlic butter
+21	Seafood Scampi	216	15.99	Scallops, shrimps, clams, mussels, served with pita bread
+21	Seafood Alfredo, Pasta	217	15.99	Linguine, scallops, shrimps, clams, mussels, house alfredo sauce
+21	Lobster Tail 	218	33.99	Inclues corn, potato, 2pc of sausages, house special sauce
+19	Ultimate Fish Taco	219	7	Freshly shucked oysters served with cocktail sauce, tabasco, and lime wedges
+19	Epic Shrimp Burrito	220	11	(6 pieces) Crispy fried chicken wings coated with garlic butter and our dry Cajun rub
+19	Fish & Chips	221	13	(4 pieces) Crispy fried chicken tenders, Cajun fries, served with ranch dressing
+19	Shrimp Roll	222	12	thinly sliced battered calamari, fried and coated with Cajun seasoning; served with cocktail sauce
+19	Reel Fish Sandwich 	223	10.99	Sautéed in garlic butter
+19	Clobster Grilled Cheese	224	15.00	Scallops, shrimps, clams, mussels, served with pita bread
+19	Surf N Turf Burger	225	15.99	Linguine, scallops, shrimps, clams, mussels, house alfredo sauce
+19	Lobster Grinder	226	15.00	Inclues corn, potato, 2pc of sausages, house special sauce
 \.
 
 
@@ -932,7 +972,7 @@ SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 162, true);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 226, true);
 
 
 --
