@@ -779,6 +779,95 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 10	Fruit Bite (Blackberry & Kiwi)	111	2.39	Wheat Flour, Bavarian Cream, Blackberry, Kiwi Contains: Coconut, Milk, Wheat
 10	Tiramisu Tart	112	3.35	Cream Cheese, chocolate Powder Contains: Egg, Milk, Wheat
 10	Soft Cream Bread	113	5.94	 Coconut, Egg, Milk, Soy, Wheat 
+11	Salt Ramen	114	7.99	Our signature ramen; silky tonkotsu broth enhanced with simple salt flavor.
+11	Soy Sauce Ramen	115	8.99	Savory & complex flavor of soy sauce combined with silky tonkotsu broth with a hint of bonito dashi.
+11	Miso Ramen	116	8.99	Robust miso paste and silky broth, with a hint of bonito dashi creates the gentle balance flavor.
+11	Spicy Miso Ramen	117	9.99	Miso based ramen with a hint of spiciness gives a nice kick to the flavor.
+11	Shiyake Ikura Gohan	118	8.49	Rice bowl topped with grilled salmon & salmon roe.
+11	Chashu Gohan	119	8.49	Rice bowl topped with Cha-Shu (braised pork belly) with simmering stock.
+11	Flavored Egg	120	0.99	Marinated soft boiled egg.
+11	Takoyaki	121	12	Fried octopus balls dizzled with takoyaki sauce, Japanese mayo, topped with bonito flakes.
+11	Gyoza	122	4.50	Pork & chicken pot stickers 5 pieces.
+13	Blossom Platter	123	38	Our famous barbecue combination platter with jelly fish, pork hock, roast duck, B.B.Q. chicken, spicy beef shank, B.B.Q. pork and pickle vegetable.
+13	Chinese Chicken Salad	124	10.95	Poach boneless & skinless chicken breast with fresh lettuce, rice noodle tossed in our sweet pickle & ginger sauce.
+13	Guilin Shrimp Ball	125	15.95	A unique mixture of succulent shrimp paste, crumbly bread crispy cooked in perfect hue with Sam Woo plum sauce or sweet & sour sauce.
+13	Deep Fried Stuffed Crab Claw (2)	126	12.95	Stuffed crab claw with shrimp paste, deep fried in light batter, served with sweet and sour sauce (option).
+13	B.B.Q. Spareribs (4)	127	11.95	Barbecue honey-glazed back ribs, using our age-old technique, marinated in a well-guarded family B.B.Q. formula. You must try!
+13	B.B.Q. Pork	128	9.95	Barbecue honey-glazed pork prepared in a secret flavoring using our ancient technique. You must try!
+13	Fried Wonton (10)	129	7.95	Crispy and breakable noodle wrapper with shrimp paste, served with our fruity sweet & sour flavored sauce.
+12	Cage Free Chicken Salad	131	7	Organic salad with chicken served with spicy miso dressing.
+12	Crab Avocado Salad	132	8.50	Organic salad with crab and avocado served with creamy tomato dressing.
+12	Giant Shrimp Ten Zaru	133	13	Shrimp tempura and asparagus in a roll with tempura batter on top.
+12	Oyako Don 	134	8.50	Cage free chicken and egg cooked with special sauce served over organic brown rice, and includeds salad and miso soup.
+12	Chicken Teriyaki Don	135	9	Cage free chicken with original teriyaki sauce
+12	Crunchy Roll	136	5	Shrimp Tempura and asparagus along with various vegetables.
+12	Wild Salmon Teriyaki	137	13	Grilled king salmon with original teriyaki sauce.
+12	Prime Beef Steak 	138	15	Charbroiled prime rib eye with yuzu soy sauce.
+14	Proscuitto Bruschetta	139	13	Crecenza cheese, grilled asparagus, truffle, grana padano
+14	Italian Salad	140	15	Salami, provolone, pepperoncini, olive, campari tomato, red onion, cucumber, roasted pepper, oregano vinaigrette.
+14	Crispy Pesto Chicken Sandwich	141	15	Fresh mozzarella, campari tomato, arugula, calabrian pesto aioli.
+14	Famous Meatball Sandwich	142	15	Braised meatballs, marinara, scamorza cheese.
+14	Chicken Parmesan	143	22	Crushed tomato, aged provolone, mozzarella, parmesan rigatoni.
+14	Chicken Pesto	144	19	Gigli pasta, toasted pine nut, garlic, basil, crispy caper.
+14	Strozzapreti	145	20	Chicken, roasted mushroom, spinach, toasted pine nut, parmesan cream.
+14	Italian Grinder 	146	15	Rosemary ham, molinari salami, calabrese, fresh mozzarella, romaine, tomato, italian vinaigrette.
+13	Fried Crab Puffs (8)	130	7.95	Crispy wheat wrapper stuffed with a tasty mixture of crab meat and cream cheese, served with plum sauce. Great starter!
+15	AntiOxidant Salad	147	11.75	Lettuce blend, organic kale, cucumbers,  celery, mint, pickled onions, raw walnuts, grapes, mint vinaigrette.
+15	Local Mixed Beet	148	11.75	Arugala, up lettuce blend, roasted tomatoes, organic carrot, jicama, preserved lemon vinaigrette.
+15	Beets and Avocado	149	10	Organic red and white quinoa, beets, avocado, walnuts, pickled red onion, dates, hemp seeds, cabbage, coconut, miso lemongrass seasoning.
+15	Chickpea and Sweet Potato Bowl	150	10	Organic lentils, cabbage, gogi berries, chia seeds, kale pesto, harissa sauce.
+15	Curry Tofu and Vegetable Braise	151	10	Organic tofu slow cooked with organic carrots, organic apples and zucchini, in a green curry-coconut sauce, with ginger and garlic.
+15	Caesar	152	15.50	Organic romaine lettuce, organic baby kale, organic tomatoes, garlic croutons, shaved asiago, caesar dressing
+15	Cowgirl Cookie	153	2.75	Trail mix cookie! Made with organic sugar, organic flour, sunflower seeds, oats, dried cranberries, shredded coconut.
+15	Chocolate Chunk Cookie	154	2.75	Made with organic earth balance, organic sugar, organic flour, bittersweet chocolate.
+16	Pumpkin Pie Milk Tea	155	4.95	Pumpkin Topped with cheese foam and a sprinkle of nutmeg
+16	Peach Me SweetTea	156	4.95	Peach & strawberry black tea with bits of both
+16	Lychee Peachee	157	4.95	Peach black tea with diced lychee
+16	Strawberry Ecsteasy	158	4.95	Strawberry black tea with black jelly
+16	Sunset Peach	159	4.95	Peach, raspberry black tea with mango bits
+16	Bootea Shaker	160	4.95	Mango, peach & pineapple tea with black jelly
+16	Tootea Fruitea	161	4.95	Kiwi & pineapple black tea with diced jackfruit, lychee & longan
+16	Jasmine Sunrise	162	5.95	Freshly squeezed orange juice with premium jasmine green iced tea
+17	Raisin Bran	179	1.25	
+17	Bluberry 	180	1.25	
+17	Banana Nut	181	1.25	
+17	Glazed	182	0.50	
+17	Old-Fashion	183	0.75	
+17	Donut Holes	184	1.99	
+17	Maple Bars	185	0.75	
+17	Chocolate Chip	186	1.25	
+18	Milk Ice Cream	187	5.95	
+18	Ube Ice Cream	188	5.95	
+18	Milk Tea Ice Cream	189	5.95	
+18	Matcha Ice Cream	190	6.95	
+18	Chocolate Ice Cream	191	5.95	
+18	Coffee Ice Cream	192	5.95	
+18	Horchata Ice Cream	193	6.95	
+18	Banana Ice Cream	194	6.95	
+20	Chorizo Burrito	203	5.99	Chorizo, Eggs, Potatoes, Beans and Cheese
+20	Mexican Omelette	204	9.49	Served with rice & beans, Potatoes, Salsa Fresca, choice of Chicken, Al pastor, or Carnitas Substitute Carne Asad
+20	Huevos a La Mexicana	205	7.99	Two scrambled eggs mixed with pico de gallo. Served with rice, beans and corn. Choice of corn or flour tortillas
+20	Huevos Rancheros	206	8.49	Two over easy eggs over a fried tortilla topped with salsa ranchera. Served with guacamole, sour cream, rice, beans, and corn. Choice of corn or flour tortillas
+20	Burrito Gordo	207	12.79	Made with Rice, Beans, Lettuce, Tomatoes, Guacamole, Cheese, Sour Cream. Choice of Chicken, Carnitas, or Al Pastor. Carne Asada
+20	Burrito Bad Boy	208	3.59	1/2 lb of meat, Lettuce, Tomatoes, Avocado, Cheese and salsa fresca. Choice of Chicken, Carnitas, Al Pastor Carne Asada
+20	Sonara Fish Taco	209	3.59	Fried Breaded Fish, Cabbage, Tomatoes, and White Sauce
+20	Taco Gringo 	210	3.29	Flour Tortilla, Lettuce, Tomatoes, Cheese, Avocado & Choice of Chicken, Carnitas or Al Pastor
+21	Half-Dozen Raw Oysters	211	14.99	Freshly shucked oysters served with cocktail sauce, tabasco, and lime wedges
+21	Kickin Wings	212	8.99	(6 pieces) Crispy fried chicken wings coated with garlic butter and our dry Cajun rub
+21	Chicken Tenders n Fries	213	9.99	(4 pieces) Crispy fried chicken tenders, Cajun fries, served with ranch dressing
+21	Fried Calamari	214	11.49	thinly sliced battered calamari, fried and coated with Cajun seasoning; served with cocktail sauce
+21	Garlic Noodles	215	10.99	Sautéed in garlic butter
+21	Seafood Scampi	216	15.99	Scallops, shrimps, clams, mussels, served with pita bread
+21	Seafood Alfredo, Pasta	217	15.99	Linguine, scallops, shrimps, clams, mussels, house alfredo sauce
+21	Lobster Tail 	218	33.99	Inclues corn, potato, 2pc of sausages, house special sauce
+19	Ultimate Fish Taco	219	7	Freshly shucked oysters served with cocktail sauce, tabasco, and lime wedges
+19	Epic Shrimp Burrito	220	11	(6 pieces) Crispy fried chicken wings coated with garlic butter and our dry Cajun rub
+19	Fish & Chips	221	13	(4 pieces) Crispy fried chicken tenders, Cajun fries, served with ranch dressing
+19	Shrimp Roll	222	12	thinly sliced battered calamari, fried and coated with Cajun seasoning; served with cocktail sauce
+19	Reel Fish Sandwich 	223	10.99	Sautéed in garlic butter
+19	Clobster Grilled Cheese	224	15.00	Scallops, shrimps, clams, mussels, served with pita bread
+19	Surf N Turf Burger	225	15.99	Linguine, scallops, shrimps, clams, mussels, house alfredo sauce
+19	Lobster Grinder	226	15.00	Inclues corn, potato, 2pc of sausages, house special sauce
 \.
 
 
@@ -821,6 +910,17 @@ Chipotle Mexican Grill	7	33.652126	-117.838115	4255 Campus Dr Ste A116, Irvine, 
 Veggie Grill	8	33.649728	-117.744836	732 Spectrum Center Dr, Irvine, CA 92618	6	https://cdn.vox-cdn.com/thumbor/sbhOTXRJki644945wjQVYRZbAig=/0x0:2000x1600/1200x0/filters:focal(0x0:2000x1600):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/13055019/VeggieGrill_PChang_5196.jpg	1.5	4.3
 Starbucks	9	33.65921	-117.748	14061 Jeffrey Rd, Irvine, CA 92620	7	https://i.pinimg.com/originals/ce/12/b8/ce12b8f50739dcaa3f0d61ff6b79e443.jpg	1.5	4.4
 Paris Baguette	10	33.718496	-117.759125	4800 Irvine Blvd, Irvine, CA 92620	8	https://amazingsigns.com/wp-content/uploads/2017/07/523.jpg	1.5	4.6
+Hokkaido Ramen Santouka	11	33.707023	-117.783469	El Camino Real, Irvine, CA 92604	1	https://uvillage.com/wp-content/uploads/2017/07/sakeikura-Combo-AJITAMA.jpg	3	4.6
+Fukada	12	33.644371	-117.743044	8683 Irvine Center Dr, Irvine, CA 92618	1	https://s3-media0.fl.yelpcdn.com/bphoto/r0EcyFvjLgE1USJxsHcSxA/o.jpg	3	4.6
+Sam Woo Seafood Restaurant	13	33.696262	-117.798458	15333 Culver Dr #720, Irvine, CA 92606	4	https://b.zmtcdn.com/data/reviews_photos/8bd/2aeb1bac7672a50896608fdc86fc98bd_1450942642.jpg?fit=around|750:500&crop=750:500;*,*	3	4.2
+North Italia 	14	33.672127	-117.845028	2957 Michelson Dr, Irvine, CA 92612	3	https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/3276d233456403.56ab8e1d3b564.jpg	3	4.6
+Urban Plates	15	33.729167	-117.789399	13380 Jamboree Rd, Irvine, CA 92602	6	https://urbanplates.com/wp-content/uploads/2017/10/Screen-Shot-2017-11-08-at-16.26.26.png	3	4.2
+Tastea 	16	33.685395	-117.81045	3972 Barranca Pkwy K, Irvine, CA 92606	7	https://img.pagecloud.com/5DoaOSjW5ooaI0JK2hH_1VOr7nU=/432x0/filters:no_upscale()/tastea-2019/images/1-r353a.png	1.5	4.4
+Ace Donut 	17	33.705553	-117.786928	14474 Culver Dr, Irvine, CA 92604	8	https://s3-media0.fl.yelpcdn.com/bphoto/WAJTplL7k6CjC8v9GnvBfA/o.jpg	1.5	4.0
+SomiSomi 	18	33.651293	-117.745603	640 Spectrum Center Dr, Irvine, CA 92618	8	https://kirbiecravings.com/wp-content/uploads/2017/10/somi-somi-2ab.jpg	2.5	4.0
+Slapfish 	19	33.650071	-117.838983	4249 Campus Dr Suite B148, Irvine, CA 92612	4	https://www.ocregister.com/wp-content/uploads/migration/npb/npbzc3-b88424176z.120150602115508000g40a2ql1.10.jpg?w=620	3	4.0
+Tacos and Co  	20	33.669118	-117.765128	6616 Irvine Center Dr, Irvine, CA 92618	5	https://media-cdn.tripadvisor.com/media/photo-s/0c/60/36/10/excellent-chicken-tostada.jpg	3	4.4
+The Kickin Crab	21	33.688816	-117.832866	2740 Alton Pkwy, Irvine, CA 92606	4	https://i.pinimg.com/originals/0c/25/0c/0c250cb7af0217e8efc8121fd9440a3f.jpg	3	4.4
 \.
 
 
@@ -872,7 +972,7 @@ SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
 -- Name: menuItems_menuItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 113, true);
+SELECT pg_catalog.setval('public."menuItems_menuItemId_seq"', 226, true);
 
 
 --
@@ -893,7 +993,7 @@ SELECT pg_catalog.setval('public."orders_orderId_seq"', 21, true);
 -- Name: restaurants_restaurantId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 10, true);
+SELECT pg_catalog.setval('public."restaurants_restaurantId_seq"', 21, true);
 
 
 --
