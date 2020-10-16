@@ -26,14 +26,14 @@ class RestaurantList extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="d-flex flex-column justify-content-center mt-5">
         <div
-          className="col-12 text-muted font-weight-light mb-2 back mt-5 pl-0"
+          className="text-muted font-weight-light mb-2 back pl-0"
           onClick={this.handleBackClick}
         >
           <i className="fas fa-chevron-left"></i> Categories
         </div>
-        <p className="col-12 m-0">
+        <p className="m-0">
           {this.state.restaurants.length} Results for {this.props.category.name}
         </p>
         {this.state.restaurants.map(restaurant => (
@@ -45,7 +45,7 @@ class RestaurantList extends React.Component {
             removeFromFavorites={this.props.removeFromFavorites}
           />
         ))}
-      </>
+      </div>
     );
   }
 }
