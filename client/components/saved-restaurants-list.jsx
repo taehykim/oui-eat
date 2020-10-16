@@ -45,7 +45,7 @@ class SavedRestaurants extends React.Component {
     return (
       <div className="d-flex flex-column justify-content-center mt-5">
         <div
-          className="col-12 text-muted font-weight-light back pl-0"
+          className="text-muted font-weight-light back pl-0"
           onClick={this.handleBackClick}
         >
           <i className="fas fa-chevron-left"></i> Back
