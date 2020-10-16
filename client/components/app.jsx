@@ -222,7 +222,13 @@ export default class App extends React.Component {
     } else if (this.state.view.name === 'account') {
       viewing = <Account setView={this.setView} />;
     } else if (this.state.view.name === 'favoriteRestaurants') {
-      viewing = <SavedRestaurants setView={this.setView} />;
+      viewing = (
+        <SavedRestaurants
+          setView={this.setView}
+          addToFavorites={this.addToFavorites}
+          removeFromFavorites={this.removeFromFavorites}
+        />
+      );
     } else if (this.state.view.name === 'checkout') {
       viewing = <Checkout setView={this.setView} />;
     }
@@ -235,7 +241,7 @@ export default class App extends React.Component {
           setView={this.setView}
           prevView={this.state.prevView}
         />
-        <div className="row p-3 justify-content-center">{viewing}</div>
+        <div className={this.state.view.name === 'categories' ? 'row p-3 justify-content-center' : 'row p-3'}>{viewing}</div>
         <Navbar setView={this.setView} />
       </>
     );

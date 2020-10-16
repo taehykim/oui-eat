@@ -62,6 +62,10 @@ header {
   height: 100vh;
 }
 
+.modal-container2 {
+  height: 76.3vh;
+}
+
 .modal1 {
   color: white;
   background: #45433E;
