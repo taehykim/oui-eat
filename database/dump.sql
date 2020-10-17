@@ -516,6 +516,8 @@ COPY public.address ("addressId", "userId", address) FROM stdin;
 23	1	123 Test St, Irvine, CA 92000
 24	1	123 Apple St, Irvine, CA 92000
 25	1	123 test Irvine
+26	1	590 E Canyon Rd
+27	1	sf
 \.
 
 
@@ -544,6 +546,9 @@ COPY public.cart ("cartId") FROM stdin;
 18
 19
 20
+21
+22
+23
 \.
 
 
@@ -597,6 +602,10 @@ COPY public."cartItems" ("cartItemId", "cartId", "menuItemId", price) FROM stdin
 43	20	61	17.00
 44	20	61	17.00
 45	20	60	18.00
+46	21	139	13
+47	22	139	13
+48	23	114	7.99
+49	23	115	8.99
 \.
 
 
@@ -649,6 +658,8 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 26	982	123 Test St, Irvine, CA 92000	0928 3728 4738 1234	Ti Kim
 27	123	123 Apple St, Irvine, CA 92000	1247 8192 9012 1293	Tia Kim
 28	123	123 test irvine 	1234 0000 0000 0000	Testing
+29	213	590 E Canyon Rd	2323	Connor Ashlock
+30	34	wr	12	wer
 \.
 
 
@@ -657,7 +668,6 @@ COPY public."creditCard" ("creditCardId", cvv, "billingAddress", "creditCardNumb
 --
 
 COPY public."favoriteRestaurants" ("userId", "restaurantId") FROM stdin;
-1	3
 \.
 
 
@@ -737,6 +747,7 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 2	Chocolate panna cotta	69	9.00	Mascarpone crema + cacao nib
 2	Cannellini bean hummus	70	12.00	Sicilian pesto + pistachio + market vegetable + baguette
 2	Charred Octopus	71	16.50	Gigante bean + fennel + lemon yogurt + brown butter vinaigrette
+21	Lobster Tail 	218	33.99	Inclues corn, potato, 2pc of sausages, house special sauce
 7	Burrito	72	7.75	Your choice of freshly grilled meat or sfritas wrapped in a warmed flour tortilla with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese
 7	Burrito Bowl	73	7.75	Your choice of freshly grilled meat or sofritas served in a delicious bowl with rice, beans, or fajita veggies, and topped with guac, salsa, queso blanco, sour cream or cheese
 7	Salad	74	7.75	Served with our fresh supergreens lettuce blend made of Romaine, Baby Kale, and Baby Spinach. Add beans, queso blanco, salsa, guacamole, sour cream or cheese and top it off with our signature Chipotle-Honey Vinaigrette
@@ -859,7 +870,6 @@ COPY public."menuItems" ("restaurantId", name, "menuItemId", price, description)
 21	Garlic Noodles	215	10.99	Sautéed in garlic butter
 21	Seafood Scampi	216	15.99	Scallops, shrimps, clams, mussels, served with pita bread
 21	Seafood Alfredo, Pasta	217	15.99	Linguine, scallops, shrimps, clams, mussels, house alfredo sauce
-21	Lobster Tail 	218	33.99	Inclues corn, potato, 2pc of sausages, house special sauce
 19	Ultimate Fish Taco	219	7	Freshly shucked oysters served with cocktail sauce, tabasco, and lime wedges
 19	Epic Shrimp Burrito	220	11	(6 pieces) Crispy fried chicken wings coated with garlic butter and our dry Cajun rub
 19	Fish & Chips	221	13	(4 pieces) Crispy fried chicken tenders, Cajun fries, served with ranch dressing
@@ -892,6 +902,8 @@ COPY public.orders ("orderId", "cartId", "userId", "creditCardId", "orderedAt") 
 19	18	1	26	2020-10-09 05:17:24.760906+00
 20	19	1	27	2020-10-09 05:19:08.272191+00
 21	20	1	28	2020-10-09 05:28:19.089588+00
+22	21	1	29	2020-10-12 16:09:26.968864+00
+23	22	1	30	2020-10-12 18:13:24.379931+00
 \.
 
 
@@ -937,21 +949,21 @@ COPY public.users ("userId") FROM stdin;
 -- Name: address_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."address_addressId_seq"', 25, true);
+SELECT pg_catalog.setval('public."address_addressId_seq"', 27, true);
 
 
 --
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 45, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 49, true);
 
 
 --
 -- Name: cart_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cart_cartId_seq"', 20, true);
+SELECT pg_catalog.setval('public."cart_cartId_seq"', 23, true);
 
 
 --
@@ -965,7 +977,7 @@ SELECT pg_catalog.setval('public."categories_categoryId_seq"', 8, true);
 -- Name: creditCard_creditCardId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 28, true);
+SELECT pg_catalog.setval('public."creditCard_creditCardId_seq"', 30, true);
 
 
 --
@@ -986,7 +998,7 @@ SELECT pg_catalog.setval('public."orders_cartId_seq"', 1, false);
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 21, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 23, true);
 
 
 --
