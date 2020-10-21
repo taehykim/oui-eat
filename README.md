@@ -17,7 +17,9 @@ A full stack food-ordering web application
 - Bootstrap 4
 
 ## Live Demo
-Try the application live at [https://ouieat.taehykim.com/](https://ouieat.taehykim.com/)
+
++ Best in mobile view
++ Try the application live at [https://ouieat.taehykim.com/](https://ouieat.taehykim.com/)
 
 ## Features
 
