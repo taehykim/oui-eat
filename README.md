@@ -41,10 +41,40 @@ Try the application live at []
 ## Development
 
 ### Getting Started
+
 1. Clone the repository.
 
     ```shell
     git clone https://github.com/taehykim/oui-eat.git
     cd oui-eat
     ```
+
+2. Install all dependencies
+    ```shell
+    npm install
+    ```
+    
+3. Make a .env file and customize its settings
+    ```shell
+    PORT=3001
+    DEV_SERVER_PORT=3000
+    DATABASE_URL=postgres://{user}:{password}@localhost/{database-name}
+    SESSION_SECRET=secret
+    ```
+ 
+4. Start PostgreSQL and import existing database
+    ```shell
+    sudo service postgresql start
+    createdb {database-name}
+    npm run db:import
+    ```
+    
+5. Compile project
+    ```shell
+    npm run dev
+    ```
+    
+6. Access application at [http://localhost:3000](http://localhost:3000) in your browser.
+    
+
 
