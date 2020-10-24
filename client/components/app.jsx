@@ -11,13 +11,14 @@ import CartSummary from './cart-summary';
 import Account from './account';
 import SavedRestaurants from './saved-restaurants-list';
 import Checkout from './checkout';
+import DisclaimerModal from './disclaimer-modal';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       view: {
-        name: 'home',
+        name: 'disclaimer',
         params: {},
         currentCategory: null
       },
@@ -233,6 +234,9 @@ export default class App extends React.Component {
       viewing = <Checkout setView={this.setView} />;
     }
 
+    if (this.state.view.name === 'disclaimer') {
+      return <DisclaimerModal setView={this.setView} />;
+    }
     return (
       <>
         <Header
