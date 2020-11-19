@@ -50,7 +50,7 @@ class SavedRestaurants extends React.Component {
         >
           <i className="fas fa-chevron-left"></i> Back
         </div>
-        <p className="h4">Favortite Restaurants</p>
+        <p className="h4">Favorite Restaurants</p>
         {this.state.savedRestaurants.map(restaurant => (
           <RestaurantItem
             setView={this.props.setView}
